@@ -1,0 +1,42 @@
+.navbar-brand img {
+    max-height: 50px;
+}
+
+.navbar {
+    background-color: #007bff;
+}
+.navbar-nav .nav-link {
+    color: white !important;
+}
+.dropdown-menu {
+    min-width: auto;
+}
+.navbar-nav .dropdown-menu a {
+    color: black ;
+}
+
+.dropdown-item{
+    color: #007bff;
+    font-size: 14px;
+}
+.navbar-nav .nav-item {
+    border-left: 2px solid #fff; /* Change the color as needed */
+    font-size: 13px;
+    font-weight: bold;
+    
+
+    /* Optional: add some space between the border and the content */
+
+    margin-left: 10px;
+    /* Optional: add some space between the border and the content */
+
+  }
+  
+  nav{
+    text-align: right;
+  }
+  
+  /* Remove the border from the first nav item */
+  .navbar-nav .nav-item:first-child {
+    border-left: none;
+  }

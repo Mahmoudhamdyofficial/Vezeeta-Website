@@ -1,17 +1,13 @@
-
-import './App.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Home from "./screens/Home";
 
 function App() {
- 
-
   return (
     <>
-    <h1>Hello</h1>
+      <Home />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
