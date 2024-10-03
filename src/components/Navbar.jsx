@@ -39,7 +39,7 @@ export default function Navbar() {
           <li className="nav-item">
             
               
-                <button className="btn btn-outline-light btn-sm" >Sign Up</button>
+                <button className="btn btn-outline-light btn-sm " >Sign Up</button>
         
           </li>
           <li className="nav-item">
