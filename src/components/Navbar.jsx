@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./Navbar.css";
 
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -8,15 +8,15 @@ import Saudi from "../assets/NavbarImages/Saudi.jfif";
 import Lebanon from "../assets/NavbarImages/Lebanon.jfif";
 import Jordan from "../assets/NavbarImages/Jordan.jfif";
 export default function Navbar() {
-    const [language, setLanguage] = useState("عربي"); // Initial language state
+  const [language, setLanguage] = useState("عربي"); // Initial language state
 
-    const [isCollapsed, setIsCollapsed] = useState(true);
-    const toggleLanguage = () => {
-        setLanguage(language === "English" ? "عربي" : "English");
-      };
-    const toggleNavbar = () => {
-        setIsCollapsed(!isCollapsed);
-      };
+  const [isCollapsed, setIsCollapsed] = useState(true);
+  const toggleLanguage = () => {
+    setLanguage(language === "English" ? "عربي" : "English");
+  };
+  const toggleNavbar = () => {
+    setIsCollapsed(!isCollapsed);
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-dark" >
       <a className="navbar-brand mx-5" href="home.html">
@@ -37,10 +37,10 @@ export default function Navbar() {
       <div className={`collapse navbar-collapse  ${isCollapsed ? "" : "show"}`} id="navbarNav">
         <ul className="navbar-nav " style={{ marginLeft: "auto" }}>
           <li className="nav-item">
-            
-              
-                <button className="btn btn-outline-light btn-sm" >Sign Up</button>
-        
+
+
+            <button className="btn btn-outline-light btn-sm" >Sign Up</button>
+
           </li>
           <li className="nav-item">
             <a className="nav-link" href="#">
@@ -114,22 +114,22 @@ export default function Navbar() {
             </div>
           </li> */}
           <Dropdown>
-  <Dropdown.Toggle variant="transparent" style={{ color: "white" }}  id="dropdown-basic">
-    <img src={Egypt} alt="Egypt" /> Egypt
-  </Dropdown.Toggle>
+            <Dropdown.Toggle variant="transparent" style={{ color: "white" }} id="dropdown-basic">
+              <img src={Egypt} alt="Egypt" /> Egypt
+            </Dropdown.Toggle>
 
-  <Dropdown.Menu>
-    <Dropdown.Item href="#">
-      <img src={Saudi} alt="Saudi" className="drpcountry" /> Saudi
-    </Dropdown.Item>
-    <Dropdown.Item href="#">
-      <img src={Jordan} alt="Jordan" className="drpcountry" /> Jordan
-    </Dropdown.Item>
-    <Dropdown.Item href="#">
-      <img src={Lebanon} alt="Lebanon" className="drpcountry" /> Lebanon
-    </Dropdown.Item>
-  </Dropdown.Menu>
-</Dropdown>
+            <Dropdown.Menu>
+              <Dropdown.Item href="#">
+                <img src={Saudi} alt="Saudi" className="drpcountry" /> Saudi
+              </Dropdown.Item>
+              <Dropdown.Item href="#">
+                <img src={Jordan} alt="Jordan" className="drpcountry" /> Jordan
+              </Dropdown.Item>
+              <Dropdown.Item href="#">
+                <img src={Lebanon} alt="Lebanon" className="drpcountry" /> Lebanon
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </ul>
       </div>
     </nav>
