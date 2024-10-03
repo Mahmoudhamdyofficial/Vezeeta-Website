@@ -1,0 +1,173 @@
+.custom-container {
+  top: 70%;
+  width: 100%;
+  background-color: aliceblue;
+  border-radius: 50px;
+}
+.label {
+  color: red;
+  font-size: 50px;
+}
+body,
+html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.bg-img {
+  height: 100vh; /* Full viewport height */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  z-index: 1;
+}
+.header-text {
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  z-index: 2;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 100px;
+  left: 200px;
+  background: rgba(255, 255, 255, 1);
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+  border-radius: 50px;
+}
+/* .header-text {
+  position: absolute;
+  text-align: center;
+  color: white;
+  z-index: 2;
+} */
+/* .header-text h1 {
+font-size: 50px;
+}
+.header-text p {
+font-size: 20px;
+} */
+.card-shamel {
+  background-color: #00a4ff; /* Shamel's blue */
+  color: white;
+}
+
+.card-north {
+  background-color: white; /* North's white */
+}
+.card-title {
+  font-weight: bold; /* make titles bold */
+}
+.card-text {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  color: #333;
+}
+
+.btn-primary {
+  background-color: #00a4ff; /* Shamel's blue */
+  border: none;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #007bff; /* Darker blue on hover */
+}
+.northBtn {
+  background-color: #e6f1ff;
+}
+.pharmacy {
+  color: white;
+  background-image: url("../assets/HomeImages/epharmacy-solution-banner.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.pharmacy p {
+  color: white;
+  font-size: 16px;
+}
+.downApp {
+  color: white;
+  background-image: url("../assets/HomeImages/preFooter.PNG");
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.slider-container {
+  position: relative;
+  width: 100%;
+  margin: auto;
+  overflow: hidden;
+  background-color: white;
+}
+.slider-button.prev {
+  left: 10px;
+}
+.slider-button.next {
+  right: 10px;
+}
+
+.slider {
+  display: flex;
+
+  transition: transform 0.5s ease-in-out;
+}
+.slider .item {
+  min-width: 25%; /* Adjust this width for the number of items per view */
+  box-sizing: border-box;
+  border: none;
+  padding: 10px;
+}
+.slider .item img {
+  width: 100%;
+  height: 50%;
+  cursor: pointer;
+}
+
+.slider-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.price-quantity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.price-quantity p {
+  display: inline;
+}
+
+@media screen and (max-width: 1200px) {
+  .header-text {
+    display: none;
+  }
+  .collection {
+    display: none;
+  }
+}
+.prevFooter {
+  color: #666666;
+  font-weight: 500;
+}
