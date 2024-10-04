@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import "./login.css"
 import { FaFacebookF } from "react-icons/fa";
@@ -8,8 +9,8 @@ function Login() {
         <Navbar />
         {/* Login Card  */}
         <div className="container-fluid body">
-            <div className="row justify-content-center pt-5">
-                <div className="col-3-5 rounded-2 overflow-hidden bg-white px-0">
+            <div className="row justify-content-center py-5">
+                <div className="col-3-5 rounded-2 overflow-hidden bg-white mb-5 px-0">
                     <div className="bg-primary text-center text-white">
                         Login
                     </div>
@@ -53,12 +54,13 @@ function Login() {
                     <div className="row mt-4 justify-content-center">
                         <div className="col-6 d-flex new-user">
                             <div className="w-50 text-muted fw-semibold">New User ?</div>
-                            <div className="w-50"><a className="fw-semibold" href="">Sign Up</a></div>
+                            <div className="w-50"><a className="text-muted fw-semibold" href="">Sign Up</a></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <Footer />
     </>);
 }
 
