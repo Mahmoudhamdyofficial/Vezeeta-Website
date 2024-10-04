@@ -20,6 +20,7 @@ import Searchfilters from "../components/Searchfilters";
 import Offers from "../components/Offers";
 import Specialities from "../components/Specialities";
 import DoctorSearchBar from "../components/Searchfilters";
+import Footer from "../components/Footer";
 export default function Home() {
   const images = [img1, img2, img3];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -60,7 +61,7 @@ export default function Home() {
               <span style={{ color: "#FF6347" }}>16676</span>
             </p>
           </div>
-          <DoctorSearchBar/>
+          <DoctorSearchBar />
         </div>
         <div className="container mt-5 ">
           <h1 className="py-3" style={{ color: "grey" }}>
@@ -278,6 +279,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

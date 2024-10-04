@@ -1,15 +1,22 @@
 import React,{ useState, useEffect } from 'react'
-
+import img1 from "../assets/s/s1.jpg";
+import img2 from "../assets/s/s2.jpg";
+import img3 from "../assets/s/s3.webp";
+import img4 from "../assets/s/s4.webp";
+import img5 from "../assets/s/s5.jpg";
+import img6 from "../assets/s/s6.webp";
+import img7 from "../assets/s/s7.webp";
+import img8 from "../assets/s/s8.webp";
 export default function Specialities() {
     const specialtiesList = [
-        { id: "1", name: "Skin", img: "../public/s/s1.jpg" },
-        { id: "2", name: "Teeth", img: "../public/s/s2.jpg" },
-        { id: "3", name: "Mental Disorders", img: "../public/s/s3.webp" },
-        { id: "4", name: "Child", img: "../public/s/s4.webp" },
-        { id: "5", name: "Brain & Nerves", img: "../public/s/s5.jpg" },
-        { id: "6", name: "Bones", img: "../public/s/s6.webp" },
-        { id: "7", name: "Gynatology and Infertility", img: "../public/s/s7.webp" },
-        { id: "8", name: "Ear, Nose and Throat", img: "../public/s/s8.webp" },
+        { id: "1", name: "Skin", img: `${img1}`},
+        { id: "2", name: "Teeth", img: `${img2}`},
+        { id: "3", name: "Mental Disorders", img: `${img3}`},
+        { id: "4", name: "Child", img: `${img4}`}, 
+        { id: "5", name: "Brain & Nerves", img: `${img5}`},
+        { id: "6", name: "Bones", img: `${img6}`},
+        { id: "7", name: "Gynatology and Infertility", img: `${img7}`},
+        { id: "8", name: "Ear, Nose and Throat", img: `${img8}`},
       ];
     const [currentIndex, setCurrentIndex] = useState(0);
     const itemsPerView = 5;
