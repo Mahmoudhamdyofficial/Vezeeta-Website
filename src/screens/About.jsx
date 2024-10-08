@@ -30,7 +30,6 @@ function About() {
         setActiveKey(key);
     };
     return (<>
-        <Navbar />
         <div className="pb-3"
             style={{ backgroundColor: 'rgb(238, 236, 236)' }}
         >
@@ -258,7 +257,6 @@ function About() {
                 </div>
             </div>
         </div>
-        <Footer />
     </>);
 }
 

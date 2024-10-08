@@ -11,7 +11,6 @@ import { TbHeadset } from "react-icons/tb";
 import "./Teleconsultation.css"
 function Teleconsultation() {
     return (<>
-        <Navbar />
         <div className="pb-3 sec1">
             <div className="container pt-4">
                 <div className="row" style={{ height: "17vh" }}>

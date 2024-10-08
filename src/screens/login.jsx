@@ -6,7 +6,6 @@ import { FaFacebookF } from "react-icons/fa";
 
 function Login() {
     return (<>
-        <Navbar />
         {/* Login Card  */}
         <div className="container-fluid body">
             <div className="row justify-content-center py-5">
@@ -60,7 +59,6 @@ function Login() {
                 </div>
             </div>
         </div>
-        <Footer />
     </>);
 }
 

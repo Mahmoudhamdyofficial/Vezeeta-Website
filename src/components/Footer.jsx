@@ -1,12 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import logo from "../assets/NavbarImages/whitelogowithdotcom.png";
 import googleplay from "../assets/HomeImages/google-play-badge.png";
 import appstore from "../assets/HomeImages/app-store-badge.png";
 import { FaFacebookF } from "react-icons/fa";
 import { IoLogoInstagram } from "react-icons/io";
 import { FaTwitter } from "react-icons/fa";
+
 import "./Footer.css";
+import { Link } from "react-router-dom";
 export default function Footer() {
   return (
     <>
@@ -17,7 +18,7 @@ export default function Footer() {
               <img src={logo} alt className="img-fluid mb-3" />
               <ul >
                 <li>
-                  <a >About US</a>
+                  <Link to="/about">About US</Link>
                 </li>
                 <li>
                   <a href>Our Team</a>
