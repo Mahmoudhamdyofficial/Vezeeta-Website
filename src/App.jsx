@@ -1,11 +1,13 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Home from "./screens/Home";
 
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Home from "./screens/Home/Home";
 import Login from "./screens/login";
 import About from "./screens/About";
 import Teleconsultation from "./screens/allspecialities/Teleconsultation";
+import Search from "./screens/search/search";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
@@ -22,10 +24,12 @@ function App() {
     <Route path="/login" element={<Login />} />
     <Route path="/about" element={<About />} />
     <Route path="/teleconsultation" element={<Teleconsultation />} />
+    <Route path="/search" element={<Search />} />
 
     </Routes>
     <Footer />
     </Router>
+
     </>
   );
 }
