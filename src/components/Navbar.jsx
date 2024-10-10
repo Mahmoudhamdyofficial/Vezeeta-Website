@@ -1,12 +1,12 @@
 import { useState } from "react";
 import "./Navbar.css";
-import Dropdown from 'react-bootstrap/Dropdown';
+import Dropdown from "react-bootstrap/Dropdown";
 import logo from "../assets/NavbarImages/whitelogowithdotcom.png";
 import Egypt from "../assets/NavbarImages/Egypt.webp";
 import Saudi from "../assets/NavbarImages/Saudi.jfif";
 import Lebanon from "../assets/NavbarImages/Lebanon.jfif";
 import Jordan from "../assets/NavbarImages/Jordan.jfif";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 export default function Navbar() {
   const [language, setLanguage] = useState("عربي"); // Initial language state
 
@@ -18,10 +18,10 @@ export default function Navbar() {
     setIsCollapsed(!isCollapsed);
   };
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark" >
+    <nav className="navbar navbar-expand-lg navbar-dark">
       <Link to="/">
         <img src={logo} alt="Logo" />
-        </Link>
+      </Link>
       <button
         className="navbar-toggler"
         type="button"
@@ -34,19 +34,21 @@ export default function Navbar() {
       >
         <span className="navbar-toggler-icon" />
       </button>
-      <div className={`collapse navbar-collapse  ${isCollapsed ? "" : "show"}`} id="navbarNav">
+      <div
+        className={`collapse navbar-collapse  ${isCollapsed ? "" : "show"}`}
+        id="navbarNav"
+      >
         <ul className="navbar-nav " style={{ marginLeft: "auto" }}>
           <li className="nav-item">
-
-
-            <button className="btn btn-outline-light btn-sm" >Sign Up</button>
-
+            <Link to="/signup">
+              <button className="btn btn-outline-light btn-sm">Sign Up</button>
+            </Link>
           </li>
           <li className="nav-item">
             <Link to="/login">
-            <a className="nav-link" href="#">
-              Login
-            </a>
+              <a className="nav-link" href="#">
+                Login
+              </a>
             </Link>
           </li>
           <li className="nav-item">
@@ -116,7 +118,11 @@ export default function Navbar() {
             </div>
           </li> */}
           <Dropdown>
-            <Dropdown.Toggle variant="transparent" style={{ color: "white" }} id="dropdown-basic">
+            <Dropdown.Toggle
+              variant="transparent"
+              style={{ color: "white" }}
+              id="dropdown-basic"
+            >
               <img src={Egypt} alt="Egypt" /> Egypt
             </Dropdown.Toggle>
 
@@ -128,7 +134,8 @@ export default function Navbar() {
                 <img src={Jordan} alt="Jordan" className="drpcountry" /> Jordan
               </Dropdown.Item>
               <Dropdown.Item href="#">
-                <img src={Lebanon} alt="Lebanon" className="drpcountry" /> Lebanon
+                <img src={Lebanon} alt="Lebanon" className="drpcountry" />{" "}
+                Lebanon
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>

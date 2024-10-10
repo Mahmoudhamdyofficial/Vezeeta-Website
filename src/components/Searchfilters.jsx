@@ -2,6 +2,7 @@ import { Dropdown } from "react-bootstrap";
 import { SlCalender } from "react-icons/sl";
 import { RiCustomerServiceLine } from "react-icons/ri";
 import { CiStethoscope } from "react-icons/ci";
+import {Link} from "react-router-dom"
 
 export default function DoctorSearchBar() {
   return (
@@ -117,7 +118,7 @@ export default function DoctorSearchBar() {
           {/* Search Button */}
           <div className="col-md-12 text-end">
             <button className="btn btn-danger px-4">
-              <i className="fa-solid fa-search me-2"></i>Search
+              <Link to="/search">Search</Link>
             </button>
           </div>
         </div>
