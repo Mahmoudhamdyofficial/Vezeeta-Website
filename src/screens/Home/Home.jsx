@@ -120,7 +120,7 @@ export default function Home() {
               </div>
               <a
                 href="#"
-                className={`btn ${styles["btn-primary"]} col-lg-3 py-3"`}
+                className={`btn ${styles["btn-primary"]} ${styles.anchor} col-lg-3 py-3"`}
                 style={{ color: "#219de2" }}
               >
                 Explore North
@@ -142,7 +142,7 @@ export default function Home() {
               </p>
               <a
                 href="#"
-                className={`btn ${styles["btn-primary"]} col-lg-2 py-3`}
+                className={`btn ${styles["btn-primary"]} ${styles.anchor} col-lg-2 py-3`}
                 style={{ color: "#219de2" }}
               >
                 Ask now
@@ -158,7 +158,7 @@ export default function Home() {
               </p>
               <a
                 href="#"
-                className={`btn col-lg-2 py-3 ${styles["btn-primary"]}`}
+                className={`btn col-lg-2 py-3 ${styles["btn-primary"]} ${styles.anchor}`}
                 style={{ color: "#327ac5" }}
               >
                 Place order
@@ -200,7 +200,7 @@ export default function Home() {
                   <p className={styles["card-text"]} style={{ fontSize: 16 }}>
                     Choose the specialty, and the doctor will visit you at home.
                   </p>
-                  <a href="#" className="col-lg-2 py-3">
+                  <a href="#" className={`${styles["btn-primary"]}col-lg-2 py-3`}>
                     Book a visit ▸
                   </a>
                 </div>
