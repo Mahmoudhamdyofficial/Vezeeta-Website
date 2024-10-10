@@ -1,16 +1,16 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Home from "./screens/Home";
-import { Route, Routes } from "react-router-dom";
+import Home from "./screens/Home/Home";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <>
-    <Routes>
-    <Route path="/" element={<Home />} />
-
-    </Routes>
-      
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Router>
     </>
   );
 }

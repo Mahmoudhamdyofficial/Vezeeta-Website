@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
-import "./Home.css";
-import img1 from "../assets/HomeImages/homecovernewen1-eg-en.jpeg";
-import img2 from "../assets/HomeImages/homecovernewen2-eg-en.jpeg";
-import img3 from "../assets/HomeImages/homecovernewen3-eg-en.jpeg";
-import shamel from "../assets/HomeImages/shamel-logo.webp";
-import mentalHealthLogo from "../assets/HomeImages/mental-health-image.png";
-import north from "../assets/HomeImages/mental-health-logo.svg";
-import teleconsultation from "../assets/HomeImages/mobile.png";
-import homeVisit from "../assets/HomeImages/desktop.png";
-import medicalCare from "../assets/HomeImages/medical-care-icon.svg";
-import reviews from "../assets/HomeImages/doctor-icon.svg";
-import booking from "../assets/HomeImages/booking-icon.svg";
-import security from "../assets/HomeImages/security-icon.svg";
-import appstore from "../assets/HomeImages/app-store-badge.png";
-import googleplay from "../assets/HomeImages/google-play-badge.png";
-
-import Searchfilters from "../components/Searchfilters";
-import Offers from "../components/Offers";
-import Specialities from "../components/Specialities";
-import DoctorSearchBar from "../components/Searchfilters";
-import Footer from "../components/Footer";
+import Navbar from "../../components/Navbar";
+import img1 from "../../assets/HomeImages/homecovernewen1-eg-en.jpeg";
+import img2 from "../../assets/HomeImages/homecovernewen2-eg-en.jpeg";
+import img3 from "../../assets/HomeImages/homecovernewen3-eg-en.jpeg";
+import shamel from "../../assets/HomeImages/shamel-logo.webp";
+import mentalHealthLogo from "../../assets/HomeImages/mental-health-image.png";
+import north from "../../assets/HomeImages/mental-health-logo.svg";
+import teleconsultation from "../../assets/HomeImages/mobile.png";
+import homeVisit from "../../assets/HomeImages/desktop.png";
+import medicalCare from "../../assets/HomeImages/medical-care-icon.svg";
+import reviews from "../../assets/HomeImages/doctor-icon.svg";
+import booking from "../../assets/HomeImages/booking-icon.svg";
+import security from "../../assets/HomeImages/security-icon.svg";
+import appstore from "../../assets/HomeImages/app-store-badge.png";
+import googleplay from "../../assets/HomeImages/google-play-badge.png";
+import styles from "./Home.module.css";
+import Searchfilters from "../../components/Searchfilters";
+import Offers from "../../components/Offers";
+import Specialities from "../../components/Specialities";
+import DoctorSearchBar from "../../components/Searchfilters";
+import Footer from "../../components/Footer";
 export default function Home() {
   const images = [img1, img2, img3];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -46,7 +45,7 @@ export default function Home() {
       <Navbar />
       <div>
         <div
-          className="bg-img  d-flex flex-column justify-content-center "
+          className={`${styles["bg-img"]} d-flex flex-column justify-content-center `}
           style={slideshowStyles}
         >
           <div
@@ -68,14 +67,14 @@ export default function Home() {
             New services for better healthcare
           </h1>
           {/* First Card */}
-          <div className="card mb-3 card-shamel">
+          <div className={`${styles["card-shamel"]} card mb-3`}>
             <div className="card-body d-flex justify-content-between align-items-center">
               <div className="row">
                 <img src={shamel} alt="Profile" style={{ width: 100 }} />
                 <div className="px-3">
-                  <h3 className="card-title">Shamel</h3>
+                  <h3 className={styles["card-title"]}>Shamel</h3>
                   <p
-                    className="card-text"
+                    className={styles["card-text"]}
                     style={{ color: "white", fontSize: 16 }}
                   >
                     Save up to 80% on all medical services
@@ -87,15 +86,15 @@ export default function Home() {
               </div>
               <a
                 href="#"
-                className="btn btn-light col-lg-3 py-3"
-                style={{ color: "#219de2" }}
+                className={`btn btn-light col-lg-3 py-3 `}
+                style={{ color: "grey" }}
               >
                 See Details
               </a>
             </div>
           </div>
           {/* Second Card */}
-          <div className="card mb-3 card-north">
+          <div className={`${styles["card-north"]} card mb-3`}>
             <div className="card-body d-flex justify-content-between align-items-center">
               <div className="row">
                 <img
@@ -108,11 +107,11 @@ export default function Home() {
                   <img
                     src={north}
                     alt="Profile"
-                    className="north"
+                    className={styles.north}
                     style={{ width: 100 }}
                   />
                   <p
-                    className="card-text"
+                    className={styles["card-text"]}
                     style={{ fontSize: 16, color: "darkgray" }}
                   >
                     North, your way to practice peace.
@@ -121,7 +120,7 @@ export default function Home() {
               </div>
               <a
                 href="#"
-                className="btn northBtn col-lg-3 py-3"
+                className={`btn ${styles["btn-primary"]} col-lg-3 py-3"`}
                 style={{ color: "#219de2" }}
               >
                 Explore North
@@ -131,11 +130,11 @@ export default function Home() {
           {/* Third Card */}
           <div className="card mb-3 card-question">
             <div className="card-body mx-3">
-              <h4 className="card-title" style={{ color: "#666666" }}>
+              <h4 className={styles["card-title"]} style={{ color: "#666666" }}>
                 Have a Medical Question?
               </h4>
               <p
-                className="card-text"
+                className={styles["card-text"]}
                 style={{ fontSize: 16, color: "#666666" }}
               >
                 Submit your medical question and receive an answer from a
@@ -143,7 +142,7 @@ export default function Home() {
               </p>
               <a
                 href="#"
-                className="btn northBtn col-lg-2 py-3"
+                className={`btn ${styles["btn-primary"]} col-lg-2 py-3`}
                 style={{ color: "#219de2" }}
               >
                 Ask now
@@ -151,15 +150,15 @@ export default function Home() {
             </div>
           </div>
           {/*Fourth Card*/}
-          <div className="card mb-3 card-question pharmacy">
+          <div className={`card mb-3 card-question ${styles.pharmacy}`}>
             <div className="card-body mx-3">
-              <h4 className="card-title">Pharmacy</h4>
-              <p className="card-text">
+              <h4 className={styles["card-title"]}>Pharmacy</h4>
+              <p className={styles["card-text"]}>
                 Get your medicine and all your pharmacy needs
               </p>
               <a
                 href="#"
-                className="btn btn-light col-lg-2 py-3"
+                className={`btn col-lg-2 py-3 ${styles["btn-primary"]}`}
                 style={{ color: "#327ac5" }}
               >
                 Place order
@@ -178,8 +177,8 @@ export default function Home() {
                   style={{ width: 100 }}
                 />
                 <div>
-                  <h4 className="card-title">Teleconsultation</h4>
-                  <p className="card-text" style={{ fontSize: 16 }}>
+                  <h4 className={styles["card-title"]}>Teleconsultation</h4>
+                  <p className={styles["card-text"]} style={{ fontSize: 16 }}>
                     Schedule a voice or video call with a specialized doctor.
                   </p>
                   <a
@@ -201,8 +200,8 @@ export default function Home() {
                   style={{ width: 100 }}
                 />
                 <div>
-                  <h4 className="card-title">Home Visit</h4>
-                  <p className="card-text" style={{ fontSize: 16 }}>
+                  <h4 className={styles["card-title"]}>Home Visit</h4>
+                  <p className={styles["card-text"]} style={{ fontSize: 16 }}>
                     Choose the specialty, and the doctor will visit you at home.
                   </p>
                   <a
@@ -259,9 +258,9 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="downApp col-lg-12 p-5 rounded">
+          <div className={`${styles.downApp} col-lg-12 p-5 rounded`}>
             <h4>Download Vezeeta Application</h4>
-            <div style={{ maxWidth: 600, wordWrap: "break-word" }}>
+            <div style={{ maxWidth: 400, wordWrap: "break-word" }}>
               <p>
                 Search, compare and book doctor consultations with ease. Order
                 your medicines &amp; get them deilvered within 60 minutes. Track

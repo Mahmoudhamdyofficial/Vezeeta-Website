@@ -48,18 +48,7 @@ html {
   padding: 20px;
   border-radius: 50px;
 }
-/* .header-text {
-  position: absolute;
-  text-align: center;
-  color: white;
-  z-index: 2;
-} */
-/* .header-text h1 {
-font-size: 50px;
-}
-.header-text p {
-font-size: 20px;
-} */
+
 .card-shamel {
   background-color: #00a4ff; /* Shamel's blue */
   color: white;
@@ -171,3 +160,4 @@ font-size: 20px;
   color: #666666;
   font-weight: 500;
 }
+
