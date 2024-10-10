@@ -155,9 +155,10 @@ export default function Search() {
           </div>
         </div>
       </section>
+      
 
       <section className="section55" style={{ backgroundColor: 'rgb(223, 223, 223)' }}>
-       <div className="container">
+        <div className="container">
             <p className="text-primary d-inline pSmall">Vezeeta </p>
             <p className="d-inline pSmall">Doctor Mostafa Nabil Eldsoky</p>
 
@@ -192,25 +193,24 @@ export default function Search() {
               </div>
             </div>
           </div>
-
           <div className="col-lg-2 col-md-12 h-25 text-center position-sticky top-0" style={{ backgroundColor: 'rgb(223, 223, 223)' }}>
             <div className="bg-white rounded-2 overflow-hidden">
               <h6 className="bg-primary text-white py-1">Filters</h6>
               <p id="toggle-title" className="g">Title</p>
               <div id="title-inputs">
-                <div>
+                <div className='check' >
                   <input id="Professors" type="checkbox" />
                   <label htmlFor="Professors">Professors</label>
                 </div>
-                <div>
+                <div className='check'>
                   <input id="lecturers" type="checkbox" />
                   <label htmlFor="lecturers">Lecturers</label>
                 </div>
-                <div>
+                <div className='check'>
                   <input id="consultant" type="checkbox" />
                   <label htmlFor="consultant">Consultant</label>
                 </div>
-                <div>
+                <div className='check'>
                   <input id="specialist" type="checkbox" />
                   <label htmlFor="specialist">Specialist</label>
                 </div>
@@ -229,7 +229,6 @@ export default function Search() {
               </div>
             </div>
           </div>
-
           {/* Second Doctor's Info */}
           <div className="col-lg-10 col-md-12 h-25 px-0">
             <div className="bg-white mb-3 pb-4 rounded-2">
