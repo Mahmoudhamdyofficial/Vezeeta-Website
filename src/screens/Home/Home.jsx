@@ -42,7 +42,6 @@ export default function Home() {
   };
   return (
     <>
-      <Navbar />
       <div>
         <div
           className={`${styles["bg-img"]} d-flex flex-column justify-content-center `}
@@ -181,13 +180,9 @@ export default function Home() {
                   <p className={styles["card-text"]} style={{ fontSize: 16 }}>
                     Schedule a voice or video call with a specialized doctor.
                   </p>
-                  <a
-                    href="DoctorDetails.html"
-                    className="col-lg-2 py-3"
-                    style={{ color: "#327ac5" }}
-                  >
+                  <Link to="/teleconsultation" style={{ color: "#219de2" }}>
                     Book a Call ▸
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -207,7 +202,7 @@ export default function Home() {
                   <a
                     href="#"
                     className="col-lg-2 py-3"
-                    style={{ color: "#327ac5" }}
+                    
                   >
                     Book a visit ▸
                   </a>
@@ -278,7 +273,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }
