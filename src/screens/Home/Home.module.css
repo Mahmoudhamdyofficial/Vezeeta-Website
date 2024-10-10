@@ -1,3 +1,8 @@
+a{
+  text-decoration: none;
+  color: white !important;
+
+}
 .custom-container {
   top: 70%;
   width: 100%;
@@ -79,16 +84,15 @@ html {
   background-color: #e6f1ff;
 }
 .pharmacy {
-  color: white;
   background-image: url("../assets/HomeImages/epharmacy-solution-banner.jpeg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-.pharmacy p {
+/* .pharmacy p {
   color: white;
   font-size: 16px;
-}
+} */
 .downApp {
   color: white;
   background-image: url("../assets/HomeImages/preFooter.PNG");

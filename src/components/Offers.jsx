@@ -7,7 +7,7 @@ import img5 from "../assets/f/f5.png";
 import img6 from "../assets/f/f6.png";
 import img7 from "../assets/f/f7.png";
 import img8 from "../assets/f/f8.png";
-import styles from '../screens/Home.module.css'
+import styles from '../screens/Home/Home.module.css'
 export default function Offers() {
     const offersList = [
         { id: "1", name: "Teeth Cleaning", price: 329, oldprice: 500, offers: "236 Offers", img: `${img1}` },

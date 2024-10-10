@@ -20,6 +20,7 @@ import Offers from "../../components/Offers";
 import Specialities from "../../components/Specialities";
 import DoctorSearchBar from "../../components/Searchfilters";
 import Footer from "../../components/Footer";
+import {Link} from "react-router-dom";
 export default function Home() {
   const images = [img1, img2, img3];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -151,8 +152,8 @@ export default function Home() {
           {/*Fourth Card*/}
           <div className={`card mb-3 card-question ${styles.pharmacy}`}>
             <div className="card-body mx-3">
-              <h4 className={styles["card-title"]}>Pharmacy</h4>
-              <p className={styles["card-text"]}>
+              <h4 className={styles['card-title']}>Pharmacy</h4>
+              <p className={styles['card-text']}>
                 Get your medicine and all your pharmacy needs
               </p>
               <a

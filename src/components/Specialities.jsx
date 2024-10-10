@@ -7,7 +7,7 @@ import img5 from "../assets/s/s5.jpg";
 import img6 from "../assets/s/s6.webp";
 import img7 from "../assets/s/s7.webp";
 import img8 from "../assets/s/s8.webp";
-import styles from '../screens/Home.module.css'
+import styles from '../screens/Home/Home.module.css'
 export default function Specialities() {
     const specialtiesList = [
         { id: "1", name: "Skin", img: `${img1}`},

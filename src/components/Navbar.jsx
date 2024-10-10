@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./Navbar.css";
-
 import Dropdown from 'react-bootstrap/Dropdown';
 import logo from "../assets/NavbarImages/whitelogowithdotcom.png";
 import Egypt from "../assets/NavbarImages/Egypt.webp";
