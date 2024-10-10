@@ -1,0 +1,126 @@
+.sign-up-container {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.sign-up-form {
+  background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+.btn-facebook {
+    background-color: #3b5998;
+    color: white;
+   display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius:  10px;
+    height: 35px;
+    width: 50%;
+}
+
+.btn-facebook:hover {
+    background-color: #3b5998;
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.divider span {
+    flex-grow: 1;
+    border-top: 1px solid #ccc;
+    margin: 0 10px;
+}
+
+.country-flag {
+    width: 30px;
+    height: 20px;
+    margin-left: 5px;
+}
+
+.btn-join-now {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-join-now:hover {
+    background-color: #c82333;
+    opacity: 0.9;
+}
+
+.terms {
+    font-size: 0.85rem;
+    margin-top: 10px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+.signUpText{
+    background-color: #007bff;
+    color: white;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px 10px 0 0;
+
+}
+.formName{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left:40px;
+    padding-right: 10px;
+}
+.formControl{
+    width: 60%;
+    height: 35px;
+    border-radius: 5px  ;
+    background-color: #eaf1fe;
+    border: solid gray 2px;
+    padding: 5px;
+}
+.formControlEmail{
+    width: 60%;
+    height: 35px;
+    border-radius: 5px  ;
+    border: solid gray 2px;
+    padding: 5px;
+}
+.formControl:focus {
+    border-color: rgb(100, 100, 247);
+    outline: none;
+  }
+.Subscribe{
+    background-color: #ee0c23;
+    color: white;
+    border-radius: 5px;
+    width: 40%;
+    height: 35px;
+    border: none;
+    
+}
+.Subscribe:hover{
+    background-color: #f66473;
+   
+}
+.buttonSub{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
