@@ -17,10 +17,15 @@ function App() {
   return (
     <>
     <Router>
+    <Navbar />
     <Routes>
     <Route path="/" element={<Home />} />
+    <Route path="/login" element={<Login />} />
+    <Route path="/about" element={<About />} />
+    <Route path="/teleconsultation" element={<Teleconsultation />} />
 
     </Routes>
+    <Footer />
     </Router>
     </>
   );

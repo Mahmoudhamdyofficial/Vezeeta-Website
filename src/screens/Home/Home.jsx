@@ -199,11 +199,7 @@ export default function Home() {
                   <p className={styles["card-text"]} style={{ fontSize: 16 }}>
                     Choose the specialty, and the doctor will visit you at home.
                   </p>
-                  <a
-                    href="#"
-                    className="col-lg-2 py-3"
-                    
-                  >
+                  <a href="#" className="col-lg-2 py-3">
                     Book a visit ▸
                   </a>
                 </div>
