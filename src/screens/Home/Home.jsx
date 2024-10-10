@@ -216,7 +216,7 @@ export default function Home() {
           <div className="row">
             <div className="col-lg-3">
               <img src={medicalCare} alt="home" />
-              <h4 className="prevFooter">All your healthcare needs</h4>
+              <h4 className={styles.prevFooter}>All your healthcare needs</h4>
               <p>
                 Search and book a clinic visit, home visit, or a
                 teleconsultation. Order your medicine and book a service or
@@ -225,7 +225,7 @@ export default function Home() {
             </div>
             <div className="col-lg-3">
               <img src={reviews} alt="review" />
-              <h4 className="prevFooter">Verified patient reviews</h4>
+              <h4 className={styles.prevFooter}>Verified patient reviews</h4>
               <p>
                 Doctor ratings are from patients who booked and visited the
                 doctor through Vezeeta.
@@ -233,7 +233,7 @@ export default function Home() {
             </div>
             <div className="col-lg-3">
               <img src={booking} alt="booking" />
-              <h4 className="prevFooter">Your booking is confirmed</h4>
+              <h4 className={styles.prevFooter}>Your booking is confirmed</h4>
               <p>
                 Your booking is automatically confirmed, as the doctor specifies
                 his working hours and is notified of the booking details.
@@ -241,7 +241,7 @@ export default function Home() {
             </div>
             <div className="col-lg-3">
               <img src={security} alt="security" />
-              <h4 className="prevFooter">
+              <h4 className={styles.prevFooter}>
                 Book for free, and pay in the clinic
               </h4>
               <p>
