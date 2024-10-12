@@ -2,10 +2,11 @@ ul {
   list-style-type: none;
 }
 
-a {
+.anchor {
   font-weight: bold;
   font-size: 12px;
   color: white !important;
+  text-decoration: none;
 }
 h6 {
   font-weight: bold;

@@ -1,3 +1,8 @@
+.anchor {
+  text-decoration: none;
+  color: white !important;
+
+}
 .custom-container {
   top: 70%;
   width: 100%;
@@ -48,18 +53,7 @@ html {
   padding: 20px;
   border-radius: 50px;
 }
-/* .header-text {
-  position: absolute;
-  text-align: center;
-  color: white;
-  z-index: 2;
-} */
-/* .header-text h1 {
-font-size: 50px;
-}
-.header-text p {
-font-size: 20px;
-} */
+
 .card-shamel {
   background-color: #00a4ff; /* Shamel's blue */
   color: white;
@@ -90,19 +84,18 @@ font-size: 20px;
   background-color: #e6f1ff;
 }
 .pharmacy {
-  color: white;
   background-image: url("../assets/HomeImages/epharmacy-solution-banner.jpeg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-.pharmacy p {
+/* .pharmacy p {
   color: white;
   font-size: 16px;
-}
+} */
 .downApp {
   color: white;
-  background-image: url("../assets/HomeImages/preFooter.PNG");
+  background-image: url("../../assets/HomeImages/preFooter.PNG");
   background-position: left;
   background-repeat: no-repeat;
   background-size: cover;
@@ -171,3 +164,4 @@ font-size: 20px;
   color: #666666;
   font-weight: 500;
 }
+

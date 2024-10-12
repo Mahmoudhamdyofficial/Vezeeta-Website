@@ -7,6 +7,7 @@ import img5 from "../assets/s/s5.jpg";
 import img6 from "../assets/s/s6.webp";
 import img7 from "../assets/s/s7.webp";
 import img8 from "../assets/s/s8.webp";
+import styles from '../screens/Home/Home.module.css'
 export default function Specialities() {
     const specialtiesList = [
         { id: "1", name: "Skin", img: `${img1}`},
@@ -27,15 +28,15 @@ export default function Specialities() {
     };
   return (
     <div className="slider-containerMain">
-    <div className="slider-container">
-      <button className="slider-button prev" onClick={() => moveSlide(-1)}>❮</button>
+    <div className={styles['slider-container']}>
+      <button className={`${styles['slider-button']} ${styles.prev}`} onClick={() => moveSlide(-1)}>❮</button>
       <div className="slider-wrapper" style={{ backgroundColor: "#eef0f2" }}>
         <div className="d-flex justify-content-between p-4">
           <h1 style={{ fontWeight: 650, color: "grey" }}>Book from top specialties</h1>
         </div>
-        <div id="offersSecond" className="slider" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+        <div id="offersSecond" className={styles.slider} style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
           {specialtiesList.map(({ id, name, img }) => (
-            <div key={id} id={`product-id-${id}`} className="item">
+            <div key={id} id={`product-id-${id}`} className={styles.item}>
               <img src={img} alt={name} className="img-fluid" />
               <div className="details">
                 <h6 className="fw-bolder" style={{ color: 'grey', fontWeight: 550 }}>{name}</h6>
@@ -44,7 +45,7 @@ export default function Specialities() {
           ))}
         </div>
       </div>
-      <button className="slider-button next" onClick={() => moveSlide(1)}>❯</button>
+      <button className={`${styles['slider-button']} ${styles.next}`} onClick={() => moveSlide(1)}>❯</button>
     </div>
   </div>
   )

@@ -7,6 +7,7 @@ import img5 from "../assets/f/f5.png";
 import img6 from "../assets/f/f6.png";
 import img7 from "../assets/f/f7.png";
 import img8 from "../assets/f/f8.png";
+import styles from '../screens/Home/Home.module.css'
 export default function Offers() {
     const offersList = [
         { id: "1", name: "Teeth Cleaning", price: 329, oldprice: 500, offers: "236 Offers", img: `${img1}` },
@@ -28,19 +29,19 @@ export default function Offers() {
 
   return (
     <div className="slider-containerMain">
-        <div className='slider-container'>
-        <button className="slider-button prev" onClick={() => moveSlide(-1)}>❮</button>
+        <div className={styles['slider-container']}>
+        <button className={`${styles['slider-button']} ${styles.prev}`}  onClick={() => moveSlide(-1)}>❮</button>
     <div className="d-flex justify-content-between p-4">
       <h1 style={{ fontWeight: 650, color: "grey" }}>Choose from top offers</h1>
       <h1><a href="#" style={{ fontSize: 16 }}>All Offers <i className="fa-solid fa-play text-danger" /></a></h1>
     </div>
-    <div id="offers" className="slider" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+    <div id="offers" className={styles.slider} style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
       {offersList.map(({ id, name, price, oldprice, img, offers }) => (
-          <div key={id} id={`product-id-${id}`} className="item">
+          <div key={id} id={`product-id-${id}`} className={styles.item}>
           <img src={img} alt={name} className="img-fluid" />
           <div className="details">
             <h6 className="fw-bolder" style={{ color: 'grey', fontWeight: 550 }}>{name}</h6>
-            <div className="price-quantity">
+            <div className={styles['price-quantity']}>
               <p className="text-muted" style={{ textDecoration: 'line-through' }}>{oldprice}EGP</p>
               <p style={{ color: '#327ac5' }}>{price}EGP</p>
             </div>
@@ -49,7 +50,7 @@ export default function Offers() {
         </div>
       ))}
     </div>
-    <button className="slider-button next" onClick={() => moveSlide(1)}>❯</button>
+    <button className={`${styles['slider-button']} ${styles.next}`} onClick={() => moveSlide(1)}>❯</button>
     </div>
   </div>
   )
