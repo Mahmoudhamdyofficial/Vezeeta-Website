@@ -204,7 +204,7 @@ export default function Home() {
                   <a
                     href="#"
                     className="col-lg-2 py-3"
-                    
+
                   >
                     Book a visit ▸
                   </a>

@@ -22,7 +22,7 @@ export default function Navbar() {
     <nav className="navbar navbar-expand-lg navbar-dark" >
       <Link to="/">
         <img src={logo} alt="Logo" />
-        </Link>
+      </Link>
       <button
         className="navbar-toggler"
         type="button"
@@ -45,12 +45,13 @@ export default function Navbar() {
           </li>
           <li className="nav-item">
             <Link to="/login">
-            <a className="nav-link" href="#">
-              Login
-            </a>
+              <a className="nav-link" href="#">
+                Login
+              </a>
             </Link>
           </li>
           <li className="nav-item">
+
             <a className="nav-link" href="#">
               Vezzeta For Doctors
             </a>
