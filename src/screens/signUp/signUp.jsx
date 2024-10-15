@@ -1,7 +1,8 @@
 import { Form, Container, Row, Col } from 'react-bootstrap';
 import { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth} from './firebase'; // Import db and auth from firebase.js
+import { auth, db} from './firebase'; // Import db and auth from firebase.js
+import { setDoc, doc} from "firebase/firestore";
 
 import './SignUp.css';
 import { ImFacebook2 } from "react-icons/im";
@@ -21,13 +22,21 @@ export default function SignUp() {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      
-      console.log('User registered:', user);
+    
+      await setDoc(doc(db, 'User', user.uid), {
+        name: name,
+        phone: phone,
+        email: email,
+        gender: gender,
+        birthDate: birthDate,
+        uid: user.uid
+      });
+      console.log('User registered and added to Firestore:', user);
       alert('You have signed up successfully!');
       window.location.href = "/login";
     } catch (error) {
-      console.error("Error adding document: ", error);
-      setError(error.message);
+      console.error("Error during signup:", error);
+      setError(error.message);  
     }
   };
 
@@ -117,7 +126,7 @@ export default function SignUp() {
               <div className="divider"><span></span></div>
 
               <p className="text-center terms">
-                By signing up you agree to our <a href="#terms">Terms Of Use</a>
+                By signing up you agree to our <a href="#">Terms Of Use</a>
               </p>
               <p className="text-center">
                 Already Registered? <a href="/login">Login</a>

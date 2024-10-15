@@ -84,7 +84,7 @@ function Login() {
                                     <input id="chk" type="checkbox" className="custom-checkbox" />
                                     <label className="chk-label" htmlFor="chk"> Remember Me </label>
                                 </div>
-                                <div className="w-50 text-end"><a className="forget-link" href=""> Forgot Your Password?</a></div>
+                                <div className="w-50 text-end"><a className="forget-link"> Forgot Your Password?</a></div>
                             </div>
                         </div>
                         <div className="text-center">
