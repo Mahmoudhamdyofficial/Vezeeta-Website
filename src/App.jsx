@@ -12,8 +12,12 @@ import Footer from "./components/Footer";
 
 
 import { BrowserRouter as Router,Route, Routes } from "react-router-dom";
+import { AuthContext } from "./context/AuthContext";
+import { useContext } from "react";
 
 function App() {
+  const { currentUser } = useContext(AuthContext);
+  console.log(currentUser);
   return (
     <>
     <Router>
