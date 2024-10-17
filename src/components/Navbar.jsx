@@ -71,6 +71,7 @@ export default function Navbar() {
             </>
           )}
           <li className="nav-item">
+
             <a className="nav-link" href="#">
               Vezzeta For Doctors
             </a>
