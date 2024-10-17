@@ -8,6 +8,7 @@ import Lebanon from "../assets/NavbarImages/Lebanon.jfif";
 import Jordan from "../assets/NavbarImages/Jordan.jfif";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext"; // Ensure correct import
+import { LuLogOut } from "react-icons/lu";
 
 export default function Navbar() {
   const { currentUser, dispatch } = useContext(AuthContext); // Use currentUser from context
@@ -50,9 +51,25 @@ export default function Navbar() {
         <ul className="navbar-nav" style={{ marginLeft: "auto" }}>
           {currentUser ? (
             <>
-              <li className="nav-item nav-link">
+            <Dropdown>
+              <Dropdown.Toggle variant="transparent"
+              style={{ color: "white" }}
+              id="dropdown-basic">
               {currentUser.name || currentUser.email}
-              </li>
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item  className="drp-item">
+                  Profile
+                </Dropdown.Item>
+                <Dropdown.Item  className="drp-item">
+                  Appointments 
+                </Dropdown.Item>
+                <Dropdown.Item onClick={handleLogout} className="drp-item">
+                  Logout <LuLogOut style={{marginLeft: "5px",alignSelf: "center" , fontSize: "20px" , color: "black"}}/>
+
+                </Dropdown.Item>
+              </Dropdown.Menu>
+              </Dropdown>
             </>
           ) : (
             <>
@@ -64,6 +81,7 @@ export default function Navbar() {
               <li className="nav-item">
                 <Link to="/login">
                   <a className="nav-link" href="#">
+
                     Login
                   </a>
                 </Link>
@@ -71,10 +89,11 @@ export default function Navbar() {
             </>
           )}
           <li className="nav-item">
-
+          <Link to="/DoctorSignup">
             <a className="nav-link" href="#">
               Vezzeta For Doctors
             </a>
+            </Link>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="contact.html">
