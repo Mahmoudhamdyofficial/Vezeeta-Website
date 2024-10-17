@@ -11,7 +11,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 
-import { BrowserRouter as Router,Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 import { useContext } from "react";
 import DoctorSignup from "./screens/DoctorSignup/DoctorSignup";
@@ -20,20 +20,22 @@ function App() {
   console.log(currentUser);
   return (
     <>
-    <Router>
-    <Navbar />
-    <Routes>
-    <Route path="/" element={<Home />} />
-    <Route path="/login" element={<Login />} />
-    <Route path="/about" element={<About />} />
-    <Route path="/teleconsultation" element={<Teleconsultation />} />
-    <Route path="/search" element={<Search />} />
-    <Route path="/Signup" element={<SignUp />} />
-    <Route path="/DoctorSignup" element={<DoctorSignup />} />
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/teleconsultation" element={<Teleconsultation />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/Signup" element={<SignUp />} />
+          <Route path="/DoctorSignup" element={<DoctorSignup />} />
+          <Route path="/DoctorSignup" element={<DoctorSignup />} />
 
-    </Routes>
-    <Footer />
-    </Router>
+
+        </Routes>
+        <Footer />
+      </Router>
 
     </>
   );
