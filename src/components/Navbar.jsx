@@ -8,7 +8,7 @@ import Lebanon from "../assets/NavbarImages/Lebanon.jfif";
 import Jordan from "../assets/NavbarImages/Jordan.jfif";
 import { Link } from "react-router-dom";
 export default function Navbar() {
-  const [language, setLanguage] = useState("عربي"); // Initial language state
+  const [language, setLanguage] = useState("عربي");
 
   const [isCollapsed, setIsCollapsed] = useState(true);
   const toggleLanguage = () => {

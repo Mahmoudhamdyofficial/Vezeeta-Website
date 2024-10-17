@@ -12,6 +12,7 @@ import Footer from "./components/Footer";
 
 
 import { BrowserRouter as Router,Route, Routes } from "react-router-dom";
+import DoctorSignup from "./screens/DoctorSignup/DoctorSignup";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
     <Route path="/teleconsultation" element={<Teleconsultation />} />
     <Route path="/search" element={<Search />} />
     <Route path="/Signup" element={<SignUp />} />
+    <Route path="/DoctorSignup" element={<DoctorSignup />} />
 
     </Routes>
     <Footer />
