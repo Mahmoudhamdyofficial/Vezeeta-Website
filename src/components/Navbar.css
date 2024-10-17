@@ -5,9 +5,7 @@
 .navbar {
     background-color: #007bff;
 }
-.navbar-nav .nav-link {
-    color: white !important;
-}
+
 .dropdown-menu {
     min-width: auto;
 }

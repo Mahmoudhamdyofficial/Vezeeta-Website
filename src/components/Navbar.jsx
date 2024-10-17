@@ -7,6 +7,7 @@ import Egypt from "../assets/NavbarImages/Egypt.webp";
 import Saudi from "../assets/NavbarImages/Saudi.jfif";
 import Lebanon from "../assets/NavbarImages/Lebanon.jfif";
 import Jordan from "../assets/NavbarImages/Jordan.jfif";
+import { Link } from 'react-router-dom';
 export default function Navbar() {
   const [language, setLanguage] = useState("عربي"); // Initial language state
 
@@ -19,9 +20,9 @@ export default function Navbar() {
   };
   return (
     <nav className="navbar navbar-expand-lg navbar-dark" >
-      <a className="navbar-brand mx-5" href="home.html">
+      <Link to="/">
         <img src={logo} alt="Logo" />
-      </a>
+      </Link>
       <button
         className="navbar-toggler"
         type="button"
@@ -43,11 +44,14 @@ export default function Navbar() {
 
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">
-              Login
-            </a>
+            <Link to="/login">
+              <a className="nav-link" href="#">
+                Login
+              </a>
+            </Link>
           </li>
           <li className="nav-item">
+
             <a className="nav-link" href="#">
               Vezzeta For Doctors
             </a>

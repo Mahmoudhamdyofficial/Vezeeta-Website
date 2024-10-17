@@ -15,6 +15,7 @@ import booking from "../assets/HomeImages/booking-icon.svg";
 import security from "../assets/HomeImages/security-icon.svg";
 import appstore from "../assets/HomeImages/app-store-badge.png";
 import googleplay from "../assets/HomeImages/google-play-badge.png";
+import { Link } from "react-router-dom";
 
 import Searchfilters from "../components/Searchfilters";
 import Offers from "../components/Offers";
@@ -43,7 +44,6 @@ export default function Home() {
   };
   return (
     <>
-      <Navbar />
       <div>
         <div
           className="bg-img  d-flex flex-column justify-content-center "
@@ -182,13 +182,9 @@ export default function Home() {
                   <p className="card-text" style={{ fontSize: 16 }}>
                     Schedule a voice or video call with a specialized doctor.
                   </p>
-                  <a
-                    href="DoctorDetails.html"
-                    className="col-lg-2 py-3"
-                    style={{ color: "#327ac5" }}
-                  >
+                  <Link to="/teleconsultation" style={{ color: "#219de2" }}>
                     Book a Call ▸
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -208,7 +204,7 @@ export default function Home() {
                   <a
                     href="#"
                     className="col-lg-2 py-3"
-                    style={{ color: "#327ac5" }}
+
                   >
                     Book a visit ▸
                   </a>
@@ -279,7 +275,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }
