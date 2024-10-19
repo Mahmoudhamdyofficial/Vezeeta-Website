@@ -3,7 +3,10 @@ import { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from './firebase';
 import { setDoc, doc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "./firebase"; // Import the Firebase storage instance
 import './DoctorSignup.css';
+
 export default function DoctorSignup() {
 
     const [email, setEmail] = useState('');
@@ -11,25 +14,55 @@ export default function DoctorSignup() {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [gender, setGender] = useState('');
-    const [birthDate, setBirthDate] = useState('');
     const [specialization, setspecialization] = useState('');
     const [clinicLocation, setclinicLocation] = useState('');
+    const [Cost, setCost] = useState('');
+    const [qualifications, setqualifications] = useState('');
+    const [image, setImage] = useState(null);
     const [error, setError] = useState('');
 
+    const handleImageChange = (e) => {
+        if (e.target.files[0]) {
+          setImage(e.target.files[0]);
+        }
+      };
+      const handleImageUpload = () => {
+        if (image) {
+          const storageRef = ref(storage, `images/${image.name}`);
+          
+          // Upload the file to Firebase Storage
+          uploadBytes(storageRef, image).then((snapshot) => {
+            // Get the image URL after upload is successful
+            getDownloadURL(snapshot.ref).then((url) => {
+              console.log("Uploaded image URL:", url);
+            });
+          }).catch((error) => {
+            console.error("Error uploading image:", error);
+          });
+        }
+      };
+    
     const handleSignup = async (e) => {
         e.preventDefault();
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const doctor = userCredential.user;
-
+            let imageUrl = '';
+            if (image) {
+                const storageRef = ref(storage, `images/${image.name}`);
+                const snapshot = await uploadBytes(storageRef, image);
+                imageUrl = await getDownloadURL(snapshot.ref);
+            }
             await setDoc(doc(db, 'doctor', doctor.uid), {
                 name: name,
                 phone: phone,
                 email: email,
                 gender: gender,
-                birthDate: birthDate,
                 specialization: specialization,
                 clinicLocation: clinicLocation,
+                Cost:Cost,
+                qualifications:qualifications,
+                imageUrl: imageUrl ,
                 uid: doctor.uid
             });
             console.log('User registered and added to Firestore:', doctor);
@@ -69,6 +102,11 @@ export default function DoctorSignup() {
                                 <input className='formControlEmail' type="email" id="formEmail" placeholder="example@domain.com" value={email} onChange={(e) => setEmail(e.target.value)} />
                             </div>
                             <br />
+                            <div className="formName">
+                                <Form.Label>Password <span className="star">*</span></Form.Label>
+                                <input className="formControl" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            </div>
+                            <br />
 
                             <div className="formName">
                                 <Form.Label>Gender <span className="star">*</span></Form.Label>
@@ -97,17 +135,7 @@ export default function DoctorSignup() {
                             </div>
                             <br />
 
-                            <div className="formName">
-                                <Form.Label>Birth Date <span className="star">*</span></Form.Label>
-                                <input className="formControl" type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
-                            </div>
-                            <br />
-
-                            <div className="formName">
-                                <Form.Label>Password <span className="star">*</span></Form.Label>
-                                <input className="formControl" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                            </div>
-                            <br />
+                          
                             <div className="formName">
                                 <Form.Label>clinic location <span className="star">*</span></Form.Label>
                                 <input className="formControl" type="clinic" placeholder="clinic location" value={clinicLocation} onChange={(e) => setclinicLocation(e.target.value)} />
@@ -118,11 +146,24 @@ export default function DoctorSignup() {
                                 <input className="formControl" type="Department" placeholder="Department" value={specialization} onChange={(e) => setspecialization(e.target.value)} />
                             </div>
                             <br />
-
+                            <div className="formName">
+                                <Form.Label>Cost <span className="star">*</span></Form.Label>
+                                <input className="formControl" type="number" placeholder="Cost" value={Cost} onChange={(e) => setCost(e.target.value)} />
+                            </div>
+                            <br />
+                            <div className="formName">
+                                <Form.Label>Scientific qualifications  <span className="star">*</span></Form.Label>
+                                <input className="formControl" type="text" placeholder=" Scientific qualifications " value={qualifications} onChange={(e) => setqualifications(e.target.value)} />
+                            </div>
+                            <br />
+                            <div className="formName">
+                                    <input className='' type="file" onChange={handleImageChange} />
+                            </div>
+                            <br/>
                             {error && <p className="text-danger">{error}</p>}
-
+                            <br/>
                             <div className="buttonSub">
-                                <button className="Subscribe" type="submit">
+                                <button onClick={handleImageUpload} className="Subscribe" type="submit">
                                     Subscribe now
                                 </button>
                             </div>
@@ -137,6 +178,7 @@ export default function DoctorSignup() {
                                 Already Registered? <a href="/login">Login</a>
                             </p>
                             <br />
+                              
                         </Form>
                     </div>
                 </Col>
