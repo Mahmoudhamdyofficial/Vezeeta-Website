@@ -10,46 +10,57 @@ import { PiGraduationCapLight } from "react-icons/pi";
 import { GiPriceTag } from "react-icons/gi";
 import { SlCalender } from "react-icons/sl";
 import { IoTicketOutline } from "react-icons/io5";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoMdStar } from "react-icons/io";
 import { BsTelephone } from "react-icons/bs";
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../DoctorSignup/firebase';
+import { IoLocation } from "react-icons/io5";
 
 
 export default function Search() {
   const [index, setIndex] = useState(0);
 
-  const calendars = [
-      {
-          title: "Today",
-          times: ["1:15 AM", "1:30 AM", "1:45 AM", "11:00 AM"],
-          buttonText: "BOOK",
-      },
-      {
-          title: "Tomorrow",
-          times: ["12:00 AM", "12:15 AM", "12:30 AM", "12:45 AM"],
-          buttonText: "BOOK",
-      },
-      {
-          title: "Sun 10/13",
-          times: ["12:00 AM", "12:15 AM", "12:30 AM", "12:45 AM"],
-          buttonText: "BOOK",
-      },
-      {
-          title: "Mon 10/14",
-          times: ["1:00 AM", "1:15 AM", "1:45 AM", "11:30 AM"],
-          buttonText: "BOOK",
-      },
-      {
-          title: "Tue 10/15",
-          times: ["12:00 AM", "12:30 AM", "1:00 AM", "2:00 AM"],
-          buttonText: "BOOK",
-      },
-      {
-          title: "Wed 10/16",
-          times: ["1:00 AM", "2:15 AM", "2:30 AM", "3:00 AM"],
-          buttonText: "BOOK",
-      }
-  ];
+  const getFormattedDate = (date) => {
+    const options = { weekday: 'short', month: 'numeric', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+};
+
+const getCalendars = () => {
+    const calendars = [];
+    const today = new Date();
+
+    // Push today's entry
+    calendars.push({
+        title: "Today",
+        times: ["1:15 AM", "1:30 AM", "1:45 AM", "11:00 AM"],
+        buttonText: "BOOK",
+    });
+
+    // Push tomorrow's entry
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    calendars.push({
+        title: "Tomorrow",
+        times: ["12:00 AM", "12:15 AM", "12:30 AM", "12:45 AM"],
+        buttonText: "BOOK",
+    });
+
+    // Push entries for the next 5 days
+    for (let i = 2; i < 7; i++) {
+        const nextDate = new Date(today);
+        nextDate.setDate(today.getDate() + i);
+        calendars.push({
+            title: getFormattedDate(nextDate),
+            times: ["12:00 AM", "12:15 AM", "12:30 AM", "12:45 AM"],
+            buttonText: "BOOK",
+        });
+    }
+
+    return calendars;
+};
+
+const calendars = getCalendars();
 
   const handlePrev = () => {
       setIndex((prevIndex) => (prevIndex === 0 ? Math.floor((calendars.length - 1) / 3) : prevIndex - 1));
@@ -60,6 +71,27 @@ export default function Search() {
   };
 
   const calendarsToDisplay = calendars.slice(index * 3, index * 3 + 3);
+
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "doctor")); 
+        const items = [];
+        querySnapshot.forEach((doc) => {
+          items.push({ id: doc.id, ...doc.data() });
+        });
+        setData(items);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <section className="pb-3" style={{ backgroundColor: 'rgb(238, 236, 236)' }}>
@@ -212,8 +244,10 @@ export default function Search() {
       <div className="sec2 pb-3">
             <div className="container">
                 <div> <a href="" className="text-primary text-decoration-none">vezeeta </a>
-                    <p className="para-1"> / Telehealth in Egypt</p></div>
+                    <p className="para-1"> / Telehealth in Egypt</p>
+                </div>
                 <div className='row'>
+
                     <div id='col-2' >
                         <div className="position-sticky top-0">
                             <div className=" rounded-2 overflow-hidden">
@@ -434,124 +468,76 @@ export default function Search() {
                             </div>
                         </div>
                     </div>
+
+
                     <div className="col-10">
-
-                        <div className="row bg-white rounded-3 py-3 mt-3">
-                            <div className='col-lg-2 col-md-3 overflow-hidden'>
-                                <img src="../../../public/images/ahmed-mohamed-farid-oncology-surgery_20240720171132682.jpg" className='rounded-circle w-100 prof-img' alt="" />
-                            </div>
-                            <div className='col-lg-5 col-md-9 py-3'>
-                                <p className='text-primary d-inline'>Doctor</p>
-                                <a href="#" className='fs-5 ms-1 doctor-name-link'>Islam Ammar</a>
-                                <p className='doc-discrip'>Specialist of physiotherapy_Cairo University</p>
+                              
+                       {data.map((doctor)=>(
+                    <div className="row bg-white rounded-3 py-3 mt-3" key={doctor.uid}>
+                    <div className='col-lg-2 col-md-3 overflow-hidden'>
+                        <img src={doctor.imageUrl} className=' prof-img' alt="" />
+                    </div>
+                    <div className='col-lg-5 col-md-9 py-3'>
+                        <p className='text-primary d-inline'>Doctor</p>
+                        <a href="#" className='fs-5 ms-1 doctor-name-link'>{doctor.name}</a>
+                        <p className='doc-discrip'>{doctor.qualifications},{doctor.clinicLocation}</p>
                                 <div className='stars-line'><IoMdStar fontSize={"25"} className='str-rate' />
                                     <IoMdStar fontSize={"25"} className='str-rate' />
                                     <IoMdStar fontSize={"25"} className='str-rate' />
                                     <IoMdStar fontSize={"25"} className='str-rate' />
                                     <IoMdStar fontSize={"25"} className='str-rate' />
-                                </div>
-                                <p className='rating-num'>Overall Rating From 5 Visitors</p>
-                                <p className='degrees'><FaUserDoctor fontSize={"17"} className='me-2 icon-degree' />
-                                    <a className='degrees-link' href="">Gastroenterologist </a>Specialized in
-                                    <a className='degrees-link' href=""> Adult Diabetes and Endocrinology</a> </p>
-                                <p className='degrees'><IoTicketOutline fontSize={"18"} className="me-2 icon-degree" />Fees : 300EGP</p>
-                                <p className='degrees'><BsTelephone fontSize={"18"} className="me-2 icon-degree" /> <span className='hot-line'>16676</span> Cost Of Regular Call</p>
-                            </div>
-                            <div className='col-lg-5 col-md-12 mt-4'>
-                                <div className="d-flex align-items-center justify-content-center">
-                                    <button className="btn btn-outline-primary me-2" onClick={handlePrev}>
-                                        &lt;
-                                    </button>
+                </div>
+                <p className='rating-num'>Overall Rating From 5 Visitors</p>
+                <p className='degrees'><FaUserDoctor fontSize={"17"} className='me-2 icon-degree' />
+                    <a className='degrees-link' href="">{doctor.qualifications} </a>Specialized in
+                    <a className='degrees-link' href=""> {doctor.specialization}</a> </p>
+                <p className='degrees'><IoTicketOutline fontSize={"18"} className="me-2 icon-degree" />Fees : {doctor.Cost} EGP</p>
+                <p className='degrees'><IoLocation fontSize={"18"} className="me-2 icon-degree" /> <span className='hot-line'>{doctor.clinicLocation}</span> </p>
+                <p className='degrees'><BsTelephone fontSize={"18"} className="me-2 icon-degree" /> <span className='hot-line'>{doctor.phone}</span> Cost Of Regular Call</p>
+            </div>
+            <div className='col-lg-5 col-md-12 mt-4'>
+                <div className="d-flex align-items-center justify-content-center">
+                    <button className="btn btn-outline-primary me-2" onClick={handlePrev}>
+                        &lt;
+                    </button>
 
-                                    <div className="d-flex overflow-hidden">
-                                        {calendarsToDisplay.map((calendar, calendarIndex) => (
-                                            <div
-                                                key={calendarIndex}
-                                                className="card text-center mx-1 "
-                                                style={{ minWidth: '60px', maxWidth: '200px' }}
-                                            >
-                                                <div className="card-header bg-primary text-white card-font px-0 py-1">
-                                                    {calendar.title}
-                                                </div>
-                                                <div className="card-body card-font p-0">
-                                                    {calendar.times.map((time, timeIndex) => (
-                                                        <a href='#' className='m-0 p-0 card-font d-block text-decoration-none link-time' key={timeIndex}>{time}</a>
-                                                    ))}
-                                                    <p><a className='text-decoration-none' href="#">More</a></p>
-                                                </div>
-                                                <div className="card-footer py-0 px-2 foot-btn  ">
-                                                    <button className="btn card-font text-white">{calendar.buttonText}</button>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-
-                                    <button className="btn btn-outline-primary ms-2" onClick={handleNext}>
-                                        &gt;
-                                    </button>
+                    <div className="d-flex overflow-hidden">
+                        {calendarsToDisplay.map((calendar, calendarIndex) => (
+                            <div
+                                key={calendarIndex}
+                                className="card text-center mx-1 "
+                                style={{ minWidth: '60px', maxWidth: '200px' }}
+                            >
+                                <div className="card-header bg-primary text-white card-font px-0 py-1">
+                                    {calendar.title}
                                 </div>
-                                <p className='text-center degrees mt-3'>Appointement Reservation</p>
-                            </div>
-                        </div>
-                        <div className="row bg-white rounded-3 py-3 mt-3">
-                            <div className='col-lg-2 col-md-3 overflow-hidden'>
-                                <img src="../../../public/images/doctor-ibrahim-mohamed-abdelmageed-cardiology-and-vascular-disease-1_20240109153459437.jpg" className='rounded-circle w-100 prof-img' alt="" />
-                            </div>
-                            <div className='col-lg-5 col-md-9 py-3'>
-                                <p className='text-primary d-inline'>Doctor</p>
-                                <a href="#" className='fs-5 ms-1 doctor-name-link'>Islam Ammar</a>
-                                <p className='doc-discrip'>Specialist of physiotherapy_Cairo University</p>
-                                <div className='stars-line'><IoMdStar fontSize={"25"} className='str-rate' />
-                                    <IoMdStar fontSize={"25"} className='str-rate' />
-                                    <IoMdStar fontSize={"25"} className='str-rate' />
-                                    <IoMdStar fontSize={"25"} className='str-rate' />
-                                    <IoMdStar fontSize={"25"} className='str-rate' />
+                                <div className="card-body card-font p-0">
+                                    {calendar.times.map((time, timeIndex) => (
+                                        <a href='#' className='m-0 p-0 card-font d-block text-decoration-none link-time' key={timeIndex}>{time}</a>
+                                    ))}
+                                    <p><a className='text-decoration-none' href="#">More</a></p>
                                 </div>
-                                <p className='rating-num'>Overall Rating From 5 Visitors</p>
-                                <p className='degrees'><FaUserDoctor fontSize={"17"} className='me-2 icon-degree' />
-                                    <a className='degrees-link' href="">Gastroenterologist </a>Specialized in
-                                    <a className='degrees-link' href=""> Adult Diabetes and Endocrinology</a> </p>
-                                <p className='degrees'><IoTicketOutline fontSize={"18"} className="me-2 icon-degree" />Fees : 300EGP</p>
-                                <p className='degrees'><BsTelephone fontSize={"18"} className="me-2 icon-degree" /> <span className='hot-line'>16676</span> Cost Of Regular Call</p>
-                            </div>
-                            <div className='col-lg-5 col-md-12 mt-4'>
-                                <div className="d-flex align-items-center justify-content-center">
-                                    <button className="btn btn-outline-primary me-2" onClick={handlePrev}>
-                                        &lt;
-                                    </button>
-
-                                    <div className="d-flex overflow-hidden">
-                                        {calendarsToDisplay.map((calendar, calendarIndex) => (
-                                            <div
-                                                key={calendarIndex}
-                                                className="card text-center mx-1 "
-                                                style={{ minWidth: '60px', maxWidth: '200px' }}
-                                            >
-                                                <div className="card-header bg-primary text-white card-font px-0 py-1">
-                                                    {calendar.title}
-                                                </div>
-                                                <div className="card-body card-font p-0">
-                                                    {calendar.times.map((time, timeIndex) => (
-                                                        <a href='#' className='m-0 p-0 card-font d-block text-decoration-none link-time' key={timeIndex}>{time}</a>
-                                                    ))}
-                                                    <p><a className='text-decoration-none' href="#">More</a></p>
-                                                </div>
-                                                <div className="card-footer py-0 px-2 foot-btn  ">
-                                                    <button className="btn card-font text-white">{calendar.buttonText}</button>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-
-                                    <button className="btn btn-outline-primary ms-2" onClick={handleNext}>
-                                        &gt;
-                                    </button>
+                                <div className="card-footer py-0 px-2 foot-btn  ">
+                                    <button className="btn card-font text-white">{calendar.buttonText}</button>
                                 </div>
-                                <p className='text-center degrees mt-3'>Appointement Reservation</p>
                             </div>
-                        </div>
+                   ))}
+         </div>
+
+         <button className="btn btn-outline-primary ms-2" onClick={handleNext}>
+             &gt;
+         </button>
+     </div>
+     <p className='text-center degrees mt-3'>Appointement Reservation</p>
+ </div>
+</div>
+                       ))}
+                       
+
+                                 
                      
                     </div>
+
                 </div>
             </div>
 
