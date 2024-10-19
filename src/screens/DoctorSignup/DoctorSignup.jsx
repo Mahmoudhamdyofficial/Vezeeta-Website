@@ -3,9 +3,7 @@ import { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from './firebase';
 import { setDoc, doc } from "firebase/firestore";
-
 import './DoctorSignup.css';
-
 export default function DoctorSignup() {
 
     const [email, setEmail] = useState('');
