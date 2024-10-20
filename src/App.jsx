@@ -8,12 +8,13 @@ import SignUp from "./screens/signUp/signUp";
 import Search from "./screens/search/search";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-
+import Teleconsultation from "./screens/allspecialities/Teleconsultation";
 
 import { BrowserRouter as Router,Route, Routes } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 import { useContext } from "react";
 import DoctorSignup from "./screens/DoctorSignup/DoctorSignup";
+import Profile from "./screens/Profile/Profile";
 function App() {
   const { currentUser } = useContext(AuthContext);
   console.log(currentUser);
@@ -27,10 +28,12 @@ function App() {
     <Route path="/about" element={<About />} />
     <Route path="/search" element={<Search />} />
     <Route path="/Signup" element={<SignUp />} />
+    <Route path="/teleconsultation" element={<Teleconsultation />} />
+    <Route path="/Profile" element={<Profile />} />
     <Route path="/DoctorSignup" element={<DoctorSignup />} />
 
     </Routes>
-    <Footer />
+    <Footer/>
     </Router>
 
     </>

@@ -55,11 +55,11 @@ export default function Navbar() {
               <Dropdown.Toggle variant="transparent"
               style={{ color: "white" }}
               id="dropdown-basic">
-              {currentUser.name || currentUser.email}
+              {currentUser.name}
               </Dropdown.Toggle>
               <Dropdown.Menu>
                 <Dropdown.Item  className="drp-item">
-                  Profile
+                 <Link to="/Profile"> Profile </Link>
                 </Dropdown.Item>
                 <Dropdown.Item  className="drp-item">
                   Appointments 
