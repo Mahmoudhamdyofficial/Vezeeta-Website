@@ -18,7 +18,6 @@ export default function DoctorSignup() {
     const [clinicLocation, setclinicLocation] = useState('');
     const [Cost, setCost] = useState('');
     const [qualifications, setqualifications] = useState('');
-    const [role, setrole] = useState('doctor');
     const [image, setImage] = useState(null);
     const [role, setrole] = useState('doctor');
     const [error, setError] = useState('');
