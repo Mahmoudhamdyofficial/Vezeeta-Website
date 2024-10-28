@@ -24,9 +24,12 @@ function Login() {
 
             // Dispatch login action with the user data
             dispatch({ type: 'LOGIN', payload: { ...user, ...userData } });
+<<<<<<< HEAD
 
             alert('Login successful');
          
+=======
+>>>>>>> Hesham
             window.location.href = "/";
         } catch (error) {
             console.error("Login Error:", error);

@@ -9,12 +9,16 @@ import Search from "./screens/search/search";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Teleconsultation from "./screens/allspecialities/Teleconsultation";
+import DoctorInfo from "./screens/doctorInfo/doctorInfo";
+
 
 import { BrowserRouter as Router,Route, Routes } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 import { useContext } from "react";
 import DoctorSignup from "./screens/DoctorSignup/DoctorSignup";
+import DoctorInfo from "./screens/doctorInfo/doctorInfo";
 import Profile from "./screens/Profile/Profile";
+
 function App() {
   const { currentUser } = useContext(AuthContext);
   console.log(currentUser);
@@ -31,6 +35,7 @@ function App() {
     <Route path="/teleconsultation" element={<Teleconsultation />} />
     <Route path="/Profile" element={<Profile />} />
     <Route path="/DoctorSignup" element={<DoctorSignup />} />
+    <Route path="/doctor/:id" element={<DoctorInfo/>} />
 
     </Routes>
     <Footer/>

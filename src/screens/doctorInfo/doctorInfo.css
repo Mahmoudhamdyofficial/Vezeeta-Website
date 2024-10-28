@@ -1,0 +1,68 @@
+.loading-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+    color: #343a40;
+    font-size: 1.2em;
+    text-align: center;
+    padding: 0 20px;
+  }
+  
+  .loading-spinner {
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 1rem;
+  }
+  .bookSec{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+  }
+  .bookSec2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding-top: 3%;
+    padding-bottom: 2%;
+
+    gap: 10%;
+  }
+  .bookSec3{
+    width: 90%;
+    border-radius: 10px;
+    padding: 1%;
+    padding-left: 5%;
+  }
+  .bookSec4{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+  .textCost{
+    color: white;
+  }
+  .textMap{
+    color: #424344;
+    font-weight: bolder;
+  }
+  .position-sticky {
+    position: sticky;
+    top: 0; /* Adjust as needed */
+  }
+  .bookSec5{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+  }
+  .doc{
+    padding-left: 50px;
+  }

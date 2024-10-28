@@ -55,11 +55,19 @@ export default function Navbar() {
               <Dropdown.Toggle variant="transparent"
               style={{ color: "white" }}
               id="dropdown-basic">
+<<<<<<< HEAD
               {currentUser.name}
               </Dropdown.Toggle>
               <Dropdown.Menu>
                 <Dropdown.Item  className="drp-item">
                  <Link to="/Profile"> Profile </Link>
+=======
+              {currentUser.name || currentUser.email}
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item  className="drp-item">
+                  Profile
+>>>>>>> Hesham
                 </Dropdown.Item>
                 <Dropdown.Item  className="drp-item">
                   Appointments 
