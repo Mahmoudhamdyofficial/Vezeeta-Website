@@ -14,6 +14,7 @@ import { BrowserRouter as Router,Route, Routes } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 import { useContext } from "react";
 import DoctorSignup from "./screens/DoctorSignup/DoctorSignup";
+import DoctorInfo from "./screens/doctorInfo/doctorInfo";
 function App() {
   const { currentUser } = useContext(AuthContext);
   console.log(currentUser);
@@ -28,6 +29,7 @@ function App() {
     <Route path="/search" element={<Search />} />
     <Route path="/Signup" element={<SignUp />} />
     <Route path="/DoctorSignup" element={<DoctorSignup />} />
+    <Route path="/doctor/:id" element={<DoctorInfo/>} />
 
     </Routes>
     <Footer />

@@ -89,6 +89,14 @@ const calendars = getCalendars();
   };
 
   const calendarsToDisplay = calendars.slice(index * 3, index * 3 + 3);
+
+  const [SearchName, setSearchName] = useState('');
+  const [locationFilter, setLocationFilter] = useState('');
+
+  const filteredDoctors = data.filter((doctor) =>
+    doctor.name.toLowerCase().includes(SearchName.toLowerCase()) &&
+    doctor.clinicLocation.toLowerCase().includes(locationFilter.toLowerCase())
+  );
   return (
     <>
       <section className="pb-3" style={{ backgroundColor: 'rgb(238, 236, 236)' }}>
@@ -121,9 +129,9 @@ const calendars = getCalendars();
                     </button>
                     <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
 
-                      <li><a className="dropdown-item" href="#">Action</a></li>
-                      <li><a className="dropdown-item" href="#">Another action</a></li>
-                      <li><a className="dropdown-item" href="#">Something else here</a></li>
+                      <li><a className="dropdown-item">Action</a></li>
+                      <li><a className="dropdown-item">Another action</a></li>
+                      <li><a className="dropdown-item">Something else here</a></li>
                       
                       
                     </ul>
@@ -143,13 +151,11 @@ const calendars = getCalendars();
                       <p className="text-secondary text-start mb-0">In this City</p>
                       <FaMapMarkerAlt className="text-primary" />
 
-                      <p className="d-inline text-primary">choose city</p>
+                      <p className="d-inline text-primary">Choose city</p>
+                      <input className='SearchInput' type="text  "  placeholder='choose Area'value={locationFilter}  onChange={(e) => setLocationFilter(e.target.value)}/>
+
                     </button>
-                    <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton2">
-                        <li><a className="dropdown-item" href="#">Action</a></li>
-                        <li><a className="dropdown-item" href="#">Another action</a></li>
-                        <li><a className="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
+                  
                   </div>
                 </div>
 
@@ -157,21 +163,16 @@ const calendars = getCalendars();
                 <div className="col bg-white border-end">
                   <div>
                     <button
-                      className="btn dropdown-toggle"
-                      id="dropdownMenuButton3"
+                      className="btn "
+                      id=""
                       type="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
                     >
                       <p className="text-secondary text-start mb-0">In this area</p>
                       <FaMapMarkerAlt className="text-primary" />
-                      <p className="d-inline text-primary">choose area</p>
+                      <input className='SearchInput' type="text  "  placeholder='choose  Area'value={locationFilter}  onChange={(e) => setLocationFilter(e.target.value)}/>
+
                     </button>
-                    <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton3">
-                      <li><a className="dropdown-item" href="#">Action</a></li>
-                      <li><a className="dropdown-item" href="#">Another action</a></li>
-                      <li><a className="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
+                   
                   </div>
                 </div>
 
@@ -181,19 +182,13 @@ const calendars = getCalendars();
                     <button
                       className="btn dropdown-toggle"
                       id="dropdownMenuButton4"
-                      type="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
+                     
                     >
                       <p className="text-secondary text-start mb-0">My insurance is</p>
                       <FaUmbrella  className="text-primary"/>
                       <p className="d-inline text-primary">choose insurance</p>
                     </button>
-                    <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton4">
-                      <li><a className="dropdown-item" href="#">Action</a></li>
-                      <li><a className="dropdown-item" href="#">Another action</a></li>
-                      <li><a className="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
+                  
                   </div>
                 </div>
 
@@ -201,21 +196,14 @@ const calendars = getCalendars();
                 <div className="col bg-white border-end">
                   <div>
                     <button
-                      className="btn dropdown-toggle"
-                      id="dropdownMenuButton5"
+                      className="btn "
                       type="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
                     >
                       <p className="text-secondary text-start mb-0">Or search by name</p>
                       <FaUserDoctor className="text-primary" />
-                      <p className="d-inline text-primary" style={{ fontSize: 'smaller' }}>doctor name or hospital</p>
-                    </button>
-                    <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton5">
-                      <li><a className="dropdown-item" href="#">Action</a></li>
-                      <li><a className="dropdown-item" href="#">Another action</a></li>
-                      <li><a className="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
+                        <input className='SearchInput' type="text  "  placeholder='doctor name or hospital'value={SearchName}  onChange={(e) => setSearchName(e.target.value)}/>
+                     </button>
+                 
                   </div>
                 </div>
 
@@ -238,7 +226,7 @@ const calendars = getCalendars();
         </div>
       </section>
       
-      <div className="sec2 pb-3">
+        <div className="sec2 pb-3">
             <div className="container">
                 <div> <a href="" className="text-primary text-decoration-none">vezeeta </a>
                     <p className="para-1"> / Telehealth in Egypt</p></div>
@@ -467,14 +455,18 @@ const calendars = getCalendars();
 
                     <div className="col-10">
 
-                    {data.map((doctor)=>(
-                                <div className="row bg-white rounded-3 py-3 mt-3" key={data.uid}>
+
+
+                    {filteredDoctors.map((doctor)=>(
+                              <a href={`/doctor/${doctor.id}`} className='ankorTagForDoc fs-5 ms-1 doctor-name-link' key={data.uid}>
+
+                                  <div  className="row bg-white rounded-3 py-3 mt-3" >
                                 <div className='col-lg-2 col-md-3 overflow-hidden'>
                                     <img src={doctor.imageUrl} className='prof-img' alt="" />
                                 </div>
                                 <div className='col-lg-5 col-md-9 py-3'>
                                     <p className='text-primary d-inline'>Doctor</p>
-                                    <a href="#" className='fs-5 ms-1 doctor-name-link'>{doctor.name}</a>
+                                    <a className='fs-5 ms-1 doctor-name-link'>{doctor.name}</a>
                                     <p className='doc-discrip'>{doctor.qualifications},{doctor.clinicLocation}</p>
                                     <div className='stars-line'><IoMdStar fontSize={"25"} className='str-rate' />
                                         <IoMdStar fontSize={"25"} className='str-rate' />
@@ -510,7 +502,7 @@ const calendars = getCalendars();
                                                         {calendar.times.map((time, timeIndex) => (
                                                             <a href='#' className='m-0 p-0 card-font d-block text-decoration-none link-time' key={timeIndex}>{time}</a>
                                                         ))}
-                                                        <p><a className='text-decoration-none' href="#">More</a></p>
+                                                        <p><a className='text-decoration-none'>More</a></p>
                                                     </div>
                                                     <div className="card-footer py-0 px-2 foot-btn  ">
                                                         <button className="btn card-font text-white">{calendar.buttonText}</button>
@@ -526,6 +518,7 @@ const calendars = getCalendars();
                                     <p className='text-center degrees mt-3'>Appointement Reservation</p>
                                 </div>
                                 </div>
+                              </a>
                                                     ))}
                                                     
                         
