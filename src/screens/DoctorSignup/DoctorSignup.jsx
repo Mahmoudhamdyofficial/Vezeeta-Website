@@ -20,6 +20,7 @@ export default function DoctorSignup() {
     const [qualifications, setqualifications] = useState('');
     const [image, setImage] = useState(null);
     const [error, setError] = useState('');
+    // add verify state
 
     const handleImageChange = (e) => {
         if (e.target.files[0]) {

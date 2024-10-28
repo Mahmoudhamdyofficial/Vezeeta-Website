@@ -1,4 +1,5 @@
 import './search.css';  
+import { AuthContext } from '../../context/AuthContext';
 import { CiSearch } from "react-icons/ci";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaUmbrella } from "react-icons/fa";
@@ -10,7 +11,7 @@ import { PiGraduationCapLight } from "react-icons/pi";
 import { GiPriceTag } from "react-icons/gi";
 import { SlCalender } from "react-icons/sl";
 import { IoTicketOutline } from "react-icons/io5";
-import { useEffect, useState } from 'react';
+import {useContext ,useEffect, useState } from 'react';
 import { IoMdStar } from "react-icons/io";
 import { BsTelephone } from "react-icons/bs";
 import { collection, getDocs } from 'firebase/firestore';
@@ -19,6 +20,7 @@ import { IoLocation } from "react-icons/io5";
 
 
 export default function Search() {
+    const {currentUser} = useContext(AuthContext)
   const [index, setIndex] = useState(0);
 
   const getFormattedDate = (date) => {
@@ -512,8 +514,9 @@ const calendars = getCalendars();
                                                         ))}
                                                         <p><a className='text-decoration-none' href="#">More</a></p>
                                                     </div>
-                                                    <div className="card-footer py-0 px-2 foot-btn  ">
-                                                        <button className="btn card-font text-white">{calendar.buttonText}</button>
+                                                    <div className="card-footer py-0 px-2 foot-btn " style={{ backgroundColor: currentUser == null ? "grey" : "red" }}>
+                                                        {/* disable button if not logged in  */}
+                                                        <button className="btn card-font text-white"  disabled={currentUser == null}>{calendar.buttonText}</button>
                                                     </div>
                                                 </div>
                                             ))}
