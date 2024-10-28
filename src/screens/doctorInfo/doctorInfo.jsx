@@ -1,6 +1,6 @@
 
 import { doc, getDoc } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaUmbrella } from "react-icons/fa";
@@ -20,7 +20,9 @@ import { FaCalendarAlt } from "react-icons/fa";
 // import { SlCalender } from "react-icons/sl";
 import Spinner from 'react-bootstrap/Spinner';
 import "./doctorInfo.css"
+import { AuthContext } from "../../context/AuthContext";
 export default function DoctorInfo() {
+    const {currentUser} = useContext(AuthContext)
 
     const [index, setIndex] = useState(0);
 
@@ -341,8 +343,8 @@ export default function DoctorInfo() {
                                                                         ))}
                                                                         <p><a className='text-decoration-none'>More</a></p>
                                                                     </div>
-                                                                    <div className="card-footer py-0 px-2 foot-btn  ">
-                                                                        <button className="btn card-font text-white">{calendar.buttonText}</button>
+                                                                    <div className="card-footer py-0 px-2 foot-btn  " style={{ backgroundColor: currentUser == null ? "grey" : "red" }}>
+                                                                        <button className="btn card-font text-white" disabled={currentUser == null}>{calendar.buttonText}</button>
                                                                     </div>
                                                                 </div>
                                                             ))}
