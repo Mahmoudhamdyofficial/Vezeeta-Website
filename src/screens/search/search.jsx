@@ -1,4 +1,5 @@
 import './search.css';  
+import { AuthContext } from '../../context/AuthContext';
 import { CiSearch } from "react-icons/ci";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaUmbrella } from "react-icons/fa";
@@ -10,7 +11,7 @@ import { PiGraduationCapLight } from "react-icons/pi";
 import { GiPriceTag } from "react-icons/gi";
 import { SlCalender } from "react-icons/sl";
 import { IoTicketOutline } from "react-icons/io5";
-import { useEffect, useState } from 'react';
+import {useContext ,useEffect, useState } from 'react';
 import { IoMdStar } from "react-icons/io";
 import { BsTelephone } from "react-icons/bs";
 import { collection, getDocs } from 'firebase/firestore';
@@ -19,6 +20,7 @@ import { IoLocation } from "react-icons/io5";
 
 
 export default function Search() {
+    const {currentUser} = useContext(AuthContext)
   const [index, setIndex] = useState(0);
 
   const getFormattedDate = (date) => {
@@ -229,8 +231,10 @@ const calendars = getCalendars();
         <div className="sec2 pb-3">
             <div className="container">
                 <div> <a href="" className="text-primary text-decoration-none">vezeeta </a>
-                    <p className="para-1"> / Telehealth in Egypt</p></div>
+                    <p className="para-1"> / Telehealth in Egypt</p>
+                </div>
                 <div className='row'>
+
                     <div id='col-2' >
                         <div className="position-sticky top-0">
                             <div className=" rounded-2 overflow-hidden">
@@ -504,8 +508,9 @@ const calendars = getCalendars();
                                                         ))}
                                                         <p><a className='text-decoration-none'>More</a></p>
                                                     </div>
-                                                    <div className="card-footer py-0 px-2 foot-btn  ">
-                                                        <button className="btn card-font text-white">{calendar.buttonText}</button>
+                                                    <div className="card-footer py-0 px-2 foot-btn " style={{ backgroundColor: currentUser == null ? "grey" : "red" }}>
+                                                        {/* disable button if not logged in  */}
+                                                        <button className="btn card-font text-white"  disabled={currentUser == null}>{calendar.buttonText}</button>
                                                     </div>
                                                 </div>
                                             ))}
@@ -524,6 +529,7 @@ const calendars = getCalendars();
                         
                      
                     </div>
+
                 </div>
             </div>
 

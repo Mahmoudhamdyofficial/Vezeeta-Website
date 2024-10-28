@@ -20,7 +20,9 @@ export default function DoctorSignup() {
     const [qualifications, setqualifications] = useState('');
     const [role, setrole] = useState('doctor');
     const [image, setImage] = useState(null);
+    const [role, setrole] = useState('doctor');
     const [error, setError] = useState('');
+
      console.log(setrole);
     const handleImageChange = (e) => {
         if (e.target.files[0]) {
