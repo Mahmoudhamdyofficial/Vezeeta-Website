@@ -18,10 +18,10 @@ export default function DoctorSignup() {
     const [clinicLocation, setclinicLocation] = useState('');
     const [Cost, setCost] = useState('');
     const [qualifications, setqualifications] = useState('');
+    const [role, setrole] = useState('doctor');
     const [image, setImage] = useState(null);
     const [error, setError] = useState('');
-    // add verify state
-
+     console.log(setrole);
     const handleImageChange = (e) => {
         if (e.target.files[0]) {
           setImage(e.target.files[0]);
@@ -66,14 +66,36 @@ export default function DoctorSignup() {
                 imageUrl: imageUrl ,
                 uid: doctor.uid
             });
+            await setDoc(doc(db, 'Authorized', doctor.uid), {
+              
+                email: email,
+                password:password,
+                 role: role,
+                 uid: doctor.uid
+              
+            });
             console.log('User registered and added to Firestore:', doctor);
-            alert('You have signed up successfully!');
+             alert('You have signed up successfully!');
+
+             setEmail('');
+             setPassword('');
+             setName('');
+             setPhone('');
+             setGender('');
+             setspecialization('');
+             setclinicLocation('');
+             setCost('');
+             setqualifications('');
+             setImage(null);
+             setError('');
         } catch (error) {
             console.error("Error during signup:", error);
             setError(error.message);
         }
-    };
+        
 
+    };
+    
     return (
         <Container className="container">
             <Row className="justify-content-md-center pt-5">

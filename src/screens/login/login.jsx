@@ -2,12 +2,16 @@ import "./login.css";
 import { FaFacebookF } from "react-icons/fa";
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../signUp/firebase"; // Firebase config file
+import { auth, db } from "../signUp/firebase"; // Firebase config file
+import { AuthContext } from "../../context/AuthContext";
+import { useContext } from "react";
+import { doc, getDoc } from "firebase/firestore";
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const { dispatch } = useContext(AuthContext);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -15,8 +19,11 @@ function Login() {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
             console.log('User logged in:', user);
-            alert('Login successful');
-         
+            const userDoc = await getDoc(doc(db, 'User', user.uid));
+            const userData = userDoc.exists() ? userDoc.data() : null;
+
+            // Dispatch login action with the user data
+            dispatch({ type: 'LOGIN', payload: { ...user, ...userData } });
             window.location.href = "/";
         } catch (error) {
             console.error("Login Error:", error);

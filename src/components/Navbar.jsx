@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./Navbar.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import logo from "../assets/NavbarImages/whitelogowithdotcom.png";
@@ -7,16 +7,26 @@ import Saudi from "../assets/NavbarImages/Saudi.jfif";
 import Lebanon from "../assets/NavbarImages/Lebanon.jfif";
 import Jordan from "../assets/NavbarImages/Jordan.jfif";
 import { Link } from "react-router-dom";
-export default function Navbar() {
-  const [language, setLanguage] = useState("عربي");
+import { AuthContext } from "../context/AuthContext"; // Ensure correct import
+import { LuLogOut } from "react-icons/lu";
 
+export default function Navbar() {
+  const { currentUser, dispatch } = useContext(AuthContext); // Use currentUser from context
+  const [language, setLanguage] = useState("عربي"); // Initial language state
   const [isCollapsed, setIsCollapsed] = useState(true);
+
   const toggleLanguage = () => {
     setLanguage(language === "English" ? "عربي" : "English");
   };
+
   const toggleNavbar = () => {
     setIsCollapsed(!isCollapsed);
   };
+
+  const handleLogout = () => {
+    dispatch({ type: "LOGOUT" });
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark">
       <Link to="/">
@@ -35,88 +45,66 @@ export default function Navbar() {
         <span className="navbar-toggler-icon" />
       </button>
       <div
-        className={`collapse navbar-collapse  ${isCollapsed ? "" : "show"}`}
+        className={`collapse navbar-collapse ${isCollapsed ? "" : "show"}`}
         id="navbarNav"
       >
-        <ul className="navbar-nav " style={{ marginLeft: "auto" }}>
+        <ul className="navbar-nav" style={{ marginLeft: "auto" }}>
+          {currentUser ? (
+            <>
+            <Dropdown>
+              <Dropdown.Toggle variant="transparent"
+              style={{ color: "white" }}
+              id="dropdown-basic">
+              {currentUser.name || currentUser.email}
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item  className="drp-item">
+                  Profile
+                </Dropdown.Item>
+                <Dropdown.Item  className="drp-item">
+                  Appointments 
+                </Dropdown.Item>
+                <Dropdown.Item onClick={handleLogout} className="drp-item">
+                  Logout <LuLogOut style={{marginLeft: "5px",alignSelf: "center" , fontSize: "20px" , color: "black"}}/>
+
+                </Dropdown.Item>
+              </Dropdown.Menu>
+              </Dropdown>
+            </>
+          ) : (
+            <>
+              <li className="nav-item">
+                <Link to="/signup">
+                  <button className="btn btn-outline-light btn-sm">Sign Up</button>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/login">
+                  <a className="nav-link" href="#">
+
+                    Login
+                  </a>
+                </Link>
+              </li>
+            </>
+          )}
           <li className="nav-item">
-            <Link to="/signup">
-              <button className="btn btn-outline-light btn-sm">Sign Up</button>
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/login">
-              <a className="nav-link" href="#">
-                Login
-              </a>
-            </Link>
-          </li>
-          <li className="nav-item">
+          <Link to="/DoctorSignup">
             <a className="nav-link" href="#">
               Vezzeta For Doctors
             </a>
+            </Link>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="contact.html">
               Contact Us
             </a>
           </li>
-          {/* <li className="nav-item dropdown ">
-            <a
-              className="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              English
-            </a>
-            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a className="dropdown-item" href="#">
-                English
-              </a>
-              <a className="dropdown-item" href="#">
-                العربية
-              </a>
-            </div>
-          </li> */}
           <li className="nav-item">
-            <button
-              className="nav-link"
-              onClick={toggleLanguage} // Toggle the language when clicked
-            >
+            <button className="nav-link" onClick={toggleLanguage}>
               {language}
             </button>
           </li>
-          {/* <li className="nav-item dropdown">
-            <a
-              className="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <img src={Egypt}alt /> Egypt
-            </a>
-            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a className="dropdown-item" href="#">
-                <img src={Saudi} alt="saudi" className="drpcountry" />{" "}
-                Saudi
-              </a>
-              <a className="dropdown-item" href="#">
-                <img src={Jordan} alt="jordan" className="drpcountry" />{" "}
-                Jordan
-              </a>
-              <a className="dropdown-item" href="#">
-                <img src={Lebanon} alt="jordan" className="drpcountry" />{" "}
-                Lebanon
-              </a>
-            </div>
-          </li> */}
           <Dropdown>
             <Dropdown.Toggle
               variant="transparent"
@@ -125,7 +113,6 @@ export default function Navbar() {
             >
               <img src={Egypt} alt="Egypt" /> Egypt
             </Dropdown.Toggle>
-
             <Dropdown.Menu>
               <Dropdown.Item href="#">
                 <img src={Saudi} alt="Saudi" className="drpcountry" /> Saudi
@@ -134,8 +121,7 @@ export default function Navbar() {
                 <img src={Jordan} alt="Jordan" className="drpcountry" /> Jordan
               </Dropdown.Item>
               <Dropdown.Item href="#">
-                <img src={Lebanon} alt="Lebanon" className="drpcountry" />{" "}
-                Lebanon
+                <img src={Lebanon} alt="Lebanon" className="drpcountry" /> Lebanon
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>

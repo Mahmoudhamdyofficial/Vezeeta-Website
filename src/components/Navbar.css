@@ -1,40 +1,43 @@
 .navbar-brand img {
-    max-height: 50px;
+  max-height: 50px;
 }
 
 .navbar {
-    background-color: #007bff;
+  background-color: #007bff;
 }
 
 .dropdown-menu {
-    min-width: auto;
+  min-width: auto;
 }
 .navbar-nav .dropdown-menu a {
-    color: black ;
+  color: black;
 }
 
-.dropdown-item{
-    color: #007bff;
-    font-size: 14px;
+.dropdown-item {
+  color: #007bff;
+  font-size: 14px;
 }
 .navbar-nav .nav-item {
-    border-left: 1px solid #fff; /* Change the color as needed */
-    font-size: 13px;
-    font-weight: bold;
-    
+  border-left: 1px solid #fff; /* Change the color as needed */
+  font-size: 13px;
+  font-weight: bold;
 
-    /* Optional: add some space between the border and the content */
+  /* Optional: add some space between the border and the content */
 
-    margin-left: 10px;
-    /* Optional: add some space between the border and the content */
+  margin-left: 10px;
+  /* Optional: add some space between the border and the content */
+}
 
-  }
-  
-  nav{
-    text-align: right;
-  }
-  
-  /* Remove the border from the first nav item */
-  .navbar-nav .nav-item:first-child {
-    border-left: none;
-  }
+nav {
+  text-align: right;
+}
+
+/* Remove the border from the first nav item */
+.navbar-nav .nav-item:first-child {
+  border-left: none;
+}
+.drp-item {
+  color: black;
+  font-size: 20;
+  font-weight: bold;
+}

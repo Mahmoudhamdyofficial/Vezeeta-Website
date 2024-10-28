@@ -259,3 +259,15 @@ div {
 .hot-line {
     font-weight: bolder;
 }
+.SearchInput{
+    border: none;
+    padding-left:5%;
+    width: 90%;
+    
+}
+.SearchInput:focus{
+    border: none;
+}
+.ankorTagForDoc{
+    text-decoration: chocolate;
+}
