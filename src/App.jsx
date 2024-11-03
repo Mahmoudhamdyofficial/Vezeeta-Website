@@ -15,6 +15,8 @@ import { useContext } from "react";
 import DoctorSignup from "./screens/DoctorSignup/DoctorSignup";
 import DoctorInfo from "./screens/doctorInfo/doctorInfo";
 import Profile from "./screens/Profile/Profile";
+import ErrorPage from "./screens/error/error";
+import Verification from "./screens/verificationDoctor/verification";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -33,6 +35,11 @@ function App() {
     <Route path="/Profile" element={<Profile />} />
     <Route path="/DoctorSignup" element={<DoctorSignup />} />
     <Route path="/doctor/:id" element={<DoctorInfo/>} />
+    {/* add verificationDoctor page */}
+    <Route path="/Verification" element={<Verification/>} />
+    {/* add error page */}  
+    <Route path="*" element={<ErrorPage/>} />
+    
 
     </Routes>
     <Footer/>

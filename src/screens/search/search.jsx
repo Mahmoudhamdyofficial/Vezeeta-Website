@@ -71,7 +71,9 @@ const calendars = getCalendars();
         const querySnapshot = await getDocs(collection(db, "doctor")); 
         const items = [];
         querySnapshot.forEach((doc) => {
-          items.push({ id: doc.id, ...doc.data() });
+          if(doc.data().verification === "true"){
+            items.push({ id: doc.id, ...doc.data() });
+          }
         });
         setData(items);
       } catch (error) {

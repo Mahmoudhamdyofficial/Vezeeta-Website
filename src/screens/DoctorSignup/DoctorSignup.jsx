@@ -6,6 +6,8 @@ import { setDoc, doc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "./firebase"; // Import the Firebase storage instance
 import './DoctorSignup.css';
+import { useNavigate } from "react-router-dom";
+
 
 export default function DoctorSignup() {
 
@@ -17,12 +19,17 @@ export default function DoctorSignup() {
     const [specialization, setspecialization] = useState('');
     const [clinicLocation, setclinicLocation] = useState('');
     const [Cost, setCost] = useState('');
+    const [Wating, setWating] = useState('');
     const [qualifications, setqualifications] = useState('');
     const [image, setImage] = useState(null);
     const [role, setrole] = useState('doctor');
+    const [verification, setverification] = useState('');
     const [error, setError] = useState('');
 
      console.log(setrole);
+     console.log(setverification);
+     const nav = useNavigate();
+
     const handleImageChange = (e) => {
         if (e.target.files[0]) {
           setImage(e.target.files[0]);
@@ -63,7 +70,9 @@ export default function DoctorSignup() {
                 specialization: specialization,
                 clinicLocation: clinicLocation,
                 Cost:Cost,
+                Wating:Wating,
                 qualifications:qualifications,
+                verification: verification,
                 imageUrl: imageUrl ,
                 uid: doctor.uid
             });
@@ -77,6 +86,7 @@ export default function DoctorSignup() {
             });
             console.log('User registered and added to Firestore:', doctor);
              alert('You have signed up successfully!');
+             nav('/Verification');
 
              setEmail('');
              setPassword('');
@@ -86,6 +96,7 @@ export default function DoctorSignup() {
              setspecialization('');
              setclinicLocation('');
              setCost('');
+             setWating('');
              setqualifications('');
              setImage(null);
              setError('');
@@ -173,6 +184,11 @@ export default function DoctorSignup() {
                             <div className="formName">
                                 <Form.Label>Cost <span className="star">*</span></Form.Label>
                                 <input className="formControl" type="number" placeholder="Cost" value={Cost} onChange={(e) => setCost(e.target.value)} />
+                            </div>
+                            <br />
+                             <div className="formName">
+                                <Form.Label>Wating Time <span className="star">*</span></Form.Label>
+                                <input className="formControl" type="number" placeholder="Wating Time" value={Wating} onChange={(e) => setWating(e.target.value)} />
                             </div>
                             <br />
                             <div className="formName">

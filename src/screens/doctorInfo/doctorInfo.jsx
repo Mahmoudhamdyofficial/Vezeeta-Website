@@ -275,7 +275,7 @@ export default function DoctorInfo() {
 
                                             <div className="bookSec">
                                                 <CiStopwatch fontSize={"25"} className="icon-coll" />
-                                                <span className="coll-head ">Wating Time:  20 minute</span>
+                                                <span className="coll-head ">Wating Time:  {doctor.Wating} minute</span>
                                             </div>
 
 
@@ -339,11 +339,11 @@ export default function DoctorInfo() {
                                                                     </div>
                                                                     <div className="card-body card-font p-0">
                                                                         {calendar.times.map((time, timeIndex) => (
-                                                                            <a href='#' className='m-0 p-0 card-font d-block text-decoration-none link-time' key={timeIndex}>{time}</a>
+                                                                            <button href='#' style={{ backgroundColor: currentUser == null ? "white" : "white" ,borderColor: currentUser == null ? "grey" : "blue", color: currentUser == null ? "grey" : "black", height: "25px" }} className='btn btn-primary text-center m-0 p-0 card-font d-block w-100 ' key={timeIndex} disabled={currentUser == null} >{time}</button>
                                                                         ))}
                                                                         <p><a className='text-decoration-none'>More</a></p>
                                                                     </div>
-                                                                    <div className="card-footer py-0 px-2 foot-btn  " style={{ backgroundColor: currentUser == null ? "grey" : "red" }}>
+                                                                    <div className="card-footer py-0 px-2 foot-btn  " style={{ backgroundColor: currentUser == null ? "grey" : "red", borderColor: currentUser == null ? "grey" : "blue", color: currentUser == null ? "grey" : "black" }}>
                                                                         <button className="btn card-font text-white" disabled={currentUser == null}>{calendar.buttonText}</button>
                                                                     </div>
                                                                 </div>
