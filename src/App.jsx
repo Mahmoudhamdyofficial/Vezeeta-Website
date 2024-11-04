@@ -15,6 +15,12 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 import { useContext, useState } from "react";
 import DoctorSignup from "./screens/DoctorSignup/DoctorSignup";
+import DoctorInfo from "./screens/doctorInfo/doctorInfo";
+import Profile from "./screens/Profile/Profile";
+import ErrorPage from "./screens/error/error";
+import Verification from "./screens/verificationDoctor/verification";
+import Appointment from "./screens/Appointment/appointment";
+
 import { LanguageContextProvider } from "./context/TranslationContext";
 function App() {
   const [language, setLanguage] = useState("English");
@@ -29,11 +35,12 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/about" element={<About />} />
-            <Route path="/teleconsultation" element={<Teleconsultation />} />
             <Route path="/search" element={<Search />} />
-            <Route path="/profile" element={<Profile />} />
             <Route path="/Signup" element={<SignUp />} />
+            <Route path="/teleconsultation" element={<Teleconsultation />} />
+            <Route path="/Profile" element={<Profile />} />
             <Route path="/DoctorSignup" element={<DoctorSignup />} />
+            <Route path="/doctor/:id" element={<DoctorInfo />} />
           </Routes>
           <Footer />
         </Router>

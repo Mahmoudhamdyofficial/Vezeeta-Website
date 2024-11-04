@@ -67,7 +67,7 @@ export default function Navbar() {
                   </Dropdown.Item>
                   </Link>
                   <Dropdown.Item className="drp-item">
-                    Appointments
+                  <Link to="/appointment">Appointments </Link>
                   </Dropdown.Item>
                   <Dropdown.Item onClick={handleLogout} className="drp-item">
                     Logout <LuLogOut style={{ marginLeft: "5px", alignSelf: "center", fontSize: "20px", color: "black" }} />

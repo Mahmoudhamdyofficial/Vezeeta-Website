@@ -6,6 +6,8 @@ import { setDoc, doc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "./firebase"; // Import the Firebase storage instance
 import './DoctorSignup.css';
+import { useNavigate } from "react-router-dom";
+
 
 export default function DoctorSignup() {
 
@@ -17,33 +19,47 @@ export default function DoctorSignup() {
     const [specialization, setspecialization] = useState('');
     const [clinicLocation, setclinicLocation] = useState('');
     const [Cost, setCost] = useState('');
+    const [Wating, setWating] = useState('');
     const [qualifications, setqualifications] = useState('');
+<<<<<<< HEAD
+    const [role, setrole] = useState('doctor');
+=======
+    const [pref, setpref] = useState('');
+>>>>>>> f03cfe931fb01dd624aae0b19ab6d57d2003117e
     const [image, setImage] = useState(null);
     const [role, setrole] = useState('doctor');
+    const [verification, setverification] = useState('');
     const [error, setError] = useState('');
-
+<<<<<<< HEAD
      console.log(setrole);
+=======
+
+    console.log(setrole);
+    console.log(setverification);
+    const nav = useNavigate();
+
+>>>>>>> f03cfe931fb01dd624aae0b19ab6d57d2003117e
     const handleImageChange = (e) => {
         if (e.target.files[0]) {
-          setImage(e.target.files[0]);
+            setImage(e.target.files[0]);
         }
-      };
-      const handleImageUpload = () => {
+    };
+    const handleImageUpload = () => {
         if (image) {
-          const storageRef = ref(storage, `images/${image.name}`);
-          
-          // Upload the file to Firebase Storage
-          uploadBytes(storageRef, image).then((snapshot) => {
-            // Get the image URL after upload is successful
-            getDownloadURL(snapshot.ref).then((url) => {
-              console.log("Uploaded image URL:", url);
+            const storageRef = ref(storage, `images/${image.name}`);
+
+            // Upload the file to Firebase Storage
+            uploadBytes(storageRef, image).then((snapshot) => {
+                // Get the image URL after upload is successful
+                getDownloadURL(snapshot.ref).then((url) => {
+                    console.log("Uploaded image URL:", url);
+                });
+            }).catch((error) => {
+                console.error("Error uploading image:", error);
             });
-          }).catch((error) => {
-            console.error("Error uploading image:", error);
-          });
         }
-      };
-    
+    };
+
     const handleSignup = async (e) => {
         e.preventDefault();
         try {
@@ -62,12 +78,16 @@ export default function DoctorSignup() {
                 gender: gender,
                 specialization: specialization,
                 clinicLocation: clinicLocation,
-                Cost:Cost,
-                qualifications:qualifications,
-                imageUrl: imageUrl ,
+                Cost: Cost,
+                Wating: Wating,
+                qualifications: qualifications,
+                pref: pref,
+                verification: verification,
+                imageUrl: imageUrl,
                 uid: doctor.uid
             });
             await setDoc(doc(db, 'Authorized', doctor.uid), {
+<<<<<<< HEAD
               
                 email: email,
                 password:password,
@@ -89,11 +109,43 @@ export default function DoctorSignup() {
              setqualifications('');
              setImage(null);
              setError('');
+=======
+
+                email: email,
+                password: password,
+                role: role,
+                uid: doctor.uid
+
+            });
+            console.log('User registered and added to Firestore:', doctor);
+            alert('You have signed up successfully!');
+            nav('/Verification');
+
+            setEmail('');
+            setPassword('');
+            setName('');
+            setPhone('');
+            setGender('');
+            setspecialization('');
+            setclinicLocation('');
+            setCost('');
+            setWating('');
+            setqualifications('');
+            setpref('');
+            setImage(null);
+            setError('');
+>>>>>>> f03cfe931fb01dd624aae0b19ab6d57d2003117e
         } catch (error) {
             console.error("Error during signup:", error);
             setError(error.message);
         }
+<<<<<<< HEAD
         
+=======
+
+
+    };
+>>>>>>> f03cfe931fb01dd624aae0b19ab6d57d2003117e
 
     };
     
@@ -111,24 +163,24 @@ export default function DoctorSignup() {
                         <Form onSubmit={handleSignup}>
                             <div className="formName">
                                 <label htmlFor="formName">Name<span className="star">*</span></label>
-                                <input className='formControl' type="text" id="formName" placeholder="Your Full Name" value={name} onChange={(e) => setName(e.target.value)} />
+                                <input className='formControl' type="text" id="formName" placeholder="Your Full Name" value={name} onChange={(e) => setName(e.target.value)} required />
                             </div>
                             <br />
 
                             <div className="formName">
                                 <label htmlFor="formPhone">Mobile Number <span className="star">*</span></label>
-                                <input className='formControl' type="text" id="formPhone" placeholder="Your Phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                                <input className='formControl' type="text" id="formPhone" placeholder="Your Phone" value={phone} onChange={(e) => setPhone(e.target.value)} required />
                             </div>
                             <br />
 
                             <div className="formName">
                                 <label htmlFor="formEmail">E-mail Address<span className="star">*</span></label>
-                                <input className='formControlEmail' type="email" id="formEmail" placeholder="example@domain.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+                                <input className='formControlEmail' type="email" id="formEmail" placeholder="example@domain.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
                             </div>
                             <br />
                             <div className="formName">
                                 <Form.Label>Password <span className="star">*</span></Form.Label>
-                                <input className="formControl" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                <input className="formControl" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                             </div>
                             <br />
 
@@ -144,6 +196,7 @@ export default function DoctorSignup() {
                                         value="Female"
                                         onChange={(e) => setGender(e.target.value)}
                                         checked={gender === 'Female'}
+                                        required
                                     />
                                     <Form.Check
                                         inline
@@ -154,38 +207,51 @@ export default function DoctorSignup() {
                                         value="Male"
                                         onChange={(e) => setGender(e.target.value)}
                                         checked={gender === 'Male'}
+                                        required
                                     />
                                 </div>
                             </div>
                             <br />
 
-                          
+
                             <div className="formName">
                                 <Form.Label>clinic location <span className="star">*</span></Form.Label>
-                                <input className="formControl" type="clinic" placeholder="clinic location" value={clinicLocation} onChange={(e) => setclinicLocation(e.target.value)} />
+                                <input className="formControl" type="clinic" placeholder="العنوان بالتفصيل" value={clinicLocation} onChange={(e) => setclinicLocation(e.target.value)} required />
                             </div>
                             <br />
                             <div className="formName">
                                 <Form.Label>Department <span className="star">*</span></Form.Label>
-                                <input className="formControl" type="Department" placeholder="Department" value={specialization} onChange={(e) => setspecialization(e.target.value)} />
+                                <input className="formControl" type="Department" placeholder="مثال: القلب و الباطنة" value={specialization} onChange={(e) => setspecialization(e.target.value)} required />
                             </div>
                             <br />
                             <div className="formName">
-                                <Form.Label>Cost <span className="star">*</span></Form.Label>
-                                <input className="formControl" type="number" placeholder="Cost" value={Cost} onChange={(e) => setCost(e.target.value)} />
+                                <Form.Label>Pref  <span className="star">*</span></Form.Label>
+                                <input className="formControl" type="text" placeholder=" مثال : استاذ و استشاري القلب و الاوعيه الدمويه جامعة القاهره   " value={pref} onChange={(e) => setpref(e.target.value)} required />
                             </div>
                             <br />
                             <div className="formName">
                                 <Form.Label>Scientific qualifications  <span className="star">*</span></Form.Label>
-                                <input className="formControl" type="text" placeholder=" Scientific qualifications " value={qualifications} onChange={(e) => setqualifications(e.target.value)} />
+                                <input className="formControl" type="text" placeholder=" حراجه القلب للبالغين و الاطفال و الاوعيه الدموية  " value={qualifications} onChange={(e) => setqualifications(e.target.value)} required />
+                            </div>
+                            <br />
+                          
+                            <div className="formName">
+                                <Form.Label>Cost <span className="star">*</span></Form.Label>
+                                <input className="formControl" type="number" placeholder="$" value={Cost} onChange={(e) => setCost(e.target.value)} required />
                             </div>
                             <br />
                             <div className="formName">
-                                    <input className='' type="file" onChange={handleImageChange} />
+                                <Form.Label>Wating Time with miunites <span className="star">*</span></Form.Label>
+                                <input className="formControl" type="number" placeholder="Wating Time" value={Wating} onChange={(e) => setWating(e.target.value)} required />
                             </div>
-                            <br/>
+                            <br />
+                           
+                            <div className="formName">
+                                <input className='' type="file" onChange={handleImageChange} required />
+                            </div>
+                            <br />
                             {error && <p className="text-danger">{error}</p>}
-                            <br/>
+                            <br />
                             <div className="buttonSub">
                                 <button onClick={handleImageUpload} className="Subscribe" type="submit">
                                     Subscribe now
@@ -202,7 +268,7 @@ export default function DoctorSignup() {
                                 Already Registered? <a href="/login">Login</a>
                             </p>
                             <br />
-                              
+
                         </Form>
                     </div>
                 </Col>
