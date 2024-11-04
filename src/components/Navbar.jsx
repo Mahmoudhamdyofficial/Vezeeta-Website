@@ -61,9 +61,11 @@ export default function Navbar() {
                   {currentUser.name || currentUser.email}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
+                  <Link to='/profile'>
                   <Dropdown.Item className="drp-item">
                     Profile
                   </Dropdown.Item>
+                  </Link>
                   <Dropdown.Item className="drp-item">
                     Appointments
                   </Dropdown.Item>

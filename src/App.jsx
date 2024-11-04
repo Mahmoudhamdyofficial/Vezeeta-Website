@@ -9,6 +9,7 @@ import Teleconsultation from "./screens/allspecialities/Teleconsultation";
 import Search from "./screens/search/search";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Profile from "./screens/Profile/Profile";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
@@ -30,6 +31,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/teleconsultation" element={<Teleconsultation />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/Signup" element={<SignUp />} />
             <Route path="/DoctorSignup" element={<DoctorSignup />} />
           </Routes>
