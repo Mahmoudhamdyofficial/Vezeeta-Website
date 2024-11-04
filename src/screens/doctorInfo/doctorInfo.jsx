@@ -1,6 +1,6 @@
 
-import { doc, getDoc } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { addDoc, collection, doc, getDoc} from "firebase/firestore";
+import { useContext, useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaUmbrella } from "react-icons/fa";
@@ -15,20 +15,26 @@ import { FaMoneyBillWave } from "react-icons/fa";
 import { RiFilter2Line } from "react-icons/ri";
 import { CiStopwatch } from "react-icons/ci";
 import { FaCalendarAlt } from "react-icons/fa";
+import { Modal, Button, Form } from 'react-bootstrap';
 
 // import { GiPriceTag } from "react-icons/gi";
 // import { SlCalender } from "react-icons/sl";
 import Spinner from 'react-bootstrap/Spinner';
 import "./doctorInfo.css"
+import { AuthContext } from "../../context/AuthContext";
 export default function DoctorInfo() {
+    const {currentUser} = useContext(AuthContext)
 
     const [index, setIndex] = useState(0);
-
+    const [showModal, setShowModal] = useState(false); // State to control modal visibility
+    const [selectedTime, setSelectedTime] = useState(''); // State to store selected time
+    const [selectedDate, setSelectedDate] = useState(''); // State to store selected date
+    const [status, setStatus] = useState(''); 
     const getFormattedDate = (date) => {
         const options = { weekday: 'short', month: 'numeric', day: 'numeric' };
         return date.toLocaleDateString('en-US', options);
     };
-
+    console.log(setStatus);
     const getCalendars = () => {
         const calendars = [];
         const today = new Date();
@@ -36,7 +42,7 @@ export default function DoctorInfo() {
         // Push today's entry
         calendars.push({
             title: "Today",
-            times: ["1:15 AM", "1:30 AM", "1:45 AM", "11:00 AM"],
+            times: ["12:00 pm", "12:30 pm", "01:00 pm", "01:30 pm"],
             buttonText: "BOOK",
         });
 
@@ -45,7 +51,7 @@ export default function DoctorInfo() {
         tomorrow.setDate(today.getDate() + 1);
         calendars.push({
             title: "Tomorrow",
-            times: ["12:00 AM", "12:15 AM", "12:30 AM", "12:45 AM"],
+            times: ["12:00 pm", "12:30 pm", "01:00 pm", "01:30 pm"],
             buttonText: "BOOK",
         });
 
@@ -55,7 +61,7 @@ export default function DoctorInfo() {
             nextDate.setDate(today.getDate() + i);
             calendars.push({
                 title: getFormattedDate(nextDate),
-                times: ["12:00 AM", "12:15 AM", "12:30 AM", "12:45 AM"],
+                times: ["12:00 pm", "12:30 pm", "01:00 pm", "01:30 pm"],
                 buttonText: "BOOK",
             });
         }
@@ -76,11 +82,6 @@ export default function DoctorInfo() {
     };
 
     const calendarsToDisplay = calendars.slice(index * 3, index * 3 + 3);
-
-
-
-
-
     const { id } = useParams();
     const [doctor, setDoctor] = useState(null);
 
@@ -106,8 +107,32 @@ export default function DoctorInfo() {
         <p>We are fetching the latest data for you. Please wait a moment while we prepare everything.</p>
         <p>Your patience is appreciated as we load all the information you need to proceed.</p>
     </div>
+     const handleTimeSlotClick = (time, date) => {
+        setSelectedTime(time);
+        setSelectedDate(date);;
+        setShowModal(true); 
+    };
+
+    const handleConfirmBooking = async () => {
+        if (!selectedDate) {
+            console.error("Selected date is undefined.");
+            return;
+        }
+        console.log("Booking confirmed for:", currentUser.name,currentUser.email , selectedTime);
+        await addDoc(collection(db, "appointments"), {
+            doctorId: id,
+            currentUserId: currentUser.uid,
+            time: selectedTime,
+            date: selectedDate,
+            status: status,
+            
+        })
+        alert("Booking confirmed ");
+        setShowModal(false);
+    };
     return (
         <>
+        
             <section className="pb-3" style={{ backgroundColor: 'rgb(238, 236, 236)' }}>
                 <div className="container pt-4">
                     <div className="row">
@@ -235,6 +260,61 @@ export default function DoctorInfo() {
                 </div>
             </section>
 
+             {/* Header and other existing code... */}
+
+            {/* Modal Component */}
+            <Modal show={showModal} onHide={() => setShowModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>تأكيد الحجز</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group controlId="formPatientName">
+                            <Form.Label>الاسم</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="أدخل اسمك"
+                                value={currentUser.name}
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="formPatientEmail">
+                            <Form.Label>البريد الإلكتروني</Form.Label>
+                            <Form.Control
+                                placeholder="أدخل بريدك الإلكتروني"
+                                value={currentUser.email}
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="formPatientEmail">
+                            <Form.Label>رقم الهاتف  </Form.Label>
+                            <Form.Control
+                                value={currentUser.phone}
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="formPatientEmail">
+                            <Form.Label >  الميعاد الخاص بك  </Form.Label>
+                            <Form.Control
+                                value={selectedTime}
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="formPatientEmail">
+                            <Form.Label >  الميعاد الخاص بك  </Form.Label>
+                            <Form.Control
+                                value={selectedDate}
+                            />
+                        </Form.Group>
+                       
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowModal(false)}>
+                        إلغاء
+                    </Button>
+                    <Button variant="primary" onClick={handleConfirmBooking}>
+                        تأكيد الحجز
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
 
             <div className="sec2 pb-3">
                 <div className="container">
@@ -273,7 +353,7 @@ export default function DoctorInfo() {
 
                                             <div className="bookSec">
                                                 <CiStopwatch fontSize={"25"} className="icon-coll" />
-                                                <span className="coll-head ">Wating Time:  20 minute</span>
+                                                <span className="coll-head ">Wating Time:  {doctor.Wating} minute</span>
                                             </div>
 
 
@@ -337,12 +417,12 @@ export default function DoctorInfo() {
                                                                     </div>
                                                                     <div className="card-body card-font p-0">
                                                                         {calendar.times.map((time, timeIndex) => (
-                                                                            <a href='#' className='m-0 p-0 card-font d-block text-decoration-none link-time' key={timeIndex}>{time}</a>
+                                                                            <button href='#' style={{ backgroundColor: currentUser == null ? "white" : "white" ,borderColor: currentUser == null ? "grey" : "blue", color: currentUser == null ? "grey" : "black", height: "25px" }} className='btn btn-primary text-center m-0 p-0 card-font d-block w-100 ' key={timeIndex} disabled={currentUser == null} onClick={() => handleTimeSlotClick(time,calendar.title)} >{time}</button>
                                                                         ))}
                                                                         <p><a className='text-decoration-none'>More</a></p>
                                                                     </div>
-                                                                    <div className="card-footer py-0 px-2 foot-btn  ">
-                                                                        <button className="btn card-font text-white">{calendar.buttonText}</button>
+                                                                    <div className="card-footer py-0 px-2 foot-btn  " style={{ backgroundColor: currentUser == null ? "grey" : "red", borderColor: currentUser == null ? "grey" : "blue", color: currentUser == null ? "grey" : "black" }}>
+                                                                        <button className="btn card-font text-white" disabled={currentUser == null}>{calendar.buttonText}</button>
                                                                     </div>
                                                                 </div>
                                                             ))}
@@ -394,12 +474,12 @@ export default function DoctorInfo() {
                         <div id="col-8" className="col-8">
                             <div className="row bg-white rounded-3 py-3 mt-3 " >
                                 <div className='col-lg-2 col-md-3 overflow-hidden '>
-                                    <img src={doctor.imageUrl} className='prof-img' alt="" />
+                                    <img src={doctor.imageUrl} className='prof-img1' alt="" />
                                 </div>
                                 <div className='col-lg-5 col-md-9 py-3'>
                                     <p className='text-primary d-inline'>Doctor</p>
                                     <a className='fs-5 ms-1 doctor-name-link'>{doctor.name}</a>
-                                    <p className='doc-discrip'>{doctor.qualifications},{doctor.clinicLocation}</p>
+                                    <p className='doc-discrip'>{doctor.pref}</p>
                                     <div className='stars-line'><IoMdStar fontSize={"25"} className='str-rate' />
                                         <IoMdStar fontSize={"25"} className='str-rate' />
                                         <IoMdStar fontSize={"25"} className='str-rate' />
@@ -408,8 +488,8 @@ export default function DoctorInfo() {
                                     </div>
                                     <p className='rating-num'>Overall Rating From 5 Visitors</p>
                                     <p className='degrees'><FaUserDoctor fontSize={"17"} className='me-2 icon-degree' />
-                                        <a className='degrees-link' href="">{doctor.qualifications} </a>Specialized in
-                                        <a className='degrees-link' href="">  {doctor.specialization}</a> </p>
+                                        <a className=''> Doctor {doctor.specialization} </a> Specialized in 
+                                        <a className=''>  {doctor.qualifications}</a> </p>
                                     <p className='degrees'><IoTicketOutline fontSize={"18"} className="me-2 icon-degree" />Fees : {doctor.Cost} EGP</p>
                                     <p className='degrees'><IoLocation fontSize={"18"} className="me-2 icon-degree" /> <span className='hot-line'>{doctor.clinicLocation}</span> </p>
                                     <p className='degrees'><BsTelephone fontSize={"18"} className="me-2 icon-degree" /> <span className='hot-line'>{doctor.phone}</span> Cost Of Regular Call</p>

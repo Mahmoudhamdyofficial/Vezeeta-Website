@@ -78,12 +78,16 @@
     border-bottom: 2px solid rgb(13, 110, 253);
 }
 
+<<<<<<< HEAD
 .doc-discrip {
     color: rgb(139, 140, 143);
     font-size: 13px;
     font-weight: 600;
     line-height: 6px;
 }
+=======
+/* remove 5 line css */
+>>>>>>> f03cfe931fb01dd624aae0b19ab6d57d2003117e
 
 .str-rate {
     color: rgb(255, 182, 36);

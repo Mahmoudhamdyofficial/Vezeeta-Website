@@ -8,13 +8,17 @@ import SignUp from "./screens/signUp/signUp";
 import Search from "./screens/search/search";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-
-
+import Teleconsultation from "./screens/allspecialities/Teleconsultation";
 import { BrowserRouter as Router,Route, Routes } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 import { useContext } from "react";
 import DoctorSignup from "./screens/DoctorSignup/DoctorSignup";
 import DoctorInfo from "./screens/doctorInfo/doctorInfo";
+import Profile from "./screens/Profile/Profile";
+import ErrorPage from "./screens/error/error";
+import Verification from "./screens/verificationDoctor/verification";
+import Appointment from "./screens/Appointment/appointment";
+
 function App() {
   const { currentUser } = useContext(AuthContext);
   console.log(currentUser);
@@ -28,11 +32,20 @@ function App() {
     <Route path="/about" element={<About />} />
     <Route path="/search" element={<Search />} />
     <Route path="/Signup" element={<SignUp />} />
+    <Route path="/teleconsultation" element={<Teleconsultation />} />
+    <Route path="/Profile" element={<Profile />} />
     <Route path="/DoctorSignup" element={<DoctorSignup />} />
     <Route path="/doctor/:id" element={<DoctorInfo/>} />
+    {/* add verificationDoctor page */}
+    <Route path="/Verification" element={<Verification/>} />
+     {/* add appointment page for users */}
+     <Route path="/appointment" element={<Appointment/>} />
+    {/* add error page */}  
+    <Route path="*" element={<ErrorPage/>} />
+    
 
     </Routes>
-    <Footer />
+    <Footer/>
     </Router>
 
     </>

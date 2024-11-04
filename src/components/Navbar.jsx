@@ -51,37 +51,48 @@ export default function Navbar() {
         <ul className="navbar-nav" style={{ marginLeft: "auto" }}>
           {currentUser ? (
             <>
-            <Dropdown>
-              <Dropdown.Toggle variant="transparent"
-              style={{ color: "white" }}
-              id="dropdown-basic">
-              {currentUser.name || currentUser.email}
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item  className="drp-item">
-                  Profile
-                </Dropdown.Item>
-                <Dropdown.Item  className="drp-item">
-                  Appointments 
-                </Dropdown.Item>
-                <Dropdown.Item onClick={handleLogout} className="drp-item">
-                  Logout <LuLogOut style={{marginLeft: "5px",alignSelf: "center" , fontSize: "20px" , color: "black"}}/>
-
-                </Dropdown.Item>
-              </Dropdown.Menu>
+              <Dropdown>
+                <Dropdown.Toggle
+                  variant="transparent"
+                  style={{ color: "white" }}
+                  id="dropdown-basic"
+                >
+                  {currentUser.name}
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item className="drp-item">
+                    <Link to="/Profile"> Profile </Link>
+                  </Dropdown.Item>
+                  
+                  <Dropdown.Item className="drp-item">
+                  <Link to="/appointment">Appointments </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={handleLogout} className="drp-item">
+                    Logout{" "}
+                    <LuLogOut
+                      style={{
+                        marginLeft: "5px",
+                        alignSelf: "center",
+                        fontSize: "20px",
+                        color: "black",
+                      }}
+                    />
+                  </Dropdown.Item>
+                </Dropdown.Menu>
               </Dropdown>
             </>
           ) : (
             <>
               <li className="nav-item">
                 <Link to="/signup">
-                  <button className="btn btn-outline-light btn-sm">Sign Up</button>
+                  <button className="btn btn-outline-light btn-sm">
+                    Sign Up
+                  </button>
                 </Link>
               </li>
               <li className="nav-item">
                 <Link to="/login">
                   <a className="nav-link" href="#">
-
                     Login
                   </a>
                 </Link>
@@ -89,10 +100,10 @@ export default function Navbar() {
             </>
           )}
           <li className="nav-item">
-          <Link to="/DoctorSignup">
-            <a className="nav-link" href="#">
-              Vezzeta For Doctors
-            </a>
+            <Link to="/DoctorSignup">
+              <a className="nav-link" href="#">
+                Vezzeta For Doctors
+              </a>
             </Link>
           </li>
           <li className="nav-item">
@@ -121,7 +132,8 @@ export default function Navbar() {
                 <img src={Jordan} alt="Jordan" className="drpcountry" /> Jordan
               </Dropdown.Item>
               <Dropdown.Item href="#">
-                <img src={Lebanon} alt="Lebanon" className="drpcountry" /> Lebanon
+                <img src={Lebanon} alt="Lebanon" className="drpcountry" />{" "}
+                Lebanon
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
