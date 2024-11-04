@@ -66,3 +66,9 @@
   .doc{
     padding-left: 50px;
   }
+  .prof-img1 {
+    width: 135px;
+    height: 135px;
+    border-radius: 50%;
+    border: 1px solid rgb(133, 134, 137);
+}

@@ -14,6 +14,7 @@ import { IoTicketOutline } from "react-icons/io5";
 import {useContext ,useEffect, useState } from 'react';
 import { IoMdStar } from "react-icons/io";
 import { BsTelephone } from "react-icons/bs";
+import { CiStopwatch } from "react-icons/ci";
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../DoctorSignup/firebase';
 import { IoLocation } from "react-icons/io5";
@@ -464,16 +465,16 @@ const calendars = getCalendars();
 
 
                     {filteredDoctors.map((doctor)=>(
-                              <a href={`/doctor/${doctor.id}`} className='ankorTagForDoc fs-5 ms-1 doctor-name-link' key={data.uid}>
+                              <a  href={`/doctor/${doctor.id}`} className='ankorTagForDoc fs-5 ms-1 doctor-name-link' key={data.uid}>
 
-                                  <div  className="row bg-white rounded-3 py-3 mt-3" >
+                                  <div  className="divForDoc row bg-white rounded-3 py-3 mt-3" >
                                 <div className='col-lg-2 col-md-3 overflow-hidden'>
                                     <img src={doctor.imageUrl} className='prof-img' alt="" />
                                 </div>
                                 <div className='col-lg-5 col-md-9 py-3'>
                                     <p className='text-primary d-inline'>Doctor</p>
                                     <a className='fs-5 ms-1 doctor-name-link'>{doctor.name}</a>
-                                    <p className='doc-discrip'>{doctor.qualifications},{doctor.clinicLocation}</p>
+                                    <p className='doc-discrip'>{doctor.pref}</p>
                                     <div className='stars-line'><IoMdStar fontSize={"25"} className='str-rate' />
                                         <IoMdStar fontSize={"25"} className='str-rate' />
                                         <IoMdStar fontSize={"25"} className='str-rate' />
@@ -482,10 +483,11 @@ const calendars = getCalendars();
                                     </div>
                                     <p className='rating-num'>Overall Rating From 5 Visitors</p>
                                     <p className='degrees'><FaUserDoctor fontSize={"17"} className='me-2 icon-degree' />
-                                        <a className='degrees-link' href="">{doctor.qualifications} </a>Specialized in 
-                                        <a className='degrees-link' href="">  {doctor.specialization}</a> </p>
+                                        <a className='degrees-link' href="">Doctor {doctor.specialization} </a>Specialized in 
+                                        <a className='degrees-link' href="">  {doctor.qualifications}</a> </p>
                                     <p className='degrees'><IoTicketOutline fontSize={"18"} className="me-2 icon-degree" />Fees : {doctor.Cost} EGP</p>
                                     <p className='degrees'><IoLocation fontSize={"18"} className="me-2 icon-degree" /> <span className='hot-line'>{doctor.clinicLocation}</span> </p>
+                                    <p className='degrees'><CiStopwatch fontSize={"18"} className="me-2 icon-degree" /> <span className=''>{doctor.Wating} Minutes</span> </p>
                                     <p className='degrees'><BsTelephone fontSize={"18"} className="me-2 icon-degree" /> <span className='hot-line'>{doctor.phone}</span> Cost Of Regular Call</p>
                                 </div>
                                 <div className='col-lg-5 col-md-12 mt-4'>

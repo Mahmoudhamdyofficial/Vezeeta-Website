@@ -17,6 +17,7 @@ import DoctorInfo from "./screens/doctorInfo/doctorInfo";
 import Profile from "./screens/Profile/Profile";
 import ErrorPage from "./screens/error/error";
 import Verification from "./screens/verificationDoctor/verification";
+import Appointment from "./screens/Appointment/appointment";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -37,6 +38,8 @@ function App() {
     <Route path="/doctor/:id" element={<DoctorInfo/>} />
     {/* add verificationDoctor page */}
     <Route path="/Verification" element={<Verification/>} />
+     {/* add appointment page for users */}
+     <Route path="/appointment" element={<Appointment/>} />
     {/* add error page */}  
     <Route path="*" element={<ErrorPage/>} />
     

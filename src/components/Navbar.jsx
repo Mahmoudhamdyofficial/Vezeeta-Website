@@ -65,7 +65,7 @@ export default function Navbar() {
                   </Dropdown.Item>
                   
                   <Dropdown.Item className="drp-item">
-                    Appointments
+                  <Link to="/appointment">Appointments </Link>
                   </Dropdown.Item>
                   <Dropdown.Item onClick={handleLogout} className="drp-item">
                     Logout{" "}

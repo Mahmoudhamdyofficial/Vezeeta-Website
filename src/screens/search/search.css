@@ -287,6 +287,10 @@ div {
     border: none;
 }
 
-.ankorTagForDoc {
-    text-decoration: chocolate;
+
+.ankorTagForDoc:hover {
+    text-decoration: none;
+    
+
+   
 }

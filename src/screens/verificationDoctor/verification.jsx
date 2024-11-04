@@ -29,7 +29,7 @@ export default function Verification() {
 
     return (
         <div className="App">
-            <p className="text-center mt-5 font-weight-bold ">Welcome doctor {}, you must pay $10 one time to add your account to our platform.</p>
+            <p className="text-center mt-5 font-weight-bold ">Welcome doctor { }, you must pay $10 one time to add your account to our platform.</p>
             <div className="d-flex justify-content-center align-items-center">
                 <PayPalScriptProvider options={initialOptions}>
                     <PayPalButtons
@@ -39,7 +39,7 @@ export default function Verification() {
                                 purchase_units: [
                                     {
                                         amount: {
-                                            value: "10.00",
+                                            value: "1.00",
                                         },
                                     },
                                 ],
@@ -48,7 +48,8 @@ export default function Verification() {
                         onApprove={(data, actions) => {
                             return actions.order.capture().then((details) => {
                                 alert("Transaction completed by " + details.payer.name.given_name);
-                                updateVerificationStatus(); 
+                                updateVerificationStatus();
+                                window.location.href = "https://vezzeta-dashboard.vercel.app/login";
                             });
                         }}
                     />
