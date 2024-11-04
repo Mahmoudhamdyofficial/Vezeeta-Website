@@ -9,8 +9,6 @@ import Teleconsultation from "./screens/allspecialities/Teleconsultation";
 import Search from "./screens/search/search";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Profile from "./screens/Profile/Profile";
-
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 import { useContext, useState } from "react";
