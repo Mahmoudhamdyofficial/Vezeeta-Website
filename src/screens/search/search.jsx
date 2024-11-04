@@ -465,26 +465,20 @@ const calendars = getCalendars();
 
 
                     {filteredDoctors.map((doctor)=>(
-<<<<<<< HEAD
-                              <a href={`/doctor/${doctor.id}`} className='ankorTagForDoc fs-5 ms-1 doctor-name-link' key={data.uid}>
-
-                                  <div  className="row bg-white rounded-3 py-3 mt-3" >
-=======
                               <a  href={`/doctor/${doctor.id}`} className='ankorTagForDoc fs-5 ms-1 doctor-name-link' key={data.uid}>
 
                                   <div  className="divForDoc row bg-white rounded-3 py-3 mt-3" >
->>>>>>> f03cfe931fb01dd624aae0b19ab6d57d2003117e
                                 <div className='col-lg-2 col-md-3 overflow-hidden'>
                                     <img src={doctor.imageUrl} className='prof-img' alt="" />
                                 </div>
                                 <div className='col-lg-5 col-md-9 py-3'>
                                     <p className='text-primary d-inline'>Doctor</p>
                                     <a className='fs-5 ms-1 doctor-name-link'>{doctor.name}</a>
-<<<<<<< HEAD
+
                                     <p className='doc-discrip'>{doctor.qualifications},{doctor.clinicLocation}</p>
-=======
+
                                     <p className='doc-discrip'>{doctor.pref}</p>
->>>>>>> f03cfe931fb01dd624aae0b19ab6d57d2003117e
+
                                     <div className='stars-line'><IoMdStar fontSize={"25"} className='str-rate' />
                                         <IoMdStar fontSize={"25"} className='str-rate' />
                                         <IoMdStar fontSize={"25"} className='str-rate' />

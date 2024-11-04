@@ -275,19 +275,6 @@ div {
 .hot-line {
     font-weight: bolder;
 }
-<<<<<<< HEAD
-.SearchInput{
-    border: none;
-    padding-left:5%;
-    width: 90%;
-    
-}
-.SearchInput:focus{
-    border: none;
-}
-.ankorTagForDoc{
-    text-decoration: chocolate;
-=======
 
 .SearchInput {
     border: none;
@@ -306,5 +293,4 @@ div {
     
 
    
->>>>>>> f03cfe931fb01dd624aae0b19ab6d57d2003117e
 }
