@@ -3,30 +3,36 @@
   color: white !important;
 
 }
+
 .custom-container {
   top: 70%;
   width: 100%;
   background-color: aliceblue;
   border-radius: 50px;
 }
+
 .label {
   color: red;
   font-size: 50px;
 }
+
 body,
 html {
   height: 100%;
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
+
 .bg-img {
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
+  /* Full viewport height */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
   z-index: 1;
 }
+
 .header-text {
   color: white;
   position: absolute;
@@ -55,16 +61,21 @@ html {
 }
 
 .card-shamel {
-  background-color: #00a4ff; /* Shamel's blue */
+  background-color: #00a4ff;
+  /* Shamel's blue */
   color: white;
 }
 
 .card-north {
-  background-color: white; /* North's white */
+  background-color: white;
+  /* North's white */
 }
+
 .card-title {
-  font-weight: bold; /* make titles bold */
+  font-weight: bold;
+  /* make titles bold */
 }
+
 .card-text {
   font-family: "Roboto", sans-serif;
   font-size: 14px;
@@ -72,23 +83,28 @@ html {
 }
 
 .btn-primary {
-  background-color: #00a4ff; /* Shamel's blue */
+  background-color: #00a4ff;
+  /* Shamel's blue */
   border: none;
   color: white;
 }
 
 .btn-primary:hover {
-  background-color: #007bff; /* Darker blue on hover */
+  background-color: #007bff;
+  /* Darker blue on hover */
 }
+
 .northBtn {
   background-color: #e6f1ff;
 }
+
 .pharmacy {
   background-image: url("../../assets/HomeImages/epharmacy-solution-banner.jpeg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 /* .pharmacy p {
   color: white;
   font-size: 16px;
@@ -100,6 +116,8 @@ html {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+
 .slider-container {
   position: relative;
   width: 100%;
@@ -107,9 +125,11 @@ html {
   overflow: hidden;
   background-color: white;
 }
+
 .slider-button.prev {
   left: 10px;
 }
+
 .slider-button.next {
   right: 10px;
 }
@@ -119,12 +139,15 @@ html {
 
   transition: transform 0.5s ease-in-out;
 }
+
 .slider .item {
-  min-width: 25%; /* Adjust this width for the number of items per view */
+  min-width: 25%;
+  /* Adjust this width for the number of items per view */
   box-sizing: border-box;
   border: none;
   padding: 10px;
 }
+
 .slider .item img {
   width: 100%;
   height: 50%;
@@ -148,6 +171,7 @@ html {
   align-items: center;
   gap: 10px;
 }
+
 .price-quantity p {
   display: inline;
 }
@@ -156,12 +180,13 @@ html {
   .header-text {
     display: none;
   }
+
   .collection {
     display: none;
   }
 }
+
 .prevFooter {
   color: #666666;
   font-weight: 500;
 }
-

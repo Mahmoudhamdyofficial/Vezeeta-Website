@@ -1,4 +1,4 @@
-import React from "react";
+import { useContext } from "react";
 import logo from "../assets/NavbarImages/whitelogowithdotcom.png";
 import googleplay from "../assets/HomeImages/google-play-badge.png";
 import appstore from "../assets/HomeImages/app-store-badge.png";
@@ -8,80 +8,85 @@ import { FaTwitter } from "react-icons/fa";
 
 import styles from "./Footer.module.css";
 import { Link } from "react-router-dom";
+import { LanguageContext } from "../context/TranslationContext";
+import { Strings } from "../constant/strings";
 export default function Footer() {
+  const { language, setLanguage } = useContext(LanguageContext);
+  console.log(setLanguage);
+
   return (
     <>
-      <footer className="footer bg-primary ">
+      <footer className="footer bg-primary " dir={language == "English" ? "ltr" : "rtl"}>
         <div className="container">
           <div className="row justify-content-between">
             <div className="col-lg-2 col-md-6 my-5 ">
               <img src={logo} alt className="img-fluid mb-3" />
               <ul >
                 <li>
-                  <Link to="/about" className={styles.anchor}>About US</Link>
+                  <Link to="/about" className={styles.anchor}>{language == "English" ? Strings.footer.about.en : Strings.footer.about.ar}</Link>
                 </li>
                 <li>
-                  <a className={styles.anchor}  href>Our Team</a>
+                  <a className={styles.anchor} href>{language == "English" ? Strings.footer.team.en : Strings.footer.team.ar}</a>
                 </li>
                 <li>
-                  <a className={styles.anchor} href>Careers</a>
+                  <a className={styles.anchor} href>{language == "English" ? Strings.footer.careers.en : Strings.footer.careers.ar}</a>
                 </li>
                 <li>
-                  <a className={styles.anchor} href>Press</a>
+                  <a className={styles.anchor} href>{language == "English" ? Strings.footer.press.en : Strings.footer.press.ar}</a>
                 </li>
               </ul>
             </div>
             <div className="col-lg-2 col-md-6 my-5">
               <ul>
                 <li>
-                  <h6>Search By</h6>
+                  <h6>{language == "English" ? Strings.footer.search.en : Strings.footer.search.ar}</h6>
                 </li>
                 <li>
-                  <a className={styles.anchor} href>Speciality</a>
+                  <a className={styles.anchor} href>{language == "English" ? Strings.footer.speciality.en : Strings.footer.speciality.ar}</a>
                 </li>
                 <li>
-                  <a className={styles.anchor} href>Area</a>
+                  <a className={styles.anchor} href>{language == "English" ? Strings.footer.area.en : Strings.footer.area.ar}</a>
                 </li>
                 <li>
-                  <a className={styles.anchor} href>Insurance</a>
+                  <a className={styles.anchor} href>{language == "English" ? Strings.footer.insurance.en : Strings.footer.insurance.ar}</a>
                 </li>
                 <li>
-                  <a className={styles.anchor} href>Hospital</a>
+                  <a className={styles.anchor} href>{language == "English" ? Strings.footer.hospital.en : Strings.footer.hospital.ar}</a>
                 </li>
                 <li>
-                  <a className={styles.anchor} href>Center</a>
+                  <a className={styles.anchor} href>{language == "English" ? Strings.footer.center.en : Strings.footer.center.ar}</a>
                 </li>
               </ul>
             </div>
             <div className="col-lg-2 col-md-6 my-5 ">
               <ul>
                 <li>
-                  <h6>Are You A Doctor</h6>
+                  <h6>{language == "English" ? Strings.footer.doctor.en : Strings.footer.doctor.ar}</h6>
                 </li>
                 <li>
-                  <a className={styles.anchor} href>Join Vezzeta Doctors</a>
+                  <a className={styles.anchor} href>{language == "English" ? Strings.footer.doctors.en : Strings.footer.doctors.ar}</a>
                 </li>
               </ul>
             </div>
             <div className="col-lg-2 col-md-6 my-5">
               <ul>
                 <li>
-                  <h6>Need Help</h6>
+                  <h6>{language == "English" ? Strings.footer.help.en : Strings.footer.help.ar}</h6>
                 </li>
                 <li>
-                  <a className={styles.anchor} href>Medical Library</a>
+                  <a className={styles.anchor} href>{language == "English" ? Strings.footer.library.en : Strings.footer.library.ar}</a>
                 </li>
                 <li>
-                  <a className={styles.anchor} href>Contact Us</a>
+                  <a className={styles.anchor} href>{language == "English" ? Strings.footer.contact.en : Strings.footer.contact.ar}</a>
                 </li>
                 <li>
-                  <a className={styles.anchor} href>Terms of Use</a>
+                  <a className={styles.anchor} href>{language == "English" ? Strings.footer.terms.en : Strings.footer.terms.ar}</a>
                 </li>
                 <li>
-                  <a className={styles.anchor} href>Privacy Policy</a>
+                  <a className={styles.anchor} href>{language == "English" ? Strings.footer.policy.en : Strings.footer.policy.ar}</a>
                 </li>
                 <li>
-                  <a className={styles.anchor} href>Doctors Privacy Policy</a>
+                  <a className={styles.anchor} href>{language == "English" ? Strings.footer.docprivacy.en : Strings.footer.docprivacy.ar}</a>
                 </li>
               </ul>
             </div>
@@ -97,18 +102,18 @@ export default function Footer() {
                     <img src={appstore} alt className="img-fluid my-3" />
                   </li>
                 </a>
-                <li className ="d-flex gap-2">
+                <li className="d-flex gap-2">
                   <a className={styles.anchor} href>
-                    
-                    <FaFacebookF  style={{color:"white",fontSize:"25px"}}/>
+
+                    <FaFacebookF style={{ color: "white", fontSize: "25px" }} />
 
                   </a>
                   <a className={styles.anchor} href>
-                    <IoLogoInstagram  style={{color:"white",fontSize:"25px"}}/>
+                    <IoLogoInstagram style={{ color: "white", fontSize: "25px" }} />
                   </a>
                   <a className={styles.anchor} href>
-                    
-                  <FaTwitter  style={{color:"white",fontSize:"25px"}}/>
+
+                    <FaTwitter style={{ color: "white", fontSize: "25px" }} />
 
                   </a>
                 </li>

@@ -1,3 +1,15 @@
 .no-space-paragraph {
     line-height: 1.2;
 }
+
+.booknow {
+    /* font-weight: bold; */
+    color: rgb(111, 112, 114);
+}
+
+.booktitle {
+    color: rgb(111, 112, 114);
+    /* font-weight: bold; */
+    font-size: medium;
+    line-height: 100%;
+}

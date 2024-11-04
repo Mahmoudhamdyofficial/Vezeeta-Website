@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import img1 from "../../assets/HomeImages/homecovernewen1-eg-en.jpeg";
 import img2 from "../../assets/HomeImages/homecovernewen2-eg-en.jpeg";
@@ -20,7 +20,9 @@ import Offers from "../../components/Offers";
 import Specialities from "../../components/Specialities";
 import DoctorSearchBar from "../../components/Searchfilters";
 import Footer from "../../components/Footer";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { LanguageContext } from "../../context/TranslationContext";
+import { Strings } from "../../constant/strings";
 export default function Home() {
   const images = [img1, img2, img3];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -41,9 +43,11 @@ export default function Home() {
     position: "relative",
     transition: "all 0.5s ease",
   };
+  const { language, setLanguage } = useContext(LanguageContext);
+  console.log(setLanguage);
   return (
     <>
-      <div>
+      <div dir={language == "English" ? "ltr" : "rtl"}>
         <div
           className={`${styles["bg-img"]} d-flex flex-column justify-content-center `}
           style={slideshowStyles}
@@ -54,17 +58,17 @@ export default function Home() {
               textAlign: "center",
             }}
           >
-            <h1>Better Healthcare for a Better Life</h1>
+            <h1>{language == "English" ? Strings.Home.betterlife.en : Strings.Home.betterlife.ar}</h1>
             <p>
-              Book online or call{" "}
-              <span style={{ color: "#FF6347" }}>16676</span>
+              {language == "English" ? Strings.Home.book.en : Strings.Home.book.ar}{" "}
+              <span style={{ color: "#FF6347" }}>{language == "English" ? Strings.Home.number.en : Strings.Home.number.ar}</span>
             </p>
           </div>
           <DoctorSearchBar />
         </div>
         <div className="container mt-5 ">
           <h1 className="py-3" style={{ color: "grey" }}>
-            New services for better healthcare
+            {language == "English" ? Strings.Home.newservice.en : Strings.Home.newservice.ar}
           </h1>
           {/* First Card */}
           <div className={`${styles["card-shamel"]} card mb-3`}>
@@ -72,15 +76,14 @@ export default function Home() {
               <div className="row">
                 <img src={shamel} alt="Profile" style={{ width: 100 }} />
                 <div className="px-3">
-                  <h3 className={styles["card-title"]}>Shamel</h3>
+                  <h3 className={styles["card-title"]}>{language == "English" ? Strings.Home.shamel.en : Strings.Home.shamel.ar}</h3>
                   <p
                     className={styles["card-text"]}
                     style={{ color: "white", fontSize: 16 }}
                   >
-                    Save up to 80% on all medical services
+                    {language == "English" ? Strings.Home.saveup.en : Strings.Home.saveup.ar}
                     <br />
-                    The network is available only through the App - In Cairo and
-                    Giza till now
+                    {language == "English" ? Strings.Home.thenetwork.en : Strings.Home.thenetwork.ar}
                   </p>
                 </div>
               </div>
@@ -89,7 +92,7 @@ export default function Home() {
                 className={`btn btn-light col-lg-3 py-3 `}
                 style={{ color: "grey" }}
               >
-                See Details
+                {language == "English" ? Strings.Home.details.en : Strings.Home.details.ar}
               </a>
             </div>
           </div>
@@ -114,7 +117,7 @@ export default function Home() {
                     className={styles["card-text"]}
                     style={{ fontSize: 16, color: "darkgray" }}
                   >
-                    North, your way to practice peace.
+                    {language == "English" ? Strings.Home.north.en : Strings.Home.north.ar},
                   </p>
                 </div>
               </div>
@@ -123,7 +126,7 @@ export default function Home() {
                 className={`btn ${styles["btn-primary"]} ${styles.anchor} col-lg-3 py-3"`}
                 style={{ color: "#219de2" }}
               >
-                Explore North
+                {language == "English" ? Strings.Home.explore.en : Strings.Home.explore.ar}
               </a>
             </div>
           </div>
@@ -131,37 +134,37 @@ export default function Home() {
           <div className="card mb-3 card-question">
             <div className="card-body mx-3">
               <h4 className={styles["card-title"]} style={{ color: "#666666" }}>
-                Have a Medical Question?
+                {language == "English" ? Strings.Home.question.en : Strings.Home.question.ar}
               </h4>
               <p
                 className={styles["card-text"]}
                 style={{ fontSize: 16, color: "#666666" }}
               >
-                Submit your medical question and receive an answer from a
-                specialized doctor
+                {language == "English" ? Strings.Home.submit.en : Strings.Home.submit.ar}
               </p>
               <a
                 href="#"
                 className={`btn ${styles["btn-primary"]} ${styles.anchor} col-lg-2 py-3`}
                 style={{ color: "#219de2" }}
               >
-                Ask now
+                {language == "English" ? Strings.Home.Ask.en : Strings.Home.Ask.ar}
               </a>
             </div>
           </div>
           {/*Fourth Card*/}
-          <div className={`card mb-3 card-question ${styles.pharmacy}`}>
+          <div dir={language == "English" ? "ltr" : "ltr"}
+            className={`card mb-3 card-question ${styles.pharmacy}`}>
             <div className="card-body mx-3">
-              <h4 className={styles['card-title']}>Pharmacy</h4>
+              <h4 className={styles['card-title']}>{language == "English" ? Strings.Home.pharmacy.en : Strings.Home.pharmacy.ar}</h4>
               <p className={styles['card-text']}>
-                Get your medicine and all your pharmacy needs
+                {language == "English" ? Strings.Home.get.en : Strings.Home.get.ar}
               </p>
               <a
                 href="#"
                 className={`btn col-lg-2 py-3 ${styles["btn-primary"]} ${styles.anchor}`}
                 style={{ color: "#327ac5" }}
               >
-                Place order
+                {language == "English" ? Strings.Home.order.en : Strings.Home.order.ar}
               </a>
             </div>
           </div>
@@ -177,12 +180,12 @@ export default function Home() {
                   style={{ width: 100 }}
                 />
                 <div>
-                  <h4 className={styles["card-title"]}>Teleconsultation</h4>
+                  <h4 className={styles["card-title"]}>{language == "English" ? Strings.Home.teleco.en : Strings.Home.teleco.ar}</h4>
                   <p className={styles["card-text"]} style={{ fontSize: 16 }}>
-                    Schedule a voice or video call with a specialized doctor.
+                    {language == "English" ? Strings.Home.voiceorvideo.en : Strings.Home.voiceorvideo.ar}
                   </p>
                   <Link to="/teleconsultation" style={{ color: "#219de2" }}>
-                    Book a Call ▸
+                    {language == "English" ? Strings.Home.call.en : Strings.Home.call.ar}
                   </Link>
                 </div>
               </div>
@@ -196,12 +199,12 @@ export default function Home() {
                   style={{ width: 100 }}
                 />
                 <div>
-                  <h4 className={styles["card-title"]}>Home Visit</h4>
+                  <h4 className={styles["card-title"]}>{language == "English" ? Strings.Home.home.en : Strings.Home.home.ar}</h4>
                   <p className={styles["card-text"]} style={{ fontSize: 16 }}>
-                    Choose the specialty, and the doctor will visit you at home.
+                    {language == "English" ? Strings.Home.choosehome.en : Strings.Home.choosehome.ar}
                   </p>
                   <a href="#" className={`${styles["btn-primary"]}col-lg-2 py-3`}>
-                    Book a visit ▸
+                    {language == "English" ? Strings.Home.visit.en : Strings.Home.visit.ar}
                   </a>
                 </div>
               </div>
@@ -216,47 +219,40 @@ export default function Home() {
           <div className="row">
             <div className="col-lg-3">
               <img src={medicalCare} alt="home" />
-              <h4 className={styles.prevFooter}>All your healthcare needs</h4>
+              <h4 className={styles.prevFooter}>{language == "English" ? Strings.Home.healthcare.en : Strings.Home.healthcare.ar}</h4>
               <p>
-                Search and book a clinic visit, home visit, or a
-                teleconsultation. Order your medicine and book a service or
-                operation.
+                {language == "English" ? Strings.Home.clinicvisit.en : Strings.Home.clinicvisit.ar}
               </p>
             </div>
             <div className="col-lg-3">
               <img src={reviews} alt="review" />
-              <h4 className={styles.prevFooter}>Verified patient reviews</h4>
+              <h4 className={styles.prevFooter}>{language == "English" ? Strings.Home.reviews.en : Strings.Home.reviews.ar}</h4>
               <p>
-                Doctor ratings are from patients who booked and visited the
-                doctor through Vezeeta.
+                {language == "English" ? Strings.Home.doctorratings.en : Strings.Home.doctorratings.ar}
               </p>
             </div>
             <div className="col-lg-3">
               <img src={booking} alt="booking" />
-              <h4 className={styles.prevFooter}>Your booking is confirmed</h4>
+              <h4 className={styles.prevFooter}>{language == "English" ? Strings.Home.confirmed.en : Strings.Home.confirmed.ar}</h4>
               <p>
-                Your booking is automatically confirmed, as the doctor specifies
-                his working hours and is notified of the booking details.
+                {language == "English" ? Strings.Home.autoconfirmed.en : Strings.Home.autoconfirmed.ar}
               </p>
             </div>
             <div className="col-lg-3">
               <img src={security} alt="security" />
               <h4 className={styles.prevFooter}>
-                Book for free, and pay in the clinic
+                {language == "English" ? Strings.Home.forfree.en : Strings.Home.forfree.ar}
               </h4>
               <p>
-                The consultation fees stated on Vezeeta are the actual doctor's
-                fees with no extra charges.
+                {language == "English" ? Strings.Home.feesvezeeta.en : Strings.Home.feesvezeeta.ar}
               </p>
             </div>
           </div>
-          <div className={`${styles.downApp} col-lg-12 p-5 rounded`}>
-            <h4>Download Vezeeta Application</h4>
+          <div dir={language == "English" ? "ltr" : "ltr"} className={`${styles.downApp} col-lg-12 p-5 rounded`}>
+            <h4>{language == "English" ? Strings.Home.app.en : Strings.Home.app.ar}</h4>
             <div style={{ maxWidth: 400, wordWrap: "break-word" }}>
               <p>
-                Search, compare and book doctor consultations with ease. Order
-                your medicines &amp; get them deilvered within 60 minutes. Track
-                your steps count &amp; earn points on hitting the daily goal
+                {language == "English" ? Strings.Home.compare.en : Strings.Home.compare.ar}
               </p>
             </div>
             <div>
