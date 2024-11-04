@@ -41,6 +41,12 @@ function App() {
             <Route path="/Profile" element={<Profile />} />
             <Route path="/DoctorSignup" element={<DoctorSignup />} />
             <Route path="/doctor/:id" element={<DoctorInfo />} />
+            {/* add verificationDoctor page */}
+            <Route path="/Verification" element={<Verification />} />
+            {/* add appointment page for users */}
+            <Route path="/appointment" element={<Appointment />} />
+            {/* add error page */}
+            <Route path="*" element={<ErrorPage />} />
           </Routes>
           <Footer />
         </Router>
