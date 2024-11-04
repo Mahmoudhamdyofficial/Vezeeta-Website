@@ -1,7 +1,5 @@
-import Navbar from "../components/Navbar";
 import { Dropdown } from 'react-bootstrap';
 import doctors from "../assets/doctors.png"
-import Footer from "../components/Footer";
 import { VscSearch } from "react-icons/vsc";
 import { IoLocationOutline } from "react-icons/io5";
 import { RiUmbrellaLine } from "react-icons/ri";
@@ -32,6 +30,8 @@ function About() {
         setActiveKey(key);
     };
     const { language, setLanguage } = useContext(LanguageContext);
+    console.log(setLanguage);
+    
     return (<>
         <div dir={language == "English" ? "ltr" : "rtl"}>
             <div className="pb-3"

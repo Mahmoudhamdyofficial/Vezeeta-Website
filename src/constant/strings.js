@@ -67,13 +67,85 @@ export const Strings = {
         terms: { en: "Terms of Use", ar: "شروط الاستخدام" },
         policy: { en: "Privacy Policy", ar: "اتفاقية الخصوصية" },
         docprivacy: { en: "Doctors Privacy Policy", ar: "اتفاقية الخصوصية للأطباء" },
-
-
-
-
-
-
-
-
+    },
+    login: {
+        logwith: { en: " Mobile or Email", ar: "الموبايل او البريد الالكتروني" },
+        pass: { en: " Password", ar: "كلمة المرور" },
+        log: { en: " LOGIN", ar: "دخول" },
+        remember: { en: " Remember Me", ar: "تذكرنى" },
+        forget: { en: " Forgot Your Password?", ar: "نسيت كلمة المرور ؟" },
+        or: { en: " or", ar: "أو" },
+        connect: { en: " Connect With Facebook", ar: "فعل حسابك مع فيسبوك" },
+        new: { en: " New User ?", ar: "مستخدم جديد ؟" },
+        sign: { en: " Sign Up", ar: "انضم الان" },
+    },
+    signup: {
+        sign: { en: " Sign Up", ar: "انضم الان" },
+        connect: { en: " Connect With Facebook", ar: "فعل حسابك مع فيسبوك" },
+        or: { en: " or", ar: "أو" },
+        name: { en: " Name", ar: "الإسم" },
+        nameplace: { en: " Your Full Name", ar: "الإسم بالكامل" },
+        mobile: { en: " Mobile Number", ar: "رقم الموبايل" },
+        mobileplace: { en: " Your Phone", ar: "رقم الموبايل" },
+        email: { en: "Email Address", ar: "البريد الإلكترونى" },
+        gender: { en: " Gender", ar: "النوع" },
+        male: { en: " Male", ar: "ذكر" },
+        female: { en: " Female", ar: "انثي" },
+        bdate: { en: " Birth Date", ar: "تاريخ الميلاد" },
+        pass: { en: " Password ", ar: "كلمة المرور" },
+        subscribe: { en: "Subscribe now", ar: "اشترك الأن" },
+        agree: { en: " By signing up you agree to our ", ar: "بقيامك بالتسجيل فانت توافق على " },
+        terms: { en: " Terms Of Use", ar: "الشروط و القوانين" },
+        already: { en: "Already Registered? ", ar: "مسجل بالفعل في فيزيتا" },
+        log: { en: " Login", ar: "دخول" },
+    },
+    Home: {
+        betterlife: { en: "Better Healthcare for a Better Life", ar: "رعاية صحية لحياة أفضل ليك" },
+        book: { en: "Book online or call", ar: "احجز أونلاين أو كلم" },
+        number: { en: "16676", ar: "١٦٦٧٦" },
+        newservice: { en: "New services for better healthcare", ar: "حلول جديدة لرعاية أفضل ليك" },
+        shamel: { en: "Shamel", ar: "شامل" },
+        saveup: { en: "Save up to 80% on all medical services", ar: "وفر حتي 80% علي جميع الخدمات الطبية." },
+        thenetwork: { en: "The network is available only through the App ", ar: "الشبكة متاحة فقط من خلال التطبيق" },
+        details: { en: "See Details", ar: "انظر التفاصيل" },
+        north: { en: "North, your way to practice peace.", ar: "عيشها براحة مع نورث." },
+        explore: { en: "Explore North", ar: "اكتشف نورث" },
+        question: { en: "Have a Medical Question?", ar: "لديك سؤال طبى؟" },
+        submit: { en: "Submit your medical question and receive an answer from a specialized doctor", ar: "ارسل سؤالك الطبى واحصل على اجابة من دكتور متخصص" },
+        Ask: { en: "Ask now", ar: "اسأل الآن" },
+        pharmacy: { en: "Pharmacy", ar: "صيدلية" },
+        get: { en: "Get your medicine and all your pharmacy needs", ar: "اطلب ادويتك و كل اللي تحتاجه من الصيدلية." },
+        order: { en: "Place order", ar: "اطلب الأن" },
+        teleco: { en: "Teleconsultation", ar: "مكالمة دكتور" },
+        voiceorvideo: { en: "Schedule a voice or video call with a specialized doctor.", ar: "للمتابعة عبر مكالمة صوتية او فيديو" },
+        call: { en: "Book a Call ▸", ar: "◂ احجز الان" },
+        home: { en: "Home Visit", ar: "زيارة منزلية" },
+        choosehome: { en: "Choose the specialty, and the doctor will visit you at home.", ar: "اختار التخصص، والدكتور هيجيلك البيت" },
+        visit: { en: "Book a visit ▸", ar: "◂ زيارة منزلية" },
+        healthcare: { en: "All your healthcare needs", ar: "كل احتياجاتك على فيزيتا" },
+        clinicvisit: { en: "Search and book a clinic visit, home visit, or a teleconsultation. Order your medicine and book a service or operation.", ar: "ابحث و احجز كشف مع دكتور في عيادة، مستشفى، زيارة منزلية، أو عبر مكالمة. ممكن كمان تطلب أدوية، أو تحجز خدمة أو عملية بأحسن سعر." },
+        reviews: { en: "Verified patient reviews", ar: "تقييمات حقيقية من المرضى" },
+        doctorratings: { en: "Doctor ratings are from patients who booked and visited the doctor through Vezeeta.", ar: "تقييمات الدكاترة من مرضى حجزوا على فيزيتا و زاروا الدكتور بالفعل." },
+        confirmed: { en: "Your booking is confirmed", ar: "حجزك مؤكد مع الدكتور" },
+        autoconfirmed: { en: "Your booking is automatically confirmed, as the doctor specifies his working hours and is notified of the booking details.", ar: "حجزك مؤكد بمجرد اختيارك من المواعيد المتاحة للدكتور." },
+        forfree: { en: "Book for free, and pay in the clinic", ar: "احجز مجاناً، و ادفع في العيادة" },
+        feesvezeeta: { en: "The consultation fees stated on Vezeeta are the actual doctor's fees with no extra charges.", ar: "سعر الكشف على فيزيتا نفس سعر الكشف في العيادة، بدون أي مصاريف إضافية." }
+        , app: { en: "Download Vezeeta Application", ar: "حمّل تطبيق فيزيتا" },
+        compare: { en: "Search, compare and book doctor consultations with ease. Order your medicines & get them deilvered within 60 minutes. Track your steps count & earn points on hitting the daily goal", ar: "ابحث ، قارن واحجز استشارات طبية بسهولة مع اكبر شبكة دكاترة فى مصر اطلب أدويتك وهتوصلك خلال 60 دقيقة تتبع خطواتك اليومية واكسب النقاط عند تحقيق الهدف اليومي" },
+    },
+    searchbar: {
+        book: { en: "Book a doctor", ar: "احجز دكتور" },
+        examin: { en: "Examination or procedure", ar: "الفحص أو الإجراء" },
+        teleh: { en: "Telehealth", ar: "مكالمة دكتور" },
+        call: { en: "Call consultation with doctor", ar: "المتابعة عبر مكالمة مع دكتور" },
+        spec: { en: "Choose specialty", ar: "اختار التخصص" },
+        city: { en: "Choose city", ar: "اختار المحافظة" },
+        area: { en: "Choose Area", ar: "اختار المنطقة" },
+        nameorhos: { en: "Doctor name or hospital", ar: "الدكتور أو المستشفى" },
+        search: { en: "Search", ar: "ابحث" }
+    },
+    offers: {
+        top: { en: "Choose from top offers", ar: "اختار من أحسن العروض" },
+        all: { en: "All Offers", ar: "كل العروض" }
     }
 }

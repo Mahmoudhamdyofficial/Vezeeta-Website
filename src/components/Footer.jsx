@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import logo from "../assets/NavbarImages/whitelogowithdotcom.png";
 import googleplay from "../assets/HomeImages/google-play-badge.png";
 import appstore from "../assets/HomeImages/app-store-badge.png";
@@ -12,6 +12,8 @@ import { LanguageContext } from "../context/TranslationContext";
 import { Strings } from "../constant/strings";
 export default function Footer() {
   const { language, setLanguage } = useContext(LanguageContext);
+  console.log(setLanguage);
+
   return (
     <>
       <footer className="footer bg-primary " dir={language == "English" ? "ltr" : "rtl"}>
