@@ -126,7 +126,7 @@ const calendars = getCalendars();
               <p>15000 Doctors - 9000 Professors and Consultants - More than 40 Specialties</p>
             </div>
             <div className="col-md-6 col-sm-12 d-flex align-bottom justify-content-center">
-              <img src="../../assets/doctors.png" alt="Doctors" />
+              <img src="/public/images/doctors.png" alt="Doctors" />
             </div>
           </div>
 
