@@ -1,14 +1,13 @@
-
-import { addDoc, collection, doc, getDoc} from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { FaUmbrella } from "react-icons/fa";
+import { BsGenderAmbiguous } from "react-icons/bs"; // Gender-neutral icon
 import { FaUserDoctor } from "react-icons/fa6";
 import { useParams } from "react-router-dom";
 import { db } from "../DoctorSignup/firebase";
 import { IoTicketOutline } from "react-icons/io5";
-import { IoMdStar } from "react-icons/io";
+// import { IoMdStar } from "react-icons/io";
 import { BsTelephone } from "react-icons/bs";
 import { IoLocation } from "react-icons/io5";
 import { FaMoneyBillWave } from "react-icons/fa";
@@ -23,13 +22,13 @@ import Spinner from 'react-bootstrap/Spinner';
 import "./doctorInfo.css"
 import { AuthContext } from "../../context/AuthContext";
 export default function DoctorInfo() {
-    const {currentUser} = useContext(AuthContext)
+    const { currentUser } = useContext(AuthContext)
 
     const [index, setIndex] = useState(0);
     const [showModal, setShowModal] = useState(false); // State to control modal visibility
     const [selectedTime, setSelectedTime] = useState(''); // State to store selected time
     const [selectedDate, setSelectedDate] = useState(''); // State to store selected date
-    const [status, setStatus] = useState(''); 
+    const [status, setStatus] = useState('');
     const getFormattedDate = (date) => {
         const options = { weekday: 'short', month: 'numeric', day: 'numeric' };
         return date.toLocaleDateString('en-US', options);
@@ -84,55 +83,86 @@ export default function DoctorInfo() {
     const calendarsToDisplay = calendars.slice(index * 3, index * 3 + 3);
     const { id } = useParams();
     const [doctor, setDoctor] = useState(null);
+    const [groupedAppointments, setGroupedAppointments] = useState({});
+    const [pageIndex, setPageIndex] = useState(0);    console.log(calendarsToDisplay);
+    const [bookedAppointments, setBookedAppointments] = useState([]);
 
     useEffect(() => {
         const fetchDoctor = async () => {
             const docRef = doc(db, "doctor", id);
             const docSnap = await getDoc(docRef);
-
+            const docData = docSnap.data();
             if (docSnap.exists()) {
-                setDoctor(docSnap.data());
-            } else {
-                console.log("No such document!");
+                setDoctor(docData);
+
+                if (docData.availableAppointments) {
+                    // Group and sort appointments by day
+                    const grouped = docData.availableAppointments.reduce((acc, timestamp) => {
+                        const date = new Date(timestamp.seconds * 1000);
+                        const dayKey = date.toLocaleDateString("en-US", { weekday: 'short', month: 'numeric', day: 'numeric' });
+                        const time = date.toLocaleTimeString("en-US", { hour: 'numeric', minute: 'numeric', hour12: true });
+                        
+                        if (!acc[dayKey]) {
+                            acc[dayKey] = [];
+                        }
+                        acc[dayKey].push(time);
+                        acc[dayKey].sort((a, b) => new Date(`1970/01/01 ${a}`) - new Date(`1970/01/01 ${b}`)); // Sort times
+                        return acc;
+                    }, {});
+                    setGroupedAppointments(grouped);
+                }
+                const bookedQuery = query(collection(db, "appointments"), where("doctorId", "==", id));
+                const bookedSnapshot = await getDocs(bookedQuery);
+                const bookedTimes = bookedSnapshot.docs.map(doc => ({
+                    date: doc.data().date,
+                    time: doc.data().time,
+                }));
+                setBookedAppointments(bookedTimes);
             }
         };
-
         fetchDoctor();
     }, [id]);
 
     if (!doctor) return <div className="loading-page">
+        
         <Spinner animation="border" role="status" className="loading-spinner">
             <span className="visually-hidden">Loading...</span>
         </Spinner>
         <p>We are fetching the latest data for you. Please wait a moment while we prepare everything.</p>
         <p>Your patience is appreciated as we load all the information you need to proceed.</p>
     </div>
-     const handleTimeSlotClick = (time, date) => {
+    const groupedKeys = Object.keys(groupedAppointments);
+    const itemsPerPage = 3;
+    const pageCount = Math.ceil(groupedKeys.length / itemsPerPage);
+    const displayKeys = groupedKeys.slice(pageIndex * itemsPerPage, (pageIndex + 1) * itemsPerPage);
+
+    const handleTimeSlotClick = (time, date) => {
         setSelectedTime(time);
-        setSelectedDate(date);;
-        setShowModal(true); 
+        setSelectedDate(date);
+        setShowModal(true);
     };
 
-    const handleConfirmBooking = async () => {
-        if (!selectedDate) {
-            console.error("Selected date is undefined.");
-            return;
-        }
-        console.log("Booking confirmed for:", currentUser.name,currentUser.email , selectedTime);
+      const handleConfirmBooking = async () => {
+        if (!selectedDate) return;
+
         await addDoc(collection(db, "appointments"), {
             doctorId: id,
+            doctorName: doctor.name,
             currentUserId: currentUser.uid,
             time: selectedTime,
             date: selectedDate,
             status: status,
-            
-        })
+        });
         alert("Booking confirmed ");
         setShowModal(false);
     };
+    const isTimeBooked = (date, time) => {
+        return bookedAppointments.some(appointment => appointment.date === date && appointment.time === time);
+    };
+
     return (
         <>
-        
+
             <section className="pb-3" style={{ backgroundColor: 'rgb(238, 236, 236)' }}>
                 <div className="container pt-4">
                     <div className="row">
@@ -152,14 +182,16 @@ export default function DoctorInfo() {
                                 <div className="col bg-white rounded-start-3 border-end">
                                     <div>
                                         <button
-                                            className="btn dropdown-toggle"
+                                            className="btn "
                                             id="dropdownMenuButton1"
                                             type="button"
                                             data-bs-toggle="dropdown"
                                             aria-expanded="false"
                                         >
-                                            <p className="text-secondary text-start mb-0">Select a Doctor</p>
-                                            <p className="d-inline text-primary">🩺choose speciality</p>
+                                            <p className="text-secondary text-start mb-0">Doctor specialties</p>
+                                            <FaMapMarkerAlt className="text-primary" />
+                                            <input className='SearchInput' type="text  " value={doctor.specialization} />
+
                                         </button>
                                         <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
 
@@ -176,7 +208,7 @@ export default function DoctorInfo() {
                                 <div className="col bg-white border-end">
                                     <div>
                                         <button
-                                            className="btn dropdown-toggle"
+                                            className="btn "
                                             id="dropdownMenuButton2"
                                             type="button"
                                             data-bs-toggle="dropdown"
@@ -184,9 +216,7 @@ export default function DoctorInfo() {
                                         >
                                             <p className="text-secondary text-start mb-0">In this City</p>
                                             <FaMapMarkerAlt className="text-primary" />
-
-                                            <p className="d-inline text-primary">Choose city</p>
-                                            <input className='SearchInput' type="text  " placeholder='choose Area' />
+                                            <input className='SearchInput' type="text " value={doctor.clinicLocation} placeholder='choose Area' />
 
                                         </button>
 
@@ -203,7 +233,7 @@ export default function DoctorInfo() {
                                         >
                                             <p className="text-secondary text-start mb-0">In this area</p>
                                             <FaMapMarkerAlt className="text-primary" />
-                                            <input className='SearchInput' type="text  " placeholder='choose  Area' />
+                                            <input className='SearchInput' type="text  " value={doctor.clinicLocation.split(" ")[0]} />
 
                                         </button>
 
@@ -214,13 +244,14 @@ export default function DoctorInfo() {
                                 <div className="col bg-white border-end">
                                     <div>
                                         <button
-                                            className="btn dropdown-toggle"
+                                            className="btn "
                                             id="dropdownMenuButton4"
 
                                         >
-                                            <p className="text-secondary text-start mb-0">My insurance is</p>
-                                            <FaUmbrella className="text-primary" />
-                                            <p className="d-inline text-primary">choose insurance</p>
+                                            <p className="text-secondary text-start mb-0">Doctor Gender</p>
+                                            <BsGenderAmbiguous className="text-primary" />
+                                            <input className='SearchInput' type="text  " value={doctor.gender} />
+
                                         </button>
 
                                     </div>
@@ -235,7 +266,7 @@ export default function DoctorInfo() {
                                         >
                                             <p className="text-secondary text-start mb-0">Or search by name</p>
                                             <FaUserDoctor className="text-primary" />
-                                            <input className='SearchInput' type="text  " placeholder='doctor name or hospital' />
+                                            <input className='SearchInput' type="text  " value={doctor.name} />
                                         </button>
 
                                     </div>
@@ -260,49 +291,48 @@ export default function DoctorInfo() {
                 </div>
             </section>
 
-             {/* Header and other existing code... */}
-
+            {/* Header and other existing code... */}
+           
             {/* Modal Component */}
+            
             <Modal show={showModal} onHide={() => setShowModal(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>تأكيد الحجز</Modal.Title>
+                <Modal.Header className="bg-primary" closeButton>
+                    <Modal.Title className="text-white" >Booking Confirmation</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
                         <Form.Group controlId="formPatientName">
-                            <Form.Label>الاسم</Form.Label>
+                            <Form.Label className="form-label text-primary">Your Name</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="أدخل اسمك"
-                                value={currentUser.name}
+                                value={currentUser ? currentUser.name : ""}
                             />
                         </Form.Group>
                         <Form.Group controlId="formPatientEmail">
-                            <Form.Label>البريد الإلكتروني</Form.Label>
+                            <Form.Label className="form-label text-primary" >E-mail</Form.Label>
                             <Form.Control
-                                placeholder="أدخل بريدك الإلكتروني"
-                                value={currentUser.email}
+                                value={currentUser ? currentUser.email: ""}
                             />
                         </Form.Group>
                         <Form.Group controlId="formPatientEmail">
-                            <Form.Label>رقم الهاتف  </Form.Label>
+                            <Form.Label className="form-label text-primary" >Phone Number  </Form.Label>
                             <Form.Control
-                                value={currentUser.phone}
+                                value={currentUser ? currentUser.phone: ""}
                             />
                         </Form.Group>
                         <Form.Group controlId="formPatientEmail">
-                            <Form.Label >  الميعاد الخاص بك  </Form.Label>
+                            <Form.Label className="form-label text-primary" >Your Appointment Time</Form.Label>
                             <Form.Control
                                 value={selectedTime}
                             />
                         </Form.Group>
                         <Form.Group controlId="formPatientEmail">
-                            <Form.Label >  الميعاد الخاص بك  </Form.Label>
+                            <Form.Label className="form-label text-primary" >Your Appointment Date </Form.Label>
                             <Form.Control
                                 value={selectedDate}
                             />
                         </Form.Group>
-                       
+
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
@@ -401,72 +431,76 @@ export default function DoctorInfo() {
                                             <div className="bookSec2 " >
                                                 <div className=''>
                                                     <div className="bookSec4   ">
-                                                        <button className="btn btn-outline-primary me-2" onClick={handlePrev}>
+                                                        <button className="btn btn-outline-primary me-2"  onClick={() => setPageIndex((pageIndex - 1 + pageCount) % pageCount)}>
                                                             &lt;
                                                         </button>
 
-                                                        <div className="d-flex overflow-hidden">
-                                                            {calendarsToDisplay.map((calendar, calendarIndex) => (
-                                                                <div
-                                                                    key={calendarIndex}
-                                                                    className="card text-center mx-1 "
-                                                                    style={{ minWidth: '60px', maxWidth: '200px' }}
-                                                                >
-                                                                    <div className="card-header bg-primary text-white card-font px-0 py-1">
-                                                                        {calendar.title}
-                                                                    </div>
-                                                                    <div className="card-body card-font p-0">
-                                                                        {calendar.times.map((time, timeIndex) => (
-                                                                            <button href='#' style={{ backgroundColor: currentUser == null ? "white" : "white" ,borderColor: currentUser == null ? "grey" : "blue", color: currentUser == null ? "grey" : "black", height: "25px" }} className='btn btn-primary text-center m-0 p-0 card-font d-block w-100 ' key={timeIndex} disabled={currentUser == null} onClick={() => handleTimeSlotClick(time,calendar.title)} >{time}</button>
-                                                                        ))}
-                                                                        <p><a className='text-decoration-none'>More</a></p>
-                                                                    </div>
-                                                                    <div className="card-footer py-0 px-2 foot-btn  " style={{ backgroundColor: currentUser == null ? "grey" : "red", borderColor: currentUser == null ? "grey" : "blue", color: currentUser == null ? "grey" : "black" }}>
-                                                                        <button className="btn card-font text-white" disabled={currentUser == null}>{calendar.buttonText}</button>
-                                                                    </div>
-                                                                </div>
-                                                            ))}
-                                                        </div>
-
-                                                        <button className="btn btn-outline-primary ms-2" onClick={handleNext}>
+                                        <div className="container pt-4">
+                                            <h3>Available Appointments</h3>
+                                                <div className="d-flex overflow-hidden">
+                                                    {displayKeys.map((day, index) => (
+                                                        <div key={index} className="card text-center mx-1" style={{ minWidth: '60px', maxWidth: '200px' }}>
+                                                            <div className="card-header bg-primary text-white card-font px-0 py-1">{day}</div>
+                                                            <div className="time card-body card-font p-0">
+                                                                {groupedAppointments[day].map((time, timeIndex) => (
+                                                                    <button
+                                                                        key={timeIndex}
+                                                                        className="btntime  btn btn-primary text-center m-0 p-0 card-font d-block w-100"
+                                                                        style={{
+                                                                            backgroundColor: currentUser == null ? "white" : "white",
+                                                                            borderColor: currentUser == null ? "grey" : "blue",
+                                                                            color: currentUser == null ? "grey" : "black",
+                                                                            height: "25px",
+                                                                            textDecoration: isTimeBooked(day, time) ? "line-through" : "none"
+                                                                        }}
+                                                                        // disabled={currentUser == null}
+                                                                        disabled={  isTimeBooked(day, time) || !currentUser}
+                                                                        
+                                                                        onClick={() => handleTimeSlotClick(time, day)}
+                                                                    >
+                                                                        {time}
+                                                                    </button>
+                                                                ))}
+                                                                
+                                            </div>
+                                <div className="card-footer py-0 px-2 foot-btn" style={{ backgroundColor: currentUser == null ? "grey" : "red" }}>
+                                    <button className="btn card-font text-white" disabled={currentUser == null}>BOOK</button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="pagination-controls">
+                        <button onClick={handleNext}  >&lt; Prev</button>
+                        <button  onClick={handlePrev}  >Next &gt;</button>
+                    </div>
+                </div>
+ 
+                                                        <button className="btn btn-outline-primary ms-2"  onClick={() => setPageIndex((pageIndex + 1) % pageCount)}>
                                                             &gt;
                                                         </button>
                                                     </div>
                                                     <p className='text-center degrees mt-3'>Appointement Reservation</p>
                                                 </div>
-
-
-
                                             </div>
                                             <hr className="p-0 m-0" />
                                         </div>
-
-
                                     </div>
                                     <div className="" >
                                         <div className="bookSec2" >
                                             <p className="textMap"> الحجز مسبقا و الدخول بأسبقية الحضور</p>
-
                                         </div>
-
                                         <hr className="p-0 m-0" />
                                     </div>
                                     <div className="" >
                                         <div className="bookSec5" >
                                             <div className="d-flex gap-2 pt-1">
-
                                                 <span className="textMap"> احجز أونلاين، ادفع في العيادة</span>
                                                 <FaCalendarAlt fontSize={"30"} className="text-success" />
-
-
                                             </div>
                                             <p className="textMap"> الدكتور يشترط الحجز المسبق!</p>
-
                                         </div>
-
                                         <hr className="p-0 m-0" />
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -480,26 +514,23 @@ export default function DoctorInfo() {
                                     <p className='text-primary d-inline'>Doctor</p>
                                     <a className='fs-5 ms-1 doctor-name-link'>{doctor.name}</a>
                                     <p className='doc-discrip'>{doctor.pref}</p>
-                                    <div className='stars-line'><IoMdStar fontSize={"25"} className='str-rate' />
+                                    {/* <div className='stars-line'><IoMdStar fontSize={"25"} className='str-rate' />
                                         <IoMdStar fontSize={"25"} className='str-rate' />
                                         <IoMdStar fontSize={"25"} className='str-rate' />
                                         <IoMdStar fontSize={"25"} className='str-rate' />
                                         <IoMdStar fontSize={"25"} className='str-rate' />
                                     </div>
-                                    <p className='rating-num'>Overall Rating From 5 Visitors</p>
+                                    <p className='rating-num'>Overall Rating From 5 Visitors</p> */}
                                     <p className='degrees'><FaUserDoctor fontSize={"17"} className='me-2 icon-degree' />
-                                        <a className=''> Doctor {doctor.specialization} </a> Specialized in 
+                                        <a className=''> Doctor {doctor.specialization} </a> Specialized in
                                         <a className=''>  {doctor.qualifications}</a> </p>
                                     <p className='degrees'><IoTicketOutline fontSize={"18"} className="me-2 icon-degree" />Fees : {doctor.Cost} EGP</p>
                                     <p className='degrees'><IoLocation fontSize={"18"} className="me-2 icon-degree" /> <span className='hot-line'>{doctor.clinicLocation}</span> </p>
+                                    <p className='degrees'><CiStopwatch fontSize={"18"} className="me-2 icon-degree" /> <span className=''>{doctor.Wating} Minutes</span> </p>
                                     <p className='degrees'><BsTelephone fontSize={"18"} className="me-2 icon-degree" /> <span className='hot-line'>{doctor.phone}</span> Cost Of Regular Call</p>
                                 </div>
 
                             </div>
-
-
-
-
                         </div>
                     </div>
                 </div>

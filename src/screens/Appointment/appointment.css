@@ -1,0 +1,43 @@
+.table-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.styled-table {
+    border-collapse: collapse;
+    width: 50%; /* جعل الجدول يغطي نصف عرض الصفحة */
+    border: 1px solid #ddd; /* حدود الجدول */
+    text-align: center; /* تنسيق النص في منتصف الخلايا */
+}
+
+.styled-table th, .styled-table td {
+    padding: 12px;
+    border: 1px solid #ddd; /* حدود الخلايا */
+}
+
+.styled-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.styled-table tr:hover {
+    background-color: #f1f1f1; /* تمييز الصف عند المرور فوقه */
+}
+.cancelled {
+    background-color: #e61a2b;
+    font-weight: bold;
+}
+.confirmed {
+    background-color: #3ff706;
+    font-weight: bold;
+}
+.centered-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh; /* This will center vertically within the viewport */
+    font-weight: bold; /* Makes the text bold */
+    text-align: center;
+    font-size: larger;
+}

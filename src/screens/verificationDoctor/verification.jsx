@@ -26,10 +26,11 @@ export default function Verification() {
             console.error("Error updating verification status:", error);
         }
     };
+    console.log(auth.currentUser);
 
     return (
         <div className="App">
-            <p className="text-center mt-5 font-weight-bold ">Welcome doctor { }, you must pay $10 one time to add your account to our platform.</p>
+            <p className="text-center mt-5 font-weight-bold ">Welcome doctor  {}, you must pay $10 one time to add your account to our platform.</p>
             <div className="d-flex justify-content-center align-items-center">
                 <PayPalScriptProvider options={initialOptions}>
                     <PayPalButtons

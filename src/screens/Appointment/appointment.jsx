@@ -2,7 +2,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../DoctorSignup/firebase";
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-
+import "./appointment.css";
 export default function Appointment() {
     const { currentUser } = useContext(AuthContext);
     const [data, setData] = useState([]);
@@ -16,7 +16,6 @@ export default function Appointment() {
                     const q = query(
                         collection(db, "appointments"),
                         where("currentUserId", "==", currentUser.uid),
-                        where("verification", "==", "true")
                     );
 
                     const querySnapshot = await getDocs(q);
@@ -46,20 +45,33 @@ export default function Appointment() {
 
     return (
         <>
-            {data.length > 0 ? (
-                data.map((item) => (
-                    <div key={item.id}>
-                        <h3>Appointment Details</h3>
-                        <p>Patient Name: {item.patientName}</p>
-                        <p>Email: {item.patientEmail}</p>
-                        <p>Phone: {item.patientPhone}</p>
-                        <p>Date: {item.date}</p> {/* Display date as a string */}
-                        <p>Time: {item.time}</p> {/* Display time as a string */}
-                    </div>
-                ))
-            ) : (
-                <p>No appointments found for this user.</p>
-            )}
-        </>
+        {data.length > 0 ? (
+            <div className="table-container">
+                <table className="styled-table">
+                    <thead>
+                        <tr>
+                            <th>اسم الطبيب</th>
+                            <th>  تاريخ الكشف </th>
+                            <th>وقت الكشف </th>
+                            <th>الحالة</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data.map((item) => (
+                            <tr key={item.id}>
+                                <td>{item.doctorName}</td>
+                                <td>{item.date}</td>
+                                <td>{item.time}</td>
+                                <td className={item.status === "cancelled" ? "cancelled": item.status === "confirmed" ? "confirmed" : ""} >{item.status}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        ) : (
+            <p className="centered-text">No appointments found for this user.</p>
+
+        )}
+    </>
     );
 }

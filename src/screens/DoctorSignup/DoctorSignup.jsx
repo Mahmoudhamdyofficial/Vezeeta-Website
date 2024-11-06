@@ -226,7 +226,7 @@ export default function DoctorSignup() {
                 <input
                   className="formControl"
                   type="clinic"
-                  placeholder="العنوان بالتفصيل"
+                  placeholder="Detailed address"
                   value={clinicLocation}
                   onChange={(e) => setclinicLocation(e.target.value)}
                   required
@@ -240,7 +240,7 @@ export default function DoctorSignup() {
                 <input
                   className="formControl"
                   type="Department"
-                  placeholder="مثال: القلب و الباطنة"
+                  placeholder="Example: Cardiology and Internal Medicine"
                   value={specialization}
                   onChange={(e) => setspecialization(e.target.value)}
                   required
@@ -254,7 +254,7 @@ export default function DoctorSignup() {
                 <input
                   className="formControl"
                   type="text"
-                  placeholder=" مثال : استاذ و استشاري القلب و الاوعيه الدمويه جامعة القاهره   "
+                  placeholder="Example: Professor and Consultant of Cardiology and Vascular Medicine, Cairo University"
                   value={pref}
                   onChange={(e) => setpref(e.target.value)}
                   required
@@ -268,7 +268,7 @@ export default function DoctorSignup() {
                 <input
                   className="formControl"
                   type="text"
-                  placeholder=" حراجه القلب للبالغين و الاطفال و الاوعيه الدموية  "
+                  placeholder="Adult and Pediatric Cardiac Surgery and Vascular Surgery"
                   value={qualifications}
                   onChange={(e) => setqualifications(e.target.value)}
                   required

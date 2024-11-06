@@ -138,11 +138,11 @@ export const Strings = {
         examin: { en: "Examination or procedure", ar: "الفحص أو الإجراء" },
         teleh: { en: "Telehealth", ar: "مكالمة دكتور" },
         call: { en: "Call consultation with doctor", ar: "المتابعة عبر مكالمة مع دكتور" },
-        spec: { en: "Choose specialty", ar: "اختار التخصص" },
-        city: { en: "Choose city", ar: "اختار المحافظة" },
-        area: { en: "Choose Area", ar: "اختار المنطقة" },
+        spec: { en: "About Us", ar: "من نحن" },
+        city: { en: "Teleconsultation", ar: "مكالمة دكتور" },
+        area: { en: "Hot Line 16676", ar: "الخط الساخن 16676" },
         nameorhos: { en: "Doctor name or hospital", ar: "الدكتور أو المستشفى" },
-        search: { en: "Search", ar: "ابحث" }
+        search: { en: "Show Doctors", ar: " اعرض الدكاتره" }
     },
     offers: {
         top: { en: "Choose from top offers", ar: "اختار من أحسن العروض" },

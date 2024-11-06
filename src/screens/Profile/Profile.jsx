@@ -58,8 +58,13 @@ export default function Profile() {
     }
   };
 
-  if (loading) return <p>Loading user data...</p>; // Show loading state
+  if (loading) return(<div className="d-flex justify-content-center align-items-center "><p style={{ textAlign: "center", fontWeight: "bold" , fontSize: "30px ", margin: "50px"}}>
+           You must be logged in to see your profile
+             </p> 
+ <button onClick={() => window.location.href = '/login'} className="btn btn-primary">Login</button> 
 
+ </div>);
+       
   return (
     <div className="container my-5">
       <div className="row justify-content-center">

@@ -29,7 +29,7 @@ function Login() {
             // Dispatch login action with the user data
             dispatch({ type: 'LOGIN', payload: { ...user, ...userData } });
 
-            alert('Login successful');
+            // alert('Login successful');
 
             window.location.href = "/";
         } catch (error) {

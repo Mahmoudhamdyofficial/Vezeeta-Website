@@ -72,3 +72,13 @@
     border-radius: 50%;
     border: 1px solid rgb(133, 134, 137);
 }
+.pagination-controls{
+  display: none;
+}
+.time{
+  height: 150px;
+}
+.btntime:hover{
+  background-color: blue;
+
+}

@@ -2,9 +2,9 @@ import './search.css';
 import { AuthContext } from '../../context/AuthContext';
 import { CiSearch } from "react-icons/ci";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { FaUmbrella } from "react-icons/fa";
 import { FaUserDoctor } from "react-icons/fa6";
 import { BsGenderAmbiguous } from "react-icons/bs";
+import { FaStethoscope } from "react-icons/fa";
 import { RiFilter2Line } from "react-icons/ri";
 import { TbHeadset } from "react-icons/tb";
 import { PiGraduationCapLight } from "react-icons/pi";
@@ -12,7 +12,7 @@ import { GiPriceTag } from "react-icons/gi";
 import { SlCalender } from "react-icons/sl";
 import { IoTicketOutline } from "react-icons/io5";
 import {useContext ,useEffect, useState } from 'react';
-import { IoMdStar } from "react-icons/io";
+// import { IoMdStar } from "react-icons/io";
 import { BsTelephone } from "react-icons/bs";
 import { CiStopwatch } from "react-icons/ci";
 import { collection, getDocs } from 'firebase/firestore';
@@ -72,7 +72,7 @@ const calendars = getCalendars();
         const querySnapshot = await getDocs(collection(db, "doctor")); 
         const items = [];
         querySnapshot.forEach((doc) => {
-          if(doc.data().verification === "true"){
+          if(doc.data().verification === "true" && (!('banned' in doc.data()) || doc.data().banned === false)) {
             items.push({ id: doc.id, ...doc.data() });
           }
         });
@@ -97,11 +97,24 @@ const calendars = getCalendars();
 
   const [SearchName, setSearchName] = useState('');
   const [locationFilter, setLocationFilter] = useState('');
+  const [selectedGender, setSelectGender] = useState('');
+  const [selectedSpecialty, setSelectedSpecialty] = useState('');
+  const handelSelectGender = (event) => {
+    setSelectGender(event.target.value);
+  }
+  const handelSelectedSpecialty = (event) => {
+    setSelectedSpecialty(event.target.value);
+  }
 
   const filteredDoctors = data.filter((doctor) =>
     doctor.name.toLowerCase().includes(SearchName.toLowerCase()) &&
     doctor.clinicLocation.toLowerCase().includes(locationFilter.toLowerCase())
-  );
+    &&
+    ( selectedGender === '' || doctor.gender === selectedGender) 
+    &&
+    ( selectedSpecialty === '' || doctor.specialization.toLowerCase().includes(selectedSpecialty.toLowerCase())) 
+    // ( selectedSpecialty === '' || doctor.specialization=== selectedSpecialty) 
+);
   return (
     <>
       <section className="pb-3" style={{ backgroundColor: 'rgb(238, 236, 236)' }}>
@@ -113,7 +126,7 @@ const calendars = getCalendars();
               <p>15000 Doctors - 9000 Professors and Consultants - More than 40 Specialties</p>
             </div>
             <div className="col-md-6 col-sm-12 d-flex align-bottom justify-content-center">
-              <img src="/public/images/doctors.png" alt="Doctors" />
+              <img src="../../assets/doctors.png" alt="Doctors" />
             </div>
           </div>
 
@@ -123,14 +136,21 @@ const calendars = getCalendars();
                 <div className="col bg-white rounded-start-3 border-end">
                   <div>
                     <button
-                      className="btn dropdown-toggle"
+                      className="btn "
                       id="dropdownMenuButton1"
-                      type="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
                     >
-                      <p className="text-secondary text-start mb-0">Select a Doctor</p>
-                      <p className="d-inline text-primary">🩺choose speciality</p>
+                      <p className="text-secondary text-start mb-0">Doctor specialties</p>
+                      {/* <p className="d-inline text-primary">🩺choose speciality</p> */}
+                      <div className="d-flex align-items-center gap-2">
+                      <FaStethoscope size={20} color="blue" className="your-icon-class" />
+                            {/* <select className="form-select" placeholder='choose gender' value={selectedSpecialty} onChange={handelSelectedSpecialty}  aria-label="Default select example">
+                                <option value="">All Doctor</option>
+                                <option value="انف"> انف</option>
+                                <option value="قلب">قلب</option>
+                            </select> */}
+                            <input type="text" className="SearchInput" placeholder="choose speciality" value={selectedSpecialty} onChange={handelSelectedSpecialty} />
+
+                    </div>
                     </button>
                     <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
 
@@ -155,8 +175,6 @@ const calendars = getCalendars();
                     >
                       <p className="text-secondary text-start mb-0">In this City</p>
                       <FaMapMarkerAlt className="text-primary" />
-
-                      <p className="d-inline text-primary">Choose city</p>
                       <input className='SearchInput' type="text  "  placeholder='choose Area'value={locationFilter}  onChange={(e) => setLocationFilter(e.target.value)}/>
 
                     </button>
@@ -185,13 +203,20 @@ const calendars = getCalendars();
                 <div className="col bg-white border-end">
                   <div>
                     <button
-                      className="btn dropdown-toggle"
+                      className="btn "
                       id="dropdownMenuButton4"
                      
                     >
-                      <p className="text-secondary text-start mb-0">My insurance is</p>
-                      <FaUmbrella  className="text-primary"/>
-                      <p className="d-inline text-primary">choose insurance</p>
+                      <p className="text-secondary text-start mb-0">Doctor Gender</p>
+                      <div className="d-flex align-items-center gap-2">
+                            <BsGenderAmbiguous fontSize={"23"}   className="text-primary" />
+                            <select className="form-select" placeholder='choose gender' value={selectedGender}  onChange={handelSelectGender} aria-label="Default select example">
+                                <option value="">All Doctor</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+
+                    </div>
                     </button>
                   
                   </div>
@@ -206,7 +231,7 @@ const calendars = getCalendars();
                     >
                       <p className="text-secondary text-start mb-0">Or search by name</p>
                       <FaUserDoctor className="text-primary" />
-                        <input className='SearchInput' type="text  "  placeholder='doctor name or hospital'value={SearchName}  onChange={(e) => setSearchName(e.target.value)}/>
+                        <input className='SearchInput' type="text  "  placeholder='Search Doctor Name'value={SearchName}  onChange={(e) => setSearchName(e.target.value)}/>
                      </button>
                  
                   </div>
@@ -339,12 +364,16 @@ const calendars = getCalendars();
                                         >
                                             <div className="accordion-body">
                                                 <div>
-                                                    <input type="checkbox" id="Female" />
-                                                    <label htmlFor="Female" className='ms-2'> Female</label>
+                                                    <input value="Female"  checked={selectedGender === "Female"}  onChange={handelSelectGender} type="checkbox" id="Female" />
+                                                    <label htmlFor="Female"  className='ms-2'> Female</label>
                                                 </div>
                                                 <div>
-                                                    <input type="checkbox" id="Male" />
-                                                    <label htmlFor="Male" className='ms-2'> Male</label>
+                                                    <input value="Male" checked={selectedGender === "Male"}  onChange={handelSelectGender} type="checkbox" id="Male" />
+                                                    <label htmlFor="Male"  className='ms-2'> Male</label>
+                                                </div>
+                                                <div>
+                                                    <input value="" checked={selectedGender === ""}  onChange={handelSelectGender} type="checkbox" id="All" />
+                                                    <label htmlFor="All"  className='ms-2'>All Doctors</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -479,13 +508,13 @@ const calendars = getCalendars();
 
                                     <p className='doc-discrip'>{doctor.pref}</p>
 
-                                    <div className='stars-line'><IoMdStar fontSize={"25"} className='str-rate' />
+                                    {/* <div className='stars-line'><IoMdStar fontSize={"25"} className='str-rate' />
                                         <IoMdStar fontSize={"25"} className='str-rate' />
                                         <IoMdStar fontSize={"25"} className='str-rate' />
                                         <IoMdStar fontSize={"25"} className='str-rate' />
                                         <IoMdStar fontSize={"25"} className='str-rate' />
                                     </div>
-                                    <p className='rating-num'>Overall Rating From 5 Visitors</p>
+                                    <p className='rating-num'>Overall Rating From 5 Visitors</p> */}
                                     <p className='degrees'><FaUserDoctor fontSize={"17"} className='me-2 icon-degree' />
                                         <a className='degrees-link' href="">Doctor {doctor.specialization} </a>Specialized in 
                                         <a className='degrees-link' href="">  {doctor.qualifications}</a> </p>
