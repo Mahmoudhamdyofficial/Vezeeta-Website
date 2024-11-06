@@ -62,7 +62,7 @@ export default function Appointment() {
                                 <td>{item.doctorName}</td>
                                 <td>{item.date}</td>
                                 <td>{item.time}</td>
-                                <td className={item.status === "cancelled" ? "cancelled": item.status === "confirmed" ? "confirmed" : ""} >{item.status}</td>
+                                <td className={item.status === "cancelled" ? "cancelled": item.status === "confirmed" ? "confirmed" : item.status === "" ? "pending" : ""} >{item.status==="" ? "pending" : item.status}</td>
                             </tr>
                         ))}
                     </tbody>

@@ -32,6 +32,10 @@
     background-color: #3ff706;
     font-weight: bold;
 }
+.pending{
+    font-weight: bold;
+
+}
 .centered-text {
     display: flex;
     align-items: center;

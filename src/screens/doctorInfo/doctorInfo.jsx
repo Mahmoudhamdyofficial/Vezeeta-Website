@@ -337,10 +337,10 @@ export default function DoctorInfo() {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowModal(false)}>
-                        إلغاء
+                        Cancel
                     </Button>
                     <Button variant="primary" onClick={handleConfirmBooking}>
-                        تأكيد الحجز
+                        Confirm
                     </Button>
                 </Modal.Footer>
             </Modal>
