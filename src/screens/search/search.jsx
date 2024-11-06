@@ -18,6 +18,7 @@ import { CiStopwatch } from "react-icons/ci";
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../DoctorSignup/firebase';
 import { IoLocation } from "react-icons/io5";
+import doctors from "../../assets/doctors.png"
 
 
 export default function Search() {
@@ -126,7 +127,7 @@ const calendars = getCalendars();
               <p>15000 Doctors - 9000 Professors and Consultants - More than 40 Specialties</p>
             </div>
             <div className="col-md-6 col-sm-12 d-flex align-bottom justify-content-center">
-              <img src="../../assets/doctors.png" alt="Doctors" />
+              <img src={doctors} alt="Doctors" />
             </div>
           </div>
 
