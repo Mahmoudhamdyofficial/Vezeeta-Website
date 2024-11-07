@@ -507,8 +507,8 @@ const calendars = getCalendars();
                     <p className="doc-discrip">{doctor.qualifications}, {doctor.clinicLocation}</p>
                     <p className="doc-discrip">{doctor.pref}</p>
                     <p className="degrees"><FaUserDoctor fontSize={"17"} className="me-2 icon-degree" />
-                        <a className="degrees-link" href="">Doctor {doctor.specialization} </a>Specialized in
-                        <a className="degrees-link  qual" href="">{limitToThreeWords(doctor.qualifications)}</a>
+                        <a className="" >Doctor {doctor.specialization} </a>Specialized in
+                        <a className="qual" >{limitToThreeWords(doctor.qualifications)}</a>
                     </p>
                     <p className="degrees"><IoTicketOutline fontSize={"18"} className="me-2 icon-degree" />Fees: {doctor.Cost} EGP</p>
                     <p className="degrees"><IoLocation fontSize={"18"} className="me-2 icon-degree" /><span className="hot-line">{doctor.clinicLocation}</span></p>
