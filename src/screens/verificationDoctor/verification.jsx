@@ -1,6 +1,7 @@
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../DoctorSignup/firebase";
+import "./verification.css";
 
 export default function Verification() {
     const initialOptions = {
@@ -29,9 +30,9 @@ export default function Verification() {
     console.log(auth.currentUser);
 
     return (
-        <div className="App">
+        <div className="App paypaldiv">
             <p className="text-center mt-5 font-weight-bold ">Welcome doctor  {}, you must pay $10 one time to add your account to our platform.</p>
-            <div className="d-flex justify-content-center align-items-center">
+            <div className="d-flex justify-content-center align-items-center ">
                 <PayPalScriptProvider options={initialOptions}>
                     <PayPalButtons
                         style={{ layout: "vertical" }}

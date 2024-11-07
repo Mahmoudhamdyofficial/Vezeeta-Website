@@ -335,7 +335,7 @@ export default function DoctorSignup() {
                 By signing up you agree to our <a href="#">Terms Of Use</a>
               </p>
               <p className="text-center">
-                Already Registered? <a href="/login">Login</a>
+                Already Registered? <a href="https://vezzeta-dashboard.vercel.app/login">Login</a>
               </p>
               <br />
             </Form>
