@@ -45,3 +45,6 @@
     text-align: center;
     font-size: larger;
 }
+.appointment{
+    min-height: 100vh;
+}

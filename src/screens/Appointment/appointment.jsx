@@ -46,7 +46,7 @@ export default function Appointment() {
     return (
         <>
         {data.length > 0 ? (
-            <div className="table-container">
+            <div className="table-container appointment">
                 <table className="styled-table">
                     <thead>
                         <tr>
