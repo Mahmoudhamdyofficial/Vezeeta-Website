@@ -504,7 +504,7 @@ const calendars = getCalendars();
                 <div className="col-8 col-md-5 col-sm-9 py-3">
                     <p className="text-primary d-inline">Doctor</p>
                     <a className="fs-5 ms-1 doctor-name-link">{doctor.name}</a>
-                    <p className="doc-discrip">{doctor.qualifications}, {doctor.clinicLocation}</p>
+                    <p className="doc-discrip">{doctor.qualifications}</p>
                     <p className="doc-discrip">{doctor.pref}</p>
                     <p className="degrees"><FaUserDoctor fontSize={"17"} className="me-2 icon-degree" />
                         <a className="" >Doctor {doctor.specialization} </a>Specialized in
