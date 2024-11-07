@@ -45,10 +45,10 @@ export default function Offers() {
               <div className="details">
                 <h6 className="fw-bolder" style={{ color: 'grey', fontWeight: 550 }}>{name}</h6>
                 <div className={styles['price-quantity']}>
-                  <p className="text-muted" style={{ textDecoration: 'line-through' }}>{oldprice}EGP</p>
-                  <p style={{ color: '#327ac5' }}>{price}EGP</p>
+                  <p className={`text-muted ${styles.pricex}`} style={{ textDecoration: 'line-through' }}>{oldprice}EGP</p>
+                  <p style={{ color: '#327ac5' }} className={styles.pricex}>{price}EGP</p>
                 </div>
-                <p style={{ fontSize: '14px', color: 'grey' }}>{offers}</p>
+                <p style={{ fontSize: '14px', color: 'grey' }}className={styles.pricex}>{offers}</p>
               </div>
             </div>
           ))}

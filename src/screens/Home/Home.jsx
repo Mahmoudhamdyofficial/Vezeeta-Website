@@ -58,10 +58,10 @@ export default function Home() {
               textAlign: "center",
             }}
           >
-            <h1>{language == "English" ? Strings.Home.betterlife.en : Strings.Home.betterlife.ar}</h1>
-            <p>
+            <h1 className={`${styles["home-head"]}`}>{language == "English" ? Strings.Home.betterlife.en : Strings.Home.betterlife.ar}</h1>
+            <p className={`${styles["home-head"]}`}>
               {language == "English" ? Strings.Home.book.en : Strings.Home.book.ar}{" "}
-              <span style={{ color: "#FF6347" }}>{language == "English" ? Strings.Home.number.en : Strings.Home.number.ar}</span>
+              <span style={{ color: "#FF6347" }} className={`${styles["home-head"]}`}>{language == "English" ? Strings.Home.number.en : Strings.Home.number.ar}</span>
             </p>
           </div>
           <DoctorSearchBar />

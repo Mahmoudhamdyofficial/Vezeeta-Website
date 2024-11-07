@@ -24,6 +24,10 @@ import doctors from "../../assets/doctors.png"
 export default function Search() {
     const {currentUser} = useContext(AuthContext)
   const [index, setIndex] = useState(0);
+  function limitToThreeWords(text) {
+    const words = text.split(" ");
+    return words.length > 3 ? words.slice(0, 1).join(" ") + "..." : text;
+}
 
   const getFormattedDate = (date) => {
     const options = { weekday: 'short', month: 'numeric', day: 'numeric' };
@@ -265,8 +269,8 @@ const calendars = getCalendars();
                 <div className='row'>
 
                     <div id='col-2' >
-                        <div className="position-sticky top-0">
-                            <div className=" rounded-2 overflow-hidden">
+                        <div className="position-sticky top-0 filterx">
+                            <div className=" rounded-2 overflow-hidden filterss">
                                 <div className="bg-primary">
                                     <RiFilter2Line fontSize={"23"} color="white" className="ms-3" />
                                     <span className="list-head">Filters</span>
@@ -490,83 +494,55 @@ const calendars = getCalendars();
                     </div>
 
 
-                    <div className="col-10">
-
-
-
-                    {filteredDoctors.map((doctor)=>(
-                              <a  href={`/doctor/${doctor.id}`} className='ankorTagForDoc fs-5 ms-1 doctor-name-link' key={data.uid}>
-
-                                  <div  className="divForDoc row bg-white rounded-3 py-3 mt-3" >
-                                <div className='col-lg-2 col-md-3 overflow-hidden'>
-                                    <img src={doctor.imageUrl} className='prof-img' alt="" />
-                                </div>
-                                <div className='col-lg-5 col-md-9 py-3'>
-                                    <p className='text-primary d-inline'>Doctor</p>
-                                    <a className='fs-5 ms-1 doctor-name-link'>{doctor.name}</a>
-
-                                    <p className='doc-discrip'>{doctor.qualifications},{doctor.clinicLocation}</p>
-
-                                    <p className='doc-discrip'>{doctor.pref}</p>
-
-                                    {/* <div className='stars-line'><IoMdStar fontSize={"25"} className='str-rate' />
-                                        <IoMdStar fontSize={"25"} className='str-rate' />
-                                        <IoMdStar fontSize={"25"} className='str-rate' />
-                                        <IoMdStar fontSize={"25"} className='str-rate' />
-                                        <IoMdStar fontSize={"25"} className='str-rate' />
+                    <div className="col-10 doc-tag">
+    {filteredDoctors.map((doctor) => (
+        <a href={`/doctor/${doctor.id}`} className="ankorTagForDoc fs-5 ms-1 doctor-name-link" key={doctor.id}>
+            <div className="divForDoc row bg-white rounded-3 py-3 mt-3">
+                <div className="col-4 col-md-2 col-sm-3 overflow-hidden">
+                    <img src={doctor.imageUrl} className="prof-img img-fluid" alt="" />
+                </div>
+                <div className="col-8 col-md-5 col-sm-9 py-3">
+                    <p className="text-primary d-inline">Doctor</p>
+                    <a className="fs-5 ms-1 doctor-name-link">{doctor.name}</a>
+                    <p className="doc-discrip">{doctor.qualifications}, {doctor.clinicLocation}</p>
+                    <p className="doc-discrip">{doctor.pref}</p>
+                    <p className="degrees"><FaUserDoctor fontSize={"17"} className="me-2 icon-degree" />
+                        <a className="" >Doctor {doctor.specialization} </a>Specialized in
+                        <a className="qual" >{limitToThreeWords(doctor.qualifications)}</a>
+                    </p>
+                    <p className="degrees"><IoTicketOutline fontSize={"18"} className="me-2 icon-degree" />Fees: {doctor.Cost} EGP</p>
+                    <p className="degrees"><IoLocation fontSize={"18"} className="me-2 icon-degree" /><span className="hot-line">{doctor.clinicLocation}</span></p>
+                    <p className="degrees"><CiStopwatch fontSize={"18"} className="me-2 icon-degree" /> <span>{doctor.Wating} Minutes</span></p>
+                    <p className="degrees"><BsTelephone fontSize={"18"} className="me-2 icon-degree" /> <span className="hot-line">{doctor.phone}</span> Cost Of Regular Call</p>
+                </div>
+                <div className="col-12 col-md-5 mt-4">
+                    <div className="d-flex align-items-center justify-content-center flex-wrap">
+                        <button className="btn btn-outline-primary me-2" onClick={handlePrev}>&lt;</button>
+                        <div className="d-flex overflow-hidden">
+                            {calendarsToDisplay.map((calendar, calendarIndex) => (
+                                <div key={calendarIndex} className="card text-center mx-1" style={{ minWidth: '60px', maxWidth: '200px' }}>
+                                    <div className="card-header bg-primary text-white card-font px-0 py-1">{calendar.title}</div>
+                                    <div className="card-body card-font p-0">
+                                        {calendar.times.map((time, timeIndex) => (
+                                            <a href="#" className="m-0 p-0 card-font d-block text-decoration-none link-time" key={timeIndex}>{time}</a>
+                                        ))}
+                                        <p><a className="text-decoration-none">More</a></p>
                                     </div>
-                                    <p className='rating-num'>Overall Rating From 5 Visitors</p> */}
-                                    <p className='degrees'><FaUserDoctor fontSize={"17"} className='me-2 icon-degree' />
-                                        <a className='degrees-link' href="">Doctor {doctor.specialization} </a>Specialized in 
-                                        <a className='degrees-link' href="">  {doctor.qualifications}</a> </p>
-                                    <p className='degrees'><IoTicketOutline fontSize={"18"} className="me-2 icon-degree" />Fees : {doctor.Cost} EGP</p>
-                                    <p className='degrees'><IoLocation fontSize={"18"} className="me-2 icon-degree" /> <span className='hot-line'>{doctor.clinicLocation}</span> </p>
-                                    <p className='degrees'><CiStopwatch fontSize={"18"} className="me-2 icon-degree" /> <span className=''>{doctor.Wating} Minutes</span> </p>
-                                    <p className='degrees'><BsTelephone fontSize={"18"} className="me-2 icon-degree" /> <span className='hot-line'>{doctor.phone}</span> Cost Of Regular Call</p>
-                                </div>
-                                <div className='col-lg-5 col-md-12 mt-4'>
-                                    <div className="d-flex align-items-center justify-content-center">
-                                        <button className="btn btn-outline-primary me-2" onClick={handlePrev}>
-                                            &lt;
-                                        </button>
-
-                                        <div className="d-flex overflow-hidden">
-                                            {calendarsToDisplay.map((calendar, calendarIndex) => (
-                                                <div
-                                                    key={calendarIndex}
-                                                    className="card text-center mx-1 "
-                                                    style={{ minWidth: '60px', maxWidth: '200px' }}
-                                                >
-                                                    <div className="card-header bg-primary text-white card-font px-0 py-1">
-                                                        {calendar.title}
-                                                    </div>
-                                                    <div className="card-body card-font p-0">
-                                                        {calendar.times.map((time, timeIndex) => (
-                                                            <a href='#' className='m-0 p-0 card-font d-block text-decoration-none link-time' key={timeIndex}>{time}</a>
-                                                        ))}
-                                                        <p><a className='text-decoration-none'>More</a></p>
-                                                    </div>
-                                                    <div className="card-footer py-0 px-2 foot-btn " style={{ backgroundColor: currentUser == null ? "grey" : "red" }}>
-                                                        {/* disable button if not logged in  */}
-                                                        <button className="btn card-font text-white"  disabled={currentUser == null}>{calendar.buttonText}</button>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-
-                                        <button className="btn btn-outline-primary ms-2" onClick={handleNext}>
-                                            &gt;
-                                        </button>
+                                    <div className="card-footer py-0 px-2 foot-btn" style={{ backgroundColor: currentUser == null ? "grey" : "red" }}>
+                                        <button className="btn card-font text-white" disabled={currentUser == null}>{calendar.buttonText}</button>
                                     </div>
-                                    <p className='text-center degrees mt-3'>Appointement Reservation</p>
                                 </div>
-                                </div>
-                              </a>
-                                                    ))}
-                                                    
-                        
-                     
+                            ))}
+                        </div>
+                        <button className="btn btn-outline-primary ms-2" onClick={handleNext}>&gt;</button>
                     </div>
+                    <p className="text-center degrees mt-3">Appointment Reservation</p>
+                </div>
+            </div>
+        </a>
+    ))}
+</div>
+
 
                 </div>
             </div>

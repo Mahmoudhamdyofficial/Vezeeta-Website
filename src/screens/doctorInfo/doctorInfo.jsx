@@ -15,6 +15,7 @@ import { RiFilter2Line } from "react-icons/ri";
 import { CiStopwatch } from "react-icons/ci";
 import { FaCalendarAlt } from "react-icons/fa";
 import { Modal, Button, Form } from 'react-bootstrap';
+import doctors from "../../assets/doctors.png"
 
 // import { GiPriceTag } from "react-icons/gi";
 // import { SlCalender } from "react-icons/sl";
@@ -172,7 +173,7 @@ export default function DoctorInfo() {
                             <p>15000 Doctors - 9000 Professors and Consultants - More than 40 Specialties</p>
                         </div>
                         <div className="col-md-6 col-sm-12 d-flex align-bottom justify-content-center">
-                            <img src="/public/images/doctors.png" alt="Doctors" />
+                            <img src={doctors} alt="Doctors" />
                         </div>
                     </div>
 

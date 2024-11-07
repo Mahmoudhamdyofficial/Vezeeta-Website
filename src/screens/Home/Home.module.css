@@ -190,3 +190,12 @@ html {
   color: #666666;
   font-weight: 500;
 }
+@media screen and (max-width: 700px) {
+  .pricex {
+    display: none !important; /* Add !important to override any inline styles */
+    color: red; /* Temporary test style */
+  }
+  .home-head{
+    display: none;
+  }
+}

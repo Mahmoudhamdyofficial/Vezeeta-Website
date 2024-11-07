@@ -294,3 +294,63 @@ div {
 
    
 }
+@media screen and (max-width: 700px) {
+    .filterx{
+        display: none;
+    }
+}
+@media (max-width: 768px) {
+    .divForDoc {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .degrees, .doc-discrip {
+        font-size: 0.9rem;
+        text-align: center;
+    }
+
+    .prof-img {
+        width: 100px;
+        height: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .doctor-name-link, .degrees-link {
+        font-size: 1rem;
+    }
+
+    .card {
+        min-width: 50px;
+    }
+ 
+}
+
+@media screen and (max-width: 700px) {
+    .qual{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+}
+@media screen and (max-width: 700px) {
+    .doc-tag{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: center;
+        display: block; /* Ensures centering when text-align is applied */
+        margin: 0 auto; /* Centers the element within its parent */
+    }
+    
+}
+@media screen and (max-width: 1032px) {
+    .filterss{
+        display: none;
+    }
+}
+
+
